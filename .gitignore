@@ -7,4 +7,6 @@ spool/S5LX*
 src/*.gz
 src/*-*
 images/rootfs.ext4
+images/ISO-ROOT/
+images/bootable.iso
 

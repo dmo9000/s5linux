@@ -15,3 +15,10 @@ dd if=/dev/zero of=images/rootfs.ext4 bs=1k count=${PADDEDSIZE}
 # format as ext4
 
 mkfs -t ext4 -F -m 0 images/rootfs.ext4 
+
+# create mount point
+
+mkdir -p images/rootfs.mounted
+sudo mount -o loop images/rootfs.ext4 images/rootfs.mounted
+sudo cp -rfpv install-root/* images/rootfs.mounted/
+sudo umount images/rootfs.mounted
