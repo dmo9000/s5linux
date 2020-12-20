@@ -1,0 +1,10 @@
+build/
+heirloom-project/
+heirloom-project.orig/
+install-root/
+pkgbuild/*-*
+spool/S5LX*
+src/*.gz
+src/*-*
+
+

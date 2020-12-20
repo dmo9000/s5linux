@@ -1,0 +1,37 @@
+diff -urN ../../../s5linux/heirloom-project.orig/heirloom/heirloom/ls/ls.c heirloom/ls/ls.c
+--- ../../../s5linux/heirloom-project.orig/heirloom/heirloom/ls/ls.c	2020-12-20 18:59:19.769623727 +1100
++++ heirloom/ls/ls.c	2020-12-20 18:59:51.442974252 +1100
+@@ -123,6 +123,8 @@
+ #include <sys/sysmacros.h>
+ #endif
+ 
++#include <sys/sysmacros.h>
++
+ #ifndef	S_IFNAM
+ #define	S_IFNAM		0x5000	/* XENIX special named file */
+ #endif
+diff -urN ../../../s5linux/heirloom-project.orig/heirloom/heirloom/mknod/mknod.c heirloom/mknod/mknod.c
+--- ../../../s5linux/heirloom-project.orig/heirloom/heirloom/mknod/mknod.c	2020-12-20 18:59:19.774623783 +1100
++++ heirloom/mknod/mknod.c	2020-12-20 19:00:26.850366106 +1100
+@@ -47,7 +47,8 @@
+ #include	<limits.h>
+ #include	<unistd.h>
+ #ifndef	major
+-#include	<sys/mkdev.h>
++//#include	<sys/mkdev.h>
++#include <sys/sysmacros.h>
+ #endif	/* !major */
+ 
+ #ifndef	S_IFNAM
+diff -urN ../../../s5linux/heirloom-project.orig/heirloom/heirloom/shl/shl.c heirloom/shl/shl.c
+--- ../../../s5linux/heirloom-project.orig/heirloom/heirloom/shl/shl.c	2020-12-20 18:59:19.780623849 +1100
++++ heirloom/shl/shl.c	2020-12-20 19:00:34.035445622 +1100
+@@ -87,7 +87,7 @@
+ #include	<limits.h>
+ #include	<stdarg.h>
+ #if !defined (__dietlibc__) && !defined (__UCLIBC__)
+-#include	<stropts.h>
++//#include	<stropts.h>
+ #endif
+ #include	<poll.h>
+ #include	<stdio.h>
