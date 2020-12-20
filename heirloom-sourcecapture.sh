@@ -1,7 +1,7 @@
 #!/bin/sh
 
 TOPLEVEL=`pwd`
-
+set -x
 
 # heirloom snapshot
 
@@ -10,6 +10,14 @@ ln -sf heirloom heirloom-040306
 tar -hpcvf ${TOPLEVEL}/src/heirloom-040306.tar heirloom-040306
 rm -f heirloom-040306
 gzip -9 -f ${TOPLEVEL}/src/heirloom-040306.tar
+
+# heirloom shell snapshot
+
+cd ${TOPLEVEL}/heirloom-project/heirloom
+ln -sf heirloom-sh heirloom-sh-000000
+tar -hpcvf ${TOPLEVEL}/src/heirloom-sh-000000.tar heirloom-sh-000000
+rm -f heirloom-sh-000000
+gzip -9 -f ${TOPLEVEL}/src/heirloom-sh-000000.tar
 
 # devtools snapshot
 
