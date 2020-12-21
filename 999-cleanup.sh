@@ -9,6 +9,6 @@ for SRCDIR in `cat src/MANIFEST` ; do
 rm -f ~/rpmbuild/SPECS/heirloom*spec
 rm -f ~/rpmbuild/SOURCES/heirloom*bz2
 
-	
+cd src && ./cleanup.sh	
 
 

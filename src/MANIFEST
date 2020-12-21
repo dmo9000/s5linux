@@ -1,6 +1,15 @@
 bash-5.1
+binutils-2.35
 coreutils-8.32
+gcc-10.2.0
 glibc-2.32
+heirloom-040306
+heirloom-devtools-000000
+heirloom-pkgtools-000000
+heirloom-sh-000000
 ncurses-6.2
+strace-5.10
+syslinux-6.03
 util-linux-2.36
+vim-8.1
 which-2.21

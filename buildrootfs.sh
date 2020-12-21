@@ -10,15 +10,18 @@ echo "padded size = ${PADDEDSIZE}"
 
 # create the empty raw image
 
-dd if=/dev/zero of=images/rootfs.ext4 bs=1k count=${PADDEDSIZE}
+#dd if=/dev/zero of=images/rootfs.ext4 bs=1k count=${PADDEDSIZE}
 
 # format as ext4
 
-mkfs -t ext4 -F -m 0 images/rootfs.ext4 
+# mkfs -t ext4 -F -m 0 images/rootfs.ext4 
+#mkfs -t squashfs images/rootfs.ext4
+sudo rm -f images/squashfs.img
+sudo mksquashfs ./install-root ./images/squashfs.img -b 1048576 -comp xz -Xdict-size 100%
 
 # create mount point
 
-mkdir -p images/rootfs.mounted
-sudo mount -o loop images/rootfs.ext4 images/rootfs.mounted
-sudo cp -rfpv install-root/* images/rootfs.mounted/
-sudo umount images/rootfs.mounted
+#mkdir -p images/rootfs.mounted
+#sudo mount -o loop images/rootfs.ext4 images/rootfs.mounted
+#sudo cp -rfpv install-root/* images/rootfs.mounted/
+#sudo umount images/rootfs.mounted
