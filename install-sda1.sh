@@ -16,5 +16,13 @@ echo "*** Copying base system from /dev/sr0 to /dev/sda1 ..."
 
 cp -ax / /mnt/sda1 1>/dev/null 2>&1
 
+echo "*** Doing some minor housekeeping ... "
+
+rm -f /mnt/sda1/*.sh
+rm -rf /mnt/sda1/rr_moved
+rm -rf /mnt/sda1/mnt/sda1
+
+sync
+
 echo "*** done."
 
