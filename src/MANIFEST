@@ -1,6 +1,7 @@
 bash-5.1
 binutils-2.35
 coreutils-8.32
+e2fsprogs-1.45.6
 gcc-10.2.0
 glibc-2.32
 heirloom-040306

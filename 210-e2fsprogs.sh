@@ -5,7 +5,7 @@
 
 # setup
 
-PKGNAME=coreutils-8.32
+PKGNAME=e2fsprogs-1.45.6
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -25,9 +25,9 @@ make install DESTDIR=${PKGDIR}
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXcoreutils
+PKG=S5LXe2fsprogs
 NAME=${PKGNAME}
-DESC=GNU coreutils
+DESC=Linux e2fsprogs
 VENDOR=HeadRat Linux
 VERSION=000000
 ARCH=IA64,x86_64

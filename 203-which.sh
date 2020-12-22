@@ -28,7 +28,7 @@ cat <<__PKGINFO__ > pkginfo
 PKG=S5LXwhich
 NAME=${PKGNAME}
 DESC=which command
-VENDOR=Headrat Linux
+VENDOR=HeadRat Linux
 VERSION=000000
 ARCH=IA64,x86_64
 CATEGORY=utilities

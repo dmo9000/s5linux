@@ -30,7 +30,7 @@ cat <<__PKGINFO__ > pkginfo
 PKG=S5LXbash
 NAME=${PKGNAME}
 DESC=GNU Bourne Again shell 
-VENDOR=Headrat Linux
+VENDOR=HeadRat Linux
 VERSION=000000
 ARCH=IA64,x86_64
 CATEGORY=utilities

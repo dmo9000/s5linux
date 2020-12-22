@@ -27,7 +27,7 @@ sudo cat <<__PKGINFO__ | sudo tee pkginfo
 PKG=S5LXheirloom-pkgtools
 NAME=${PKGNAME}
 DESC=heirloom-pkgtools
-VENDOR=Headrat Linux
+VENDOR=HeadRat Linux
 VERSION=000000
 ARCH=IA64,x86_64
 CATEGORY=utilities

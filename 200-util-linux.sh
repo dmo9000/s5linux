@@ -30,7 +30,7 @@ cat <<__PKGINFO__ > pkginfo
 PKG=S5LXutillinux
 NAME=${PKGNAME}
 DESC=Linux utilities
-VENDOR=Headrat Linux
+VENDOR=HeadRat Linux
 VERSION=000000
 ARCH=IA64,x86_64
 CATEGORY=utilities

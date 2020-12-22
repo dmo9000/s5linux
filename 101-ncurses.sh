@@ -27,7 +27,7 @@ cat <<__PKGINFO__ > pkginfo
 PKG=S5LXncurses
 NAME=${PKGNAME}
 DESC=GNU ncurses
-VENDOR=Headrat Linux
+VENDOR=HeadRat Linux
 VERSION=000000
 ARCH=IA64,x86_64
 CATEGORY=libraries
