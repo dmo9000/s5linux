@@ -4,6 +4,7 @@ mount proc /proc -t proc
 mkdir -p /dev/pts
 mount devpts /dev/pts -t devpts
 
+cat /etc/motd
 echo ""
 echo "Welcome to HeadRat Linux!"
 echo ""

@@ -39,7 +39,7 @@ sudo egrep "^root|^dan" /etc/shadow | sudo tee install-root/etc/shadow
 sudo chmod 000 install-root/etc/shadow
 ls -l install-root/etc/shadow
 sudo cp configs/etc/ld.so.conf install-root/etc/ld.so.conf
-
+sudo cp configs/etc/motd install-root/etc/motd
 
 # create devices
 
