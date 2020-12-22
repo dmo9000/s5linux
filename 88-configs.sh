@@ -50,3 +50,7 @@ for i in `seq 0 9`; do
 	done
 
 	       
+# creat homedir for dan
+
+sudo mkdir -p /home/dan
+sudo chown dan:dan /home/dan

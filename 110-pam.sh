@@ -20,7 +20,8 @@ cd ${PKGNAME}
             --sysconfdir=/etc                \
             --libdir=/usr/lib                \
             --enable-securedir=/lib/security \
-            --docdir=/usr/share/doc/Linux-PAM-1.5.1
+            --disable-selinux \
+            --docdir=/usr/share/doc/Linux-PAM-1.4.0
 make clean
 make -j ${NPROC}
 make install DESTDIR=${PKGDIR}
