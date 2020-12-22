@@ -11,3 +11,4 @@ images/ISO-ROOT/
 images/*.iso
 kernel/bzImage
 qemu-disks/*
+packages/*.pkg

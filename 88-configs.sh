@@ -26,6 +26,7 @@ sudo mkdir -p install-root/usr/bin
 sudo cp bootstrap.sh install-root/bootstrap.sh
 sudo cp configs/root-startup.sh install-root/root/startup.sh
 sudo cp install-sda1.sh install-root/install-sda1.sh
+sudo cp rungetty.sh install-root/
 
 # create devices
 

@@ -18,8 +18,8 @@ cd ${PKGNAME}
 
 #CFLAGS=-static LDFLAGS=-static ./configure --prefix=/ --disable-wall --disable-mount --enable-static-programs
 #make LDFLAGS=--static -j ${NPROC}
-./configure --prefix=/ --disable-wall --disable-mount 
-make  -j ${NPROC}
+./configure --prefix=/usr 
+make -j ${NPROC}
 sudo make install DESTDIR=${PKGDIR}
 
 # package

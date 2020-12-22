@@ -6,7 +6,5 @@ for DIR in `cat MANIFEST`; do
 done
 
 echo "Cleaning up build/*"
-
-rm -rf build/*
-
-rm -f pkginfo
+rm -rf ./build/*
+rm -f ./pkginfo
