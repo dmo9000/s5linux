@@ -4,7 +4,7 @@ set -e
 
 # setup
 
-PKGNAME=Linux-PAM-1.5.1
+PKGNAME=Linux-PAM-1.4.0
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}

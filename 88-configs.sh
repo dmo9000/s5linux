@@ -1,3 +1,6 @@
+#!/bin/sh
+set -e
+
 sudo mkdir -p install-root/root
 sudo mkdir -p install-root/var/sadm/install
 sudo touch install-root/var/sadm/install/contents
@@ -27,6 +30,9 @@ sudo cp bootstrap.sh install-root/bootstrap.sh
 sudo cp configs/root-startup.sh install-root/root/startup.sh
 sudo cp install-sda1.sh install-root/install-sda1.sh
 sudo cp rungetty.sh install-root/
+sudo mkdir -p install-root/etc/pam.d
+sudo cp configs/etc/pam.d/login install-root/etc/pam.d/
+
 
 # create devices
 
