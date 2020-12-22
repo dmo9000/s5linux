@@ -20,7 +20,7 @@ cd ${PKGNAME}
 #make LDFLAGS=--static -j ${NPROC}
 ./configure --prefix=/ --disable-wall --disable-mount 
 make  -j ${NPROC}
-make install DESTDIR=${PKGDIR}
+sudo make install DESTDIR=${PKGDIR}
 
 # package
 
