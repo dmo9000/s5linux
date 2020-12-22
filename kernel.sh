@@ -4,7 +4,12 @@ NPROC=`nproc`
 cd src 
 tar -zxvf linux-5.10.1.tar.gz
 cd linux-5.10.1
-make defconfig
+cp ../../kernel.config .config
+#make defconfig
+#sed -i "s/CONFIG_DEBUG_STACK_USAGE=y/CONFIG_DEBUG_STACK_USAGE=n/g" .config
+#echo "CONFIG_FONT_SUN8x16=y" >> .config
+cp .config .config.current
+
 time make -j ${NPROC} bzImage
 time make -j 4 modules
 

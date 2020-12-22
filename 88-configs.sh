@@ -2,8 +2,12 @@ sudo mkdir -p install-root/root
 sudo mkdir -p install-root/var/sadm/install
 sudo touch install-root/var/sadm/install/contents
 sudo cp configs/bashrc install-root/root/.bashrc
+sudo cp configs/bashrc install-root/root/.profile
+sudo cp configs/bashrc install-root/root/.bash_profile
 sudo cp configs/etc/{passwd,group} install-root/etc
 sudo cp configs/etc/nsswitch.conf install-root/etc
+
+sudo mkdir -p install-root/proc
 sudo mkdir -p install-root/packages/
 sudo mkdir -p install-root/var/spool/pkg
 sudo mkdir -p install-root/tmp
