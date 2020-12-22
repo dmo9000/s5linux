@@ -19,3 +19,4 @@ sudo cp mtab install-root/etc/mtab
 sudo mkdir -p install-root/usr/bin
 # sudo cp install-root/bin/bash install-root/usr/bin/bash
 sudo cp bootstrap.sh install-root/bootstrap.sh
+cp configs/root-startup.sh install-root/root/startup.sh

@@ -9,6 +9,8 @@ sed -i "s/^LDFLAGS.*/LDFLAGS = -D_DEFAULT_SOURCE \"-static\"/g" heirloom-project
 sed -i "s/^LCURS.*/LCURS = -lncurses -ltinfo/g" heirloom-project/heirloom/heirloom/build/mk.config
 sed -i "s/USE_ZLIB.*/USE_ZLIB=0/g" heirloom-project/heirloom/heirloom/build/mk.config
 sed -i "s/^LIBZ.*/#LIBZ=/g" heirloom-project/heirloom/heirloom/build/mk.config 
+find heirloom-project/heirloom/heirloom  -name "*.c" -print | xargs sed -i 's/^#include <sys\/mkdev.h>/#include <sys\/sysmacros.h>/'
+
 
 cd heirloom-project/heirloom/heirloom/ 
 make CFLAGS=-static LDFLAGS=-static

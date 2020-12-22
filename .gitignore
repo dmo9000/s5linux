@@ -8,5 +8,6 @@ src/*.gz
 src/*-*
 images/rootfs.ext4
 images/ISO-ROOT/
-images/bootable.iso
+images/*.iso
+kernel/bzImage
 
