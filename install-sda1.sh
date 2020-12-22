@@ -8,6 +8,10 @@ echo "*** Copying base install image ... "
 
 /bin/dd if=/root/rootfs.ext4 of=/dev/sda1 bs=100M
 
+echo "*** Checking filesystem integrity ..."
+
+/sbin/e2fsck -f /dev/sda1
+
 echo "*** Expanding filesystem on /dev/sda1 ..."
 
 /sbin/resize2fs /dev/sda1
