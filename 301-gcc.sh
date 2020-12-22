@@ -4,7 +4,7 @@
 #
 
 # setup
-
+set -e
 PKGNAME=gcc-10.2.0
 NPROC=`nproc`
 TOPLEVEL=`pwd`

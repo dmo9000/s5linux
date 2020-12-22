@@ -4,9 +4,10 @@ set -e
 sudo mkdir -p install-root/root
 sudo mkdir -p install-root/var/sadm/install
 sudo touch install-root/var/sadm/install/contents
-sudo cp configs/bashrc install-root/root/.bashrc
-sudo cp configs/bashrc install-root/root/.profile
-sudo cp configs/bashrc install-root/root/.bash_profile
+# sudo cp configs/bashrc install-root/root/.bashrc
+# sudo cp configs/bashrc install-root/root/.profile
+# sudo cp configs/bashrc install-root/root/.bash_profile
+sudo cp configs/bashrc install-root/etc/profile
 sudo egrep "^root|^dan" /etc/passwd | tee configs/etc/passwd
 sudo egrep "^root|^dan|^tty|^wheel" /etc/group | tee configs/etc/group
 sudo cp configs/etc/{passwd,group} install-root/etc
@@ -31,7 +32,7 @@ sudo mkdir -p install-root/usr/bin
 # sudo cp install-root/bin/bash install-root/usr/bin/bash
 sudo cp bootstrap.sh install-root/bootstrap.sh
 sudo cp configs/root-startup.sh install-root/root/startup.sh
-sudo cp install-sda1.sh install-root/install-sda1.sh
+sudo cp install-sda1.sh install-root/root/install-sda1.sh
 sudo cp rungetty.sh install-root/
 sudo mkdir -p install-root/etc/pam.d
 sudo cp configs/etc/pam.d/login install-root/etc/pam.d/
@@ -39,7 +40,7 @@ sudo egrep "^root|^dan" /etc/shadow | sudo tee install-root/etc/shadow
 sudo chmod 000 install-root/etc/shadow
 ls -l install-root/etc/shadow
 sudo cp configs/etc/ld.so.conf install-root/etc/ld.so.conf
-sudo cp configs/etc/motd install-root/etc/motd
+sudo cp configs/etc/issue install-root/etc/issue
 
 # create devices
 
@@ -49,8 +50,7 @@ for i in `seq 0 9`; do
 	sudo chown root:tty install-root/dev/tty${i}
 	done
 
-	       
 # creat homedir for dan
 
-sudo mkdir -p /home/dan
-sudo chown dan:dan /home/dan
+sudo mkdir -p install-root/home/dan
+sudo chown dan:dan install-root/home/dan
