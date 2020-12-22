@@ -1,2 +1,4 @@
 root:x:0:
-tty:x:5:
+tty:x:5:dan
+wheel:x:10:dan
+dan:x:1000:
