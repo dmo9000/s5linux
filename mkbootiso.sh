@@ -49,6 +49,10 @@ EOF
 find images/ISO-ROOT/ -type f
 sudo cp -rfp install-root/* images/ISO-ROOT/ 
 
+# build and copy the ext4 image as well
+./buildrootfs.sh
+sudo cp -p images/rootfs.ext4 images/ISO-ROOT/root/rootfs.ext4
+
 sudo genisoimage -rational-rock -volid "HeadRat Linux" -cache-inodes \
 	-joliet -full-iso9660-filenames -input-charset UTF8 \
 	-b isolinux/isolinux.bin \

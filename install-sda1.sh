@@ -4,17 +4,20 @@ echo "*** Creating /dev/sda1 ..."
 
 echo ';' | /sbin/sfdisk /dev/sda 
 
-echo "*** Formatting /dev/sda1 (ext4) ..."
+echo "*** Copying base install image ... "
 
-/sbin/mkfs.ext4 /dev/sda1 
+/bin/dd if=/root/rootfs.ext4 of=/dev/sda1 bs=100M
 
+echo "*** Expanding filesystem on /dev/sda1 ..."
+
+/sbin/resize2fs /dev/sda1
+
+#echo "*** Formatting /dev/sda1 (ext4) ..."
+#/sbin/mkfs.ext4 /dev/sda1 
 echo "*** Mounting new filesystem ..."
-
 mount /dev/sda1 /mnt/sda1 
-
-echo "*** Copying base system from /dev/sr0 to /dev/sda1 ..."
-
-cp -pax / /mnt/sda1 
+#echo "*** Copying base system from /dev/sr0 to /dev/sda1 ..."
+#cp -pax / /mnt/sda1 
 
 echo "*** Doing some minor housekeeping ... "
 
