@@ -24,5 +24,9 @@ rm -rf /mnt/sda1/mnt/sda1
 
 sync
 
+echo "*** Unmounting /dev/sda1 ..."
+
+umount /mnt/sda1 1>/dev/null 2>&1
+
 echo "*** done."
 
