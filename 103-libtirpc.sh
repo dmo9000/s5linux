@@ -5,7 +5,9 @@
 
 # setup
 
-PKGNAME=util-linux-2.36
+set -e
+
+PKGNAME=libtirpc-1.2.6
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -16,20 +18,18 @@ cd ${PKGNAME}
 
 # configure/build/install
 
-#CFLAGS=-static LDFLAGS=-static ./configure --prefix=/ --disable-wall --disable-mount --enable-static-programs
-#make LDFLAGS=--static -j ${NPROC}
-./configure --prefix=/usr  --disable-selinux
-make -j ${NPROC}
-sudo make install DESTDIR=${PKGDIR}
+./configure --prefix=/ --disable-gssapi 
+make  -j ${NPROC}
+make install DESTDIR=${PKGDIR}
 
 # package
 
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXutillinux
+PKG=S5LXlibtirpc
 NAME=${PKGNAME}
-DESC=Linux utilities
+DESC=libtirpc
 VENDOR=HeadRat Linux
 VERSION=000000
 ARCH=IA64,x86_64

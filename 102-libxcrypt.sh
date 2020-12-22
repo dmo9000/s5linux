@@ -2,10 +2,11 @@
 #
 # mount/wall disabled for now since it wants to chggrp
 #
+set -e
 
 # setup
 
-PKGNAME=util-linux-2.36
+PKGNAME=libxcrypt-4.4.17
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -16,20 +17,19 @@ cd ${PKGNAME}
 
 # configure/build/install
 
-#CFLAGS=-static LDFLAGS=-static ./configure --prefix=/ --disable-wall --disable-mount --enable-static-programs
-#make LDFLAGS=--static -j ${NPROC}
-./configure --prefix=/usr  --disable-selinux
-make -j ${NPROC}
-sudo make install DESTDIR=${PKGDIR}
+./autogen.sh
+./configure --prefix=/ 
+make  -j ${NPROC}
+make install DESTDIR=${PKGDIR}
 
 # package
 
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXutillinux
+PKG=S5LXlibxcrypt
 NAME=${PKGNAME}
-DESC=Linux utilities
+DESC=libxcrypt
 VENDOR=HeadRat Linux
 VERSION=000000
 ARCH=IA64,x86_64

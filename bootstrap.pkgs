@@ -1,4 +1,6 @@
 S5LXglibc
+S5LXlibxcrypt
+S5LXlibtirpc
 S5LXpam
 S5LXpamtester
 S5LXe2fsprogs
