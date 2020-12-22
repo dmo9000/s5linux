@@ -41,6 +41,7 @@ sudo chmod 000 install-root/etc/shadow
 ls -l install-root/etc/shadow
 sudo cp configs/etc/ld.so.conf install-root/etc/ld.so.conf
 sudo cp configs/etc/issue install-root/etc/issue
+sudo cp configs/etc/inittab install-root/etc/inittab
 
 # create devices
 

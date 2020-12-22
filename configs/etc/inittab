@@ -1,0 +1,6 @@
+id:5:initdefault:
+1:12345:respawn:/sbin/agetty -s 38400 -t 600 tty1 linux
+2:2345:respawn:/sbin/agetty -s 38400 -t 600 tty2 linux
+3:345:respawn:/sbin/agetty -s 38400 -t 600 tty3 linux
+4:45:respawn:/sbin/agetty -s 38400 -t 600 tty4 linux
+5:5:respawn:/sbin/agetty -s 38400 -t 600 tty5 linux

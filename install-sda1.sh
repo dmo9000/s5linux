@@ -31,6 +31,9 @@ rm -rf /mnt/sda1/root/install-sda1.sh
 
 sync
 
+# echo "*** Installing SysV init ..."
+# ( echo 1 && /usr/5bin/yes) | /bin/chroot /mnt/sda1 /usr/5bin/pkgadd -d /packages/S5LXsysvinit.pkg
+
 echo "*** Unmounting /dev/sda1 ..."
 
 umount /mnt/sda1 

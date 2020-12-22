@@ -44,6 +44,14 @@ LABEL HeadRatLinuxInstalled
 	Boot HeadRat Linux (/dev/sda1) 
     ENDTEXT
 
+LABEL HeadRatLinuxViaInit
+    MENU LABEL ^HeadRat Linux via SysVInit (/dev/sda1) 
+    KERNEL /images/bzImage
+    APPEND root=/dev/sda1 rw init=/sbin/init fbcon=font:SUN8x16
+    TEXT HELP
+        Boot HeadRat Linux via SysVInit (/dev/sda1) 
+    ENDTEXT
+
 EOF
 
 find images/ISO-ROOT/ -type f
