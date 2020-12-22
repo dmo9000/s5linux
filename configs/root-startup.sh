@@ -1,5 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
-source /root/.bashrc
+sleep 10 
+clear
+
+echo ""
 echo "Welcome to HeadRat Linux!"
-/bin/bash
+echo ""
+
+alias ls='ls --color=always'
+exec /bin/bash 

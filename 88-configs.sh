@@ -19,4 +19,13 @@ sudo cp mtab install-root/etc/mtab
 sudo mkdir -p install-root/usr/bin
 # sudo cp install-root/bin/bash install-root/usr/bin/bash
 sudo cp bootstrap.sh install-root/bootstrap.sh
-cp configs/root-startup.sh install-root/root/startup.sh
+sudo cp configs/root-startup.sh install-root/root/startup.sh
+
+# create devices
+
+for i in `seq 0 9`; do 
+	sudo mknod install-root/dev/tty${i} c 4 ${i}
+	sudo chown root:tty install-root/dev/tty${i}
+	done
+
+	       

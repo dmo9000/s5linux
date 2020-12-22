@@ -6,8 +6,7 @@ for PKG in `/usr/5bin/cat /bootstrap.pkgs` ; do
 	echo "Installing package ${PKG} (${PKGSIZE}) ... "
 	( echo 1 && yes) | pkgadd -d ${PKG}.pkg  1>/dev/null 2>&1
 	done
-rm -rf /bootstrap.sh
-rm -rf /bootstrap.pkgs
+rm -rf /bootstrap.*
 
 exit 0
 

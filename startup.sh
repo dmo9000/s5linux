@@ -1,1 +1,1 @@
-sudo chroot install-root /bin/bash
+sudo chroot install-root /root/startup.sh
