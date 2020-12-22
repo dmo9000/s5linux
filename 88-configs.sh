@@ -7,6 +7,7 @@ sudo cp configs/bashrc install-root/root/.bash_profile
 sudo cp configs/etc/{passwd,group} install-root/etc
 sudo cp configs/etc/nsswitch.conf install-root/etc
 
+sudo mkdir -p install-root/mnt/sda1
 sudo mkdir -p install-root/proc
 sudo mkdir -p install-root/packages/
 sudo mkdir -p install-root/var/spool/pkg
@@ -24,6 +25,7 @@ sudo mkdir -p install-root/usr/bin
 # sudo cp install-root/bin/bash install-root/usr/bin/bash
 sudo cp bootstrap.sh install-root/bootstrap.sh
 sudo cp configs/root-startup.sh install-root/root/startup.sh
+sudo cp install-sda1.sh install-root/install-sda1.sh
 
 # create devices
 

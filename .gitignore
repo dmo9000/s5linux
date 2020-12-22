@@ -10,4 +10,4 @@ images/rootfs.ext4
 images/ISO-ROOT/
 images/*.iso
 kernel/bzImage
-
+qemu-disks/*

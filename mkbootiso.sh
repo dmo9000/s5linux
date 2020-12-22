@@ -27,13 +27,21 @@ font sun12x22.psfu
 
 MENU TITLE HEADRAT LINUX
 
-LABEL HeadRatLinux 
+LABEL HeadRatLinuxLive 
     MENU LABEL ^HeadRat Linux Live
     MENU DEFAULT
     KERNEL /images/bzImage
     APPEND root=/dev/sr0 init=/root/startup.sh fbcon=font:SUN8x16
     TEXT HELP
        	Boot HeadRat Linux live image 
+    ENDTEXT
+
+LABEL HeadRatLinuxInstalled
+    MENU LABEL ^HeadRat Linux (/dev/sda1) 
+    KERNEL /images/bzImage
+    APPEND root=/dev/sda1 init=/root/startup.sh fbcon=font:SUN8x16
+    TEXT HELP
+	Boot HeadRat Linux (/dev/sda1) 
     ENDTEXT
 
 EOF
