@@ -56,6 +56,10 @@ for i in `seq 0 9`; do
 	sudo chown root:tty install-root/dev/tty${i}
 	done
 
+for i in `seq 0 5`; do
+	sudo mkdir -p /etc/rc${i}.d
+	done
+
 # creat homedir for dan
 
 sudo mkdir -p install-root/home/dan
