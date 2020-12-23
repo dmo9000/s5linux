@@ -31,7 +31,7 @@ LABEL HeadRatLinuxLive
     MENU LABEL ^HeadRat Linux Live
     MENU DEFAULT
     KERNEL /images/bzImage
-    APPEND root=/dev/sr0 ro init=/sbin/init fbcon=font:SUN8x16
+    APPEND root=/dev/sr0 ro init=/sbin/init fbcon=font:SUN8x16 
     TEXT HELP
        	Boot HeadRat Linux live image 
     ENDTEXT
@@ -39,7 +39,7 @@ LABEL HeadRatLinuxLive
 LABEL HeadRatLinuxInstalled
     MENU LABEL ^HeadRat Linux (/sbin/init) 
     KERNEL /images/bzImage
-    APPEND root=/dev/sda1 rw init=/rungetty.sh fbcon=font:SUN8x16
+    APPEND root=/dev/sda1 rw init=/rungetty.sh fbcon=font:SUN8x16 
     TEXT HELP
 	Boot HeadRat Linux (/dev/sda1) 
     ENDTEXT
@@ -47,7 +47,7 @@ LABEL HeadRatLinuxInstalled
 LABEL HeadRatLinuxViaInit
     MENU LABEL ^HeadRat Linux via SysVInit (/dev/sda1) 
     KERNEL /images/bzImage
-    APPEND root=/dev/sda1 rw init=/sbin/init fbcon=font:SUN8x16
+    APPEND root=/dev/sda1 rw init=/sbin/init fbcon=font:SUN8x16 
     TEXT HELP
         Boot HeadRat Linux via SysVInit (/dev/sda1) 
     ENDTEXT

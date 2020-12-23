@@ -45,6 +45,7 @@ sudo mkdir -p install-root/etc/init.d
 sudo cp configs/etc/init.d/rc install-root/etc/init.d/rc
 sudo cp configs/etc/init.d/rcS install-root/etc/init.d/rcS
 sudo mkdir -p install-root/run
+sudo cp network.sh install-root/root/network.sh
 
 # create devices
 

@@ -13,3 +13,4 @@
 /qemu-disks/*
 /packages/*.pkg
 /src/build
+/src/pkgbuild
