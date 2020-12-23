@@ -1,7 +1,4 @@
 S5LXglibc
-S5LXgmp
-S5LXmpfr
-S5LXmpc
 S5LXsysvinit
 S5LXlibxcrypt
 S5LXlibtirpc
@@ -19,5 +16,3 @@ S5LXheirloom-devtools
 S5LXheirloom-pkgtools
 S5LXheirloom-sh
 S5LXvim
-S5LXbinutils
-S5LXgcc
