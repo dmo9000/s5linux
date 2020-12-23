@@ -1,6 +1,7 @@
 TODO
 
 * package git
+* package psutils/top
 * procps-ng-3.3.16-1 for sysctl in order to disable IPv6 to prevent DNS lookup delays
 
 	sysctl -w net.ipv6.conf.all.disable_ipv6=1

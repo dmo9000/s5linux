@@ -1,11 +1,13 @@
 bash-5.1
 bind-9.16.10
 binutils-2.35
+brotli-1.0.9
 coreutils-8.32
 curl-7.74.0
 e2fsprogs-1.45.6
 elfutils-0.182.tar
 gcc-10.2.0
+git-2.29.2
 glibc-2.32
 gmp-6.2.1
 heirloom-040306
