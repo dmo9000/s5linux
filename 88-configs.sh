@@ -14,6 +14,7 @@ sudo cp configs/etc/{passwd,group} install-root/etc
 sudo cp configs/etc/nsswitch.conf install-root/etc
 
 sudo mkdir -p install-root/mnt/sda1
+sudo mkdir -p install-root/mnt/sr0
 sudo mkdir -p install-root/proc
 sudo mkdir -p install-root/packages/
 sudo mkdir -p install-root/var/spool/pkg
@@ -47,6 +48,7 @@ sudo cp configs/etc/init.d/rcS install-root/etc/init.d/rcS
 sudo mkdir -p install-root/run
 sudo cp network.sh install-root/root/network.sh
 sudo cp configs/etc/resolv.conf install-root/etc/resolv.conf
+sudo "echo /dev/sr0 /mnt/sr0 iso9660 defaults 0 0" >> install-root/etc/fstab
 
 # create devices
 
@@ -64,3 +66,4 @@ for i in `seq 0 5`; do
 
 sudo mkdir -p install-root/home/dan
 sudo chown dan:dan install-root/home/dan
+
