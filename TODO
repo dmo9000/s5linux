@@ -1,11 +1,18 @@
 TODO
 
-* fix libxcrypt to compile the same way as Fedora so we don't have to hihack a 'rpmbuild -bi' and repackage
-* package libmpc, libgmp, libmpfr 
-* get networking going 
 * package git
-* bootstrap g++
+* procps-ng-3.3.16-1 for sysctl in order to disable IPv6 to prevent DNS lookup delays
+
+	sysctl -w net.ipv6.conf.all.disable_ipv6=1
+	sysctl -w net.ipv6.conf.default.disable_ipv6=1
+
+* chmod u+s ping or build with capability support so that it can run as a normal user
+* fix libxcrypt to compile the same way as Fedora so we don't have to hihack a 'rpmbuild -bi' and repackage
 * package Xorg
 * package CDE
 
+DONE
 
+* get networking going (iproute2 and associated libs etc) 
+* package libmpc, libgmp, libmpfr 
+* bootstrap g++

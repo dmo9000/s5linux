@@ -57,8 +57,13 @@ EOF
 find images/ISO-ROOT/ -type f
 sudo cp -rfp install-root/* images/ISO-ROOT/ 
 
+# remove the installation packages from the rootfs which will be deployed
+
+sudo rm -f install-root/packages/*.pkg
+
 # build and copy the ext4 image as well
 ./buildrootfs.sh
+
 sudo cp -p images/rootfs.ext4 images/ISO-ROOT/root/rootfs.ext4
 
 sudo genisoimage -rational-rock -volid "HeadRat Linux" -cache-inodes \

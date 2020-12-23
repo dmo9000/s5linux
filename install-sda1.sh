@@ -24,6 +24,9 @@ echo "*** Expanding filesystem on /dev/sda1 ..."
 #echo "*** Copying base system from /dev/sr0 to /dev/sda1 ..."
 #cp -pax / /mnt/sda1 
 
+echo "*** Copying package archive from installer DVD ..."
+cp -vpax /packages/* /mnt/sda1/packages/
+
 echo "*** Doing some minor housekeeping ... "
 
 rm -rf /mnt/sda1/rr_moved 
