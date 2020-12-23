@@ -1,6 +1,6 @@
---- heirloom-project.orig/heirloom/heirloom-pkgtools/libpkg/canonize.c	2020-12-23 10:56:59.279052302 +1100
-+++ heirloom-project/heirloom/heirloom-pkgtools/libpkg/canonize.c	2020-12-23 14:16:34.760450733 +1100
-@@ -1,105 +1,68 @@
+--- heirloom-project.orig/heirloom/heirloom-pkgtools/libpkg/canonize.c	2020-12-23 14:57:18.766105659 +1100
++++ heirloom-project/heirloom/heirloom-pkgtools/libpkg/canonize.c	2020-12-23 14:55:26.395018599 +1100
+@@ -1,105 +1,87 @@
 -/*
 - * CDDL HEADER START
 - *
@@ -91,7 +91,6 @@
 -				while (pt[1] == '/')
 -					(void) strcpy(pt, pt+1);
 -				pt++;
--			}
 +	/* "file" is assumed to be a pointer to an array of characters that is a maximum of PATH_MAX long */
 +	/* use a temporary buffer instead of the original approach */
 +	int element_index = 0;
@@ -105,26 +104,10 @@
 +	if (issingledot(file) || isdoubledot(file)) {
 +		memset(file, 0, PATH_MAX);
 +		return;
- 		}
--	}
--	if ((--pt > file) && (*pt == '/'))
--		*pt = '\0';
--}
- 
--void
--canonize_slashes(char *file)
--{
--	char *pt;
++		}
++
 +	memset(&path_buffer, 0, PATH_MAX);
- 
--	/* remove references such as "//" */
--	for (pt = file; *pt; /* void */) {
--		while (*pt && (*pt != '/'))
--			pt++;
--		if (*pt == '/') {
--			while (pt[1] == '/')
--				(void) strcpy(pt, pt+1);
--			pt++;
++
 +	/* search for first slash */
 +	seperator_ptr = strchr(element_ptr, '/');
 +	while (element_ptr)  {
@@ -138,7 +121,7 @@
 +			return;
 +			} else {
 +			strncpy((char *) &element_buffer, (char *) element_ptr, (seperator_ptr - element_ptr)); 
-+			}
+ 			}
 +
 +		assert(!isdoubledot(element_buffer));
 +
@@ -162,5 +145,37 @@
 +	assert(NULL);	
 +
 +     return;
+ }
+ 
+ void
+ canonize_slashes(char *file)
+ {
+-	char *pt;
++        char *pt;
+ 
+-	/* remove references such as "//" */
+-	for (pt = file; *pt; /* void */) {
+-		while (*pt && (*pt != '/'))
+-			pt++;
+-		if (*pt == '/') {
+-			while (pt[1] == '/')
+-				(void) strcpy(pt, pt+1);
+-			pt++;
+-		}
+-	}
+-	if ((--pt > file) && (*pt == '/'))
+-		*pt = '\0';
++        /* remove references such as "//" */
++        for (pt = file; *pt; /* void */) {
++                while (*pt && (*pt != '/'))
++                        pt++;
++                if (*pt == '/') {
++                        while (pt[1] == '/')
++                                (void) strcpy(pt, pt+1);
++                        pt++;
++                }
++        }
++        if ((--pt > file) && (*pt == '/'))
++                *pt = '\0';
  }
 +
