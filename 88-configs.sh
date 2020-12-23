@@ -48,7 +48,7 @@ sudo cp configs/etc/init.d/rcS install-root/etc/init.d/rcS
 sudo mkdir -p install-root/run
 sudo cp network.sh install-root/root/network.sh
 sudo cp configs/etc/resolv.conf install-root/etc/resolv.conf
-sudo "echo /dev/sr0 /mnt/sr0 iso9660 defaults 0 0" >> install-root/etc/fstab
+sudo echo "/dev/sr0 /mnt/sr0 iso9660 defaults 0 0" | sudo tee >>  install-root/etc/fstab
 
 # create devices
 
