@@ -13,11 +13,13 @@ cd src
 rm -rf ./${PKGNAME}
 tar -zxvf ${PKGNAME}.tar.gz
 mkdir -p build/${PKGNAME}
+rm -rf build/${PKGNAME}/*
 cd build/${PKGNAME}
+
 
 # configure/build/install
 
-../../${PKGNAME}/configure --prefix=/usr  --enable-languages=c --disable-multilib --disable-shared
+../../${PKGNAME}/configure --prefix=/usr  --enable-languages=c,c++ --disable-multilib 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 
