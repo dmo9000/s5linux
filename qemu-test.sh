@@ -12,7 +12,7 @@
 # boot kernel from DVD, mount rootfs ISO on root filesystem
 if [ ! -r qemu-disks/sda1.img ]; then 
 	echo "*** Creating 5GB disk image ..."
-	qemu-img create -f raw qemu-disks/sda1.img 5G
+	qemu-img create -f raw qemu-disks/sda1.img 8G
 	else
 	echo "disk image already exists: qemu-disks/sda1.img"
 	fi

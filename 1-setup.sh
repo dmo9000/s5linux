@@ -45,6 +45,9 @@ cp -v patches/heirloom-project/heirloom/heirloom-pkgtools/heirloom-pkgtools.spec
 find heirloom-project/heirloom/heirloom-pkgtools  -name "*.c" -print | xargs sed -i 's/#include "p12lib.h"//'
 cp patches/heirloom-project/heirloom/heirloom-pkgtools/libpkg/verify.c heirloom-project/heirloom/heirloom-pkgtools/libpkg/verify.c
 sed -i "s/^int\septnum/extern int eptnum/g" heirloom-project/heirloom/heirloom-pkgtools/pkgcmds/installf/main.c
+cd ${TOPLEVEL}/heirloom-project
+patch -p1 < ../heirloom-pkgtools-000000-sane-canonize.patch
+exit 1
 
 # take backup for diffing
 
