@@ -13,8 +13,9 @@ tar -zxvf ${PKGNAME}.tar.gz
 
 # configure/build/install
 
-cd ../build/
-../src/${PKGNAME}/configure --prefix=/
+mkdir -p ../${PKGNAME}-build/
+cd ../${PKGNAME}-build/
+../src/${PKGNAME}/configure --prefix=/usr
 make -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 cd ${PKGDIR} && ln -sf lib lib64

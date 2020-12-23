@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# suppress all kernel logging to console except panics
+
+/bin/dmesg -n 1
 mount proc /proc -t proc
 mkdir -p /dev/pts
 mount devpts /dev/pts -t devpts
