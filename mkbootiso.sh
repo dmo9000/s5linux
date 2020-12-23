@@ -31,13 +31,13 @@ LABEL HeadRatLinuxLive
     MENU LABEL ^HeadRat Linux Live
     MENU DEFAULT
     KERNEL /images/bzImage
-    APPEND root=/dev/sr0 ro init=/rungetty.sh fbcon=font:SUN8x16
+    APPEND root=/dev/sr0 ro init=/sbin/init fbcon=font:SUN8x16
     TEXT HELP
        	Boot HeadRat Linux live image 
     ENDTEXT
 
 LABEL HeadRatLinuxInstalled
-    MENU LABEL ^HeadRat Linux (/dev/sda1) 
+    MENU LABEL ^HeadRat Linux (/sbin/init) 
     KERNEL /images/bzImage
     APPEND root=/dev/sda1 rw init=/rungetty.sh fbcon=font:SUN8x16
     TEXT HELP

@@ -1,0 +1,166 @@
+--- heirloom-project.orig/heirloom/heirloom-pkgtools/libpkg/canonize.c	2020-12-23 10:56:59.279052302 +1100
++++ heirloom-project/heirloom/heirloom-pkgtools/libpkg/canonize.c	2020-12-23 14:16:34.760450733 +1100
+@@ -1,105 +1,68 @@
+-/*
+- * CDDL HEADER START
+- *
+- * The contents of this file are subject to the terms of the
+- * Common Development and Distribution License (the "License").
+- * You may not use this file except in compliance with the License.
+- *
+- * You can obtain a copy of the license at src/OPENSOLARIS.LICENSE
+- * or http://www.opensolaris.org/os/licensing.
+- * See the License for the specific language governing permissions
+- * and limitations under the License.
+- *
+- * When distributing Covered Code, include this CDDL HEADER in each
+- * file and include the License file at src/OPENSOLARIS.LICENSE.
+- * If applicable, add the following below this CDDL HEADER, with the
+- * fields enclosed by brackets "[]" replaced with your own identifying
+- * information: Portions Copyright [yyyy] [name of copyright owner]
+- *
+- * CDDL HEADER END
+- */
+-
+-/*
+- * Copyright 2003 Sun Microsystems, Inc.  All rights reserved.
+- * Use is subject to license terms.
+- */
+-
+-/* Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T */
+-/* All Rights Reserved */
+-
+-/*	from OpenSolaris "canonize.c	1.9	06/02/27 SMI"	*/
+-
+-/*
+- * Portions Copyright (c) 2007 Gunnar Ritter, Freiburg i. Br., Germany
+- *
+- * Sccsid @(#)canonize.c	1.2 (gritter) 2/24/07
+- */
+-
+-/*LINTLIBRARY*/
++#include <stdlib.h>
++#include <stdio.h>
+ #include <string.h>
++#ifndef _POSIX_C_SOURCE
++#define _POSIX_C_SOURCE 1
++#endif /* _POSIX_C_SOURCE */
++#include <limits.h>
++#include <assert.h>
+ 
+-#define	isdot(x)	((x[0] == '.') && (!x[1] || (x[1] == '/')))
+-#define	isdotdot(x)	((x[0] == '.') && (x[1] == '.') && \
+-			    (!x[2] || (x[2] == '/')))
++#define issingledot(x)	((x[0] == '.') && strlen(x) == 1)
++#define isdoubledot(x)  ((x[0] == '.') && x[1] == '..' && strlen(x) == 2)
+ 
+-void
+-canonize(char *file)
++void canonize(char *file) 
+ {
+-	char *pt, *last;
+-	int level;
+ 
+-	/* remove references such as "./" and "../" and "//" */
+-	for (pt = file; *pt; /* void */) {
+-		if (isdot(pt))
+-			(void) strcpy(pt, pt[1] ? pt+2 : pt+1);
+-		else if (isdotdot(pt)) {
+-			level = 0;
+-			last = pt;
+-			do {
+-				level++;
+-				last += 2;
+-				if (*last)
+-					last++;
+-			} while (isdotdot(last));
+-			--pt; /* point to previous '/' */
+-			while (level--) {
+-				if (pt <= file)
+-					return;
+-				while ((*--pt != '/') && (pt > file))
+-					;
+-			}
+-			if (*pt == '/')
+-				pt++;
+-			(void) strcpy(pt, last);
+-		} else {
+-			while (*pt && (*pt != '/'))
+-				pt++;
+-			if (*pt == '/') {
+-				while (pt[1] == '/')
+-					(void) strcpy(pt, pt+1);
+-				pt++;
+-			}
++	/* "file" is assumed to be a pointer to an array of characters that is a maximum of PATH_MAX long */
++	/* use a temporary buffer instead of the original approach */
++	int element_index = 0;
++	char path_buffer[PATH_MAX];
++	char element_buffer[PATH_MAX];
++	/* point to the start of the filename */
++	char *element_ptr = file;
++	char *seperator_ptr = NULL;
++
++	assert(element_ptr);
++	if (issingledot(file) || isdoubledot(file)) {
++		memset(file, 0, PATH_MAX);
++		return;
+ 		}
+-	}
+-	if ((--pt > file) && (*pt == '/'))
+-		*pt = '\0';
+-}
+ 
+-void
+-canonize_slashes(char *file)
+-{
+-	char *pt;
++	memset(&path_buffer, 0, PATH_MAX);
+ 
+-	/* remove references such as "//" */
+-	for (pt = file; *pt; /* void */) {
+-		while (*pt && (*pt != '/'))
+-			pt++;
+-		if (*pt == '/') {
+-			while (pt[1] == '/')
+-				(void) strcpy(pt, pt+1);
+-			pt++;
++	/* search for first slash */
++	seperator_ptr = strchr(element_ptr, '/');
++	while (element_ptr)  {
++		memset(&element_buffer, 0, PATH_MAX);
++		if (!seperator_ptr) {
++			/* no further seperator was found; copy complete string */
++			strncpy((char *) &element_buffer, (char *) element_ptr, strlen(element_ptr)); 
++			strncat((char *) &path_buffer, (char *) &element_buffer, strlen(element_buffer));
++			memset(file, 0, PATH_MAX);
++			strncat((char *) file, (char *) &path_buffer, strlen(path_buffer)); 
++			return;
++			} else {
++			strncpy((char *) &element_buffer, (char *) element_ptr, (seperator_ptr - element_ptr)); 
++			}
++
++		assert(!isdoubledot(element_buffer));
++
++		if (!issingledot(element_buffer)) {
++			/* append element_buffer to path_buffer if not a single dot */
++			strncat((char *) &path_buffer, (char *) &element_buffer, strlen(element_buffer));
++			strncat((char *) &path_buffer, (char *) "/\0", 2);
++			} else {
++			}	
++	
++		element_ptr=seperator_ptr+1;
++		element_index++;
++		seperator_ptr = strchr(element_ptr, '/');
++		/* search for next slash */
+ 		}
+-	}
+-	if ((--pt > file) && (*pt == '/'))
+-		*pt = '\0';
++
++	/* should not reach here */
++	assert(NULL);	
++
++     return;
+ }
++

@@ -23,3 +23,4 @@
 # finally bootstrap the image - comment out this step if you just want the minimal static SVR4 base
 
 ./998-bootstrap.sh
+./mkbootiso.sh

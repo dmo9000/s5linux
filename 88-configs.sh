@@ -31,7 +31,6 @@ sudo cp mtab install-root/etc/mtab
 sudo mkdir -p install-root/usr/bin
 # sudo cp install-root/bin/bash install-root/usr/bin/bash
 sudo cp bootstrap.sh install-root/bootstrap.sh
-sudo cp configs/root-startup.sh install-root/root/startup.sh
 sudo cp install-sda1.sh install-root/root/install-sda1.sh
 sudo cp rungetty.sh install-root/
 sudo mkdir -p install-root/etc/pam.d
@@ -42,6 +41,10 @@ ls -l install-root/etc/shadow
 sudo cp configs/etc/ld.so.conf install-root/etc/ld.so.conf
 sudo cp configs/etc/issue install-root/etc/issue
 sudo cp configs/etc/inittab install-root/etc/inittab
+sudo mkdir -p install-root/etc/init.d
+sudo cp configs/etc/init.d/rc install-root/etc/init.d/rc
+sudo cp configs/etc/init.d/rcS install-root/etc/init.d/rcS
+sudo mkdir -p install-root/run
 
 # create devices
 
