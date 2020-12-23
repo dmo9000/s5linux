@@ -47,7 +47,6 @@ cp patches/heirloom-project/heirloom/heirloom-pkgtools/libpkg/verify.c heirloom-
 sed -i "s/^int\septnum/extern int eptnum/g" heirloom-project/heirloom/heirloom-pkgtools/pkgcmds/installf/main.c
 cd ${TOPLEVEL}/heirloom-project
 patch -p1 < ../heirloom-pkgtools-000000-sane-canonize.patch
-exit 1
 
 # take backup for diffing
 
