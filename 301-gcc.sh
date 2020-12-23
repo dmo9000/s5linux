@@ -17,7 +17,7 @@ cd build/${PKGNAME}
 
 # configure/build/install
 
-../../${PKGNAME}/configure --prefix=/usr  --enable-languages=c --disable-multilib
+../../${PKGNAME}/configure --prefix=/usr  --enable-languages=c --disable-multilib --disable-shared
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 

@@ -1,0 +1,11 @@
+TODO
+
+* fix libxcrypt to compile the same way as Fedora so we don't have to hihack a 'rpmbuild -bi' and repackage
+* package libmpc, libgmp, libmpfr 
+* get networking going 
+* package git
+* bootstrap g++
+* package Xorg
+* package CDE
+
+
