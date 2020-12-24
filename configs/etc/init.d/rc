@@ -14,19 +14,34 @@ start_services() {
 		${SERVICE} start 1>/dev/null 2>&1
 		STATUS=$?
 		if [ $STATUS -gt 0 ]; then 
-				echo "\x1b[31m[FAILED ($STATUS)]\x1b[0m"
+				echo -e "\x1b[31m[FAILED ($STATUS)]\x1b[0m"
 			else
-				echo "\x1b[32m[OK]\x1b[0m"
+				echo -e "\x1b[32m[OK]\x1b[0m"
 			fi
 		done
-
 }	
+
+stop_services() {
+        RUNLEVEL=${1}
+        for SERVICE in `ls -1 /etc/rc${RUNLEVEL}.d/K* 2>/dev/null | sort -n` ; do
+                echo -n "Stopping service ${SERVICE} ..."
+                ${SERVICE} stop 1>/dev/null 2>&1
+                STATUS=$?
+                if [ $STATUS -gt 0 ]; then 
+                                echo -e "\x1b[31m[FAILED ($STATUS)]\x1b[0m"
+                        else
+                                echo -e "\x1b[32m[OK]\x1b[0m"
+                        fi
+                done
+} 
+
 
 echo ""
 
 case ${RUNLEVEL} in 
 	0)
 	echo "Shutting down system ... "
+	stop_services 0
 	/sbin/shutdown -hfn now 
 	;;
 	1)
@@ -51,6 +66,7 @@ case ${RUNLEVEL} in
 	;;
 	6)
 	echo "Rebooting system ... "	
+	stop_services 0
 	/sbin/shutdown -rfn now
 	;;
 	*)

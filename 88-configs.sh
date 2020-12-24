@@ -7,6 +7,10 @@ sudo touch install-root/var/sadm/install/contents
 # sudo cp configs/bashrc install-root/root/.bashrc
 # sudo cp configs/bashrc install-root/root/.profile
 # sudo cp configs/bashrc install-root/root/.bash_profile
+
+# FIXME: do something better here
+#        especially the sshd user setup should be moved to the S5LXopenssh postinstall script
+
 sudo cp configs/bashrc install-root/etc/profile
 sudo egrep "^root|^dan|^sshd" /etc/passwd | tee configs/etc/passwd
 sudo egrep "^root|^dan|^tty|^wheel|^sshd" /etc/group | tee configs/etc/group
@@ -52,8 +56,6 @@ sudo mkdir -p install-root/run
 sudo cp network.sh install-root/root/network.sh
 sudo cp configs/etc/resolv.conf install-root/etc/resolv.conf
 sudo cp configs/etc/fstab install-root/etc/fstab
-
-sudo cp configs/etc/init.d/sshd install-root/etc/init.d/sshd
 
 # create devices
 

@@ -25,7 +25,7 @@ Script="sshd"
 KeyGen=/usr/bin/ssh-keygen
 Sshd=/usr/sbin/sshd
 Rsa1Key=/etc/ssh_host_key
-RsaKey=/etc/ssh_host_ed25519_key
+RsaKey=/etc/ssh_host_ecdsa-sha2-nistp256_key
 DsaKey=/etc/ssh_host_dsa_key
 PidFile=/var/run/sshd.pid
 
@@ -33,12 +33,12 @@ PidFile=/var/run/sshd.pid
 # Declare internal functions that will be called by this script
 ################################################################
 
-do_ed25519_keygen()
+do_ecdsa-sha2-nistp256_keygen()
 {
    if [ ! -s $Rsa1Key ]
    then
 	echo "Generating SSH1 RSA host key... \c"
-	if $KeyGen -q -t ed25519 -f $Rsa1Key -C '' -N '' > /dev/null 2>&1
+	if $KeyGen -q -t ecdsa-sha2-nistp256 -f $Rsa1Key -C '' -N '' > /dev/null 2>&1
 	then
 	   /bin/chmod 600 $Rsa1Key
 	   /bin/chmod 644 $Rsa1Key.pub
@@ -48,15 +48,15 @@ do_ed25519_keygen()
 	   exit 1
 	fi
    fi
-} # function do_ed25519_keygen
+} # function do_ecdsa-sha2-nistp256_keygen
 
 ################################################################
-do_ed25519_keygen()
+do_ecdsa-sha2-nistp256_keygen()
 {
    if [ ! -s $RsaKey ]
    then
 	echo "Generating SSH2 RSA host key... \c"
-	if $KeyGen -q -t ed25519 -f $RsaKey -C '' -N '' > /dev/null 2>&1
+	if $KeyGen -q -t ecdsa-sha2-nistp256 -f $RsaKey -C '' -N '' > /dev/null 2>&1
 	then
 	   /bin/chmod 600 $RsaKey
 	   /bin/chmod 644 $RsaKey.pub
@@ -66,7 +66,7 @@ do_ed25519_keygen()
 	   exit 1
 	fi
    fi
-} # function do_ed25519_keygen
+} # function do_ecdsa-sha2-nistp256_keygen
 
 ################################################################
 do_dsa_keygen()
@@ -90,8 +90,8 @@ do_dsa_keygen()
 start()
 {
 # Create keys if necessary
-   do_ed25519_keygen
-   do_ed25519_keygen
+   do_ecdsa-sha2-nistp256_keygen
+   do_ecdsa-sha2-nistp256_keygen
    do_dsa_keygen
 
    echo "Starting $Script:"

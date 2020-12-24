@@ -24,8 +24,10 @@ cd ${PKGNAME}
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 sudo mkdir -p ${PKGDIR}/etc/init.d/
+sudo mkdir -p ${PKGDIR}/etc/rc0.d/
 sudo mkdir -p ${PKGDIR}/etc/rc5.d/
 sudo cp ${TOPLEVEL}/configs/etc/init.d/sshd ${PKGDIR}/etc/init.d/sshd
+cd ${PKGDIR}/etc/rc0.d/ && sudo ln -sf ../init.d/sshd ./K10sshd
 cd ${PKGDIR}/etc/rc5.d/ && sudo ln -sf ../init.d/sshd ./S10sshd
 
 # package
@@ -50,6 +52,12 @@ __POSTINSTALL__
 
 sudo chmod 755 postinstall
 
+cat <<__PREREMOVE__ > preremove
+#!/bin/sh
+/etc/init.d/sshd stop
+__PREREMOVE__
+
+sudo chmod 755 preremove
 
 ../../mkproto.sh
 ../../mkpkg.sh

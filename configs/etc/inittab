@@ -1,11 +1,10 @@
 id:5:initdefault:
 si::sysinit:/etc/init.d/rcS
-rc::bootwait:/etc/rc
-1:12345:respawn:/sbin/agetty --delay 10 --nohostname -s 38400 -t 600 tty1 linux
-2:2345:respawn:/sbin/agetty --delay 10 --nohostname -s 38400 -t 600 tty2 linux
-3:345:respawn:/sbin/agetty --delay 10 --nohostname -s 38400 -t 600 tty3 linux
-4:45:respawn:/sbin/agetty --delay 10 --nohostname -s 38400 -t 600 tty4 linux
-5:5:respawn:/sbin/agetty --delay 10 --nohostname -s 38400 -t 600 tty5 linux
+1:12345:respawn:/sbin/agetty --nohostname -s 38400 -t 600 tty1 linux
+2:2345:respawn:/sbin/agetty --nohostname -s 38400 -t 600 tty2 linux
+3:345:respawn:/sbin/agetty --nohostname -s 38400 -t 600 tty3 linux
+4:45:respawn:/sbin/agetty --nohostname -s 38400 -t 600 tty4 linux
+5:5:respawn:/sbin/agetty --nohostname -s 38400 -t 600 tty5 linux
 l0:0:wait:/etc/init.d/rc 0
 l1:1:wait:/etc/init.d/rc 1 
 l2:2:wait:/etc/init.d/rc 2
