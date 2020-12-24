@@ -1,2 +1,2 @@
-sudo cp ./spool/*.pkg install-root/packages/
+sudo cp -v ./spool/*.pkg install-root/packages/
 

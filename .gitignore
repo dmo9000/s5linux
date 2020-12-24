@@ -14,3 +14,7 @@
 /packages/*.pkg
 /src/build
 /src/pkgbuild
+/configs/etc/passwd
+/configs/etc/group
+/configs/etc/shadow
+

@@ -36,12 +36,12 @@ LABEL HeadRatLinuxLive
        	Boot HeadRat Linux live image 
     ENDTEXT
 
-LABEL HeadRatLinuxInstalled
-    MENU LABEL ^HeadRat Linux (/sbin/init) 
+LABEL HeadRatLinuxInstaller
+    MENU LABEL ^HeadRat Linux Install to /dev/sda1 
     KERNEL /images/bzImage
-    APPEND root=/dev/sda1 rw init=/rungetty.sh fbcon=font:SUN8x16 
+    APPEND root=/dev/sr0 ro init=/root/install-sda1.sh fbcon=font:SUN8x16 
     TEXT HELP
-	Boot HeadRat Linux (/dev/sda1) 
+	Install HeadRat Linux to (/dev/sda1) 
     ENDTEXT
 
 LABEL HeadRatLinuxViaInit

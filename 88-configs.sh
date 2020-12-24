@@ -8,11 +8,14 @@ sudo touch install-root/var/sadm/install/contents
 # sudo cp configs/bashrc install-root/root/.profile
 # sudo cp configs/bashrc install-root/root/.bash_profile
 sudo cp configs/bashrc install-root/etc/profile
-sudo egrep "^root|^dan" /etc/passwd | tee configs/etc/passwd
-sudo egrep "^root|^dan|^tty|^wheel" /etc/group | tee configs/etc/group
-sudo cp configs/etc/{passwd,group} install-root/etc
-sudo cp configs/etc/nsswitch.conf install-root/etc
+sudo egrep "^root|^dan|^sshd" /etc/passwd | tee configs/etc/passwd
+sudo egrep "^root|^dan|^tty|^wheel|^sshd" /etc/group | tee configs/etc/group
+sudo egrep "^root|^dan|^sshd" /etc/shadow | sudo tee configs/etc/shadow
+sudo cp -p configs/etc/{passwd,group,shadow} install-root/etc
+sudo chmod 644 install-root/etc/{passwd,group}
+sudo chmod 000 install-root/etc/shadow
 
+sudo cp configs/etc/nsswitch.conf install-root/etc
 sudo mkdir -p install-root/mnt/sda1
 sudo mkdir -p install-root/mnt/sr0
 sudo mkdir -p install-root/proc
@@ -48,7 +51,9 @@ sudo cp configs/etc/init.d/rcS install-root/etc/init.d/rcS
 sudo mkdir -p install-root/run
 sudo cp network.sh install-root/root/network.sh
 sudo cp configs/etc/resolv.conf install-root/etc/resolv.conf
-sudo echo "/dev/sr0 /mnt/sr0 iso9660 defaults 0 0" | sudo tee >>  install-root/etc/fstab
+sudo cp configs/etc/fstab install-root/etc/fstab
+
+sudo cp configs/etc/init.d/sshd install-root/etc/init.d/sshd
 
 # create devices
 
@@ -59,7 +64,7 @@ for i in `seq 0 9`; do
 	done
 
 for i in `seq 0 5`; do
-	sudo mkdir -p /etc/rc${i}.d
+	sudo mkdir -p install-root/etc/rc${i}.d
 	done
 
 # creat homedir for dan

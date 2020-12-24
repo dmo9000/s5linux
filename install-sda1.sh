@@ -1,4 +1,8 @@
 #!/bin/bash
+/bin/dmesg -n 1
+
+echo "*** Read to install to /dev/sda1 - hit ENTER to start"
+read ENTER
 
 echo "*** Creating /dev/sda1 ..."
 
@@ -24,8 +28,8 @@ echo "*** Expanding filesystem on /dev/sda1 ..."
 #echo "*** Copying base system from /dev/sr0 to /dev/sda1 ..."
 #cp -pax / /mnt/sda1 
 
-echo "*** Copying package archive from installer DVD ..."
-cp -vpax /packages/* /mnt/sda1/packages/
+#echo "*** Copying package archive from installer DVD ..."
+#cp -vpax /packages/* /mnt/sda1/packages/
 
 echo "*** Doing some minor housekeeping ... "
 
@@ -44,3 +48,6 @@ umount /mnt/sda1 1>/dev/null 2>&1
 
 echo "*** done."
 
+echo "*** Hit ENTER to reboot the system"
+read ENTER
+/sbin/reboot -f
