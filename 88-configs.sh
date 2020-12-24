@@ -56,6 +56,8 @@ sudo mkdir -p install-root/run
 sudo cp network.sh install-root/root/network.sh
 sudo cp configs/etc/resolv.conf install-root/etc/resolv.conf
 sudo cp configs/etc/fstab install-root/etc/fstab
+sudo mkdir -p install-root/boot
+sudo cp -p kernel/bzImage install-root/boot/bzImage
 
 # create devices
 

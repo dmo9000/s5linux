@@ -36,19 +36,19 @@ echo "*** Doing some minor housekeeping ... "
 echo "/dev/sda1 /boot ext4 defaults 0 0" >> /mnt/install/etc/fstab
 echo "/dev/sda2 / ext4 defaults 0 0" >> /mnt/install/etc/fstab
 
+rm -rf /mnt/install/boot/bzImage
 rm -rf /mnt/install/rr_moved 
 rm -rf /mnt/install/mnt/install
 rm -rf /mnt/install/root/install-sda.sh
-
 sync
-
-# echo "*** Installing SysV init ..."
-# ( echo 1 && /usr/5bin/yes) | /bin/chroot /mnt/install /usr/5bin/pkgadd -d /packages/S5LXsysvinit.pkg
-
 echo "*** Unmounting /dev/sda2 ..."
-
 umount /mnt/install 1>/dev/null 2>&1
 
+echo "*** Installing kernel (bzImage) to /boot ..."
+mount /dev/sda1 /mnt/install 1>/dev/null 2>&1
+cp -v /boot/bzImage /mnt/install/bzImage
+sync
+umount /mnt/install 1>/dev/null 2>&1
 echo "*** done."
 
 echo "*** Hit ENTER to reboot the system"
