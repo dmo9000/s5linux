@@ -1,5 +1,4 @@
 #!/bin/sh
-set -x
 #
 # The is the "init" start/stop script for the OpenSSH server daemon "sshd"
 #
