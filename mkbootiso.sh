@@ -37,19 +37,19 @@ LABEL HeadRatLinuxLive
     ENDTEXT
 
 LABEL HeadRatLinuxInstaller
-    MENU LABEL ^HeadRat Linux Install to /dev/sda1 
+    MENU LABEL ^HeadRat Linux Install to /dev/sda2 
     KERNEL /images/bzImage
-    APPEND root=/dev/sr0 ro init=/root/install-sda1.sh fbcon=font:SUN8x16 
+    APPEND root=/dev/sr0 ro init=/root/install-sda.sh fbcon=font:SUN8x16 
     TEXT HELP
-	Install HeadRat Linux to (/dev/sda1) 
+	Install HeadRat Linux to (/dev/sda2) 
     ENDTEXT
 
 LABEL HeadRatLinuxViaInit
-    MENU LABEL ^HeadRat Linux via SysVInit (/dev/sda1) 
+    MENU LABEL ^HeadRat Linux via SysVInit (/dev/sda2) 
     KERNEL /images/bzImage
-    APPEND root=/dev/sda1 rw init=/sbin/init fbcon=font:SUN8x16 
+    APPEND root=/dev/sda2 rw init=/sbin/init fbcon=font:SUN8x16 
     TEXT HELP
-        Boot HeadRat Linux via SysVInit (/dev/sda1) 
+        Boot HeadRat Linux via SysVInit (/dev/sda2) 
     ENDTEXT
 
 EOF

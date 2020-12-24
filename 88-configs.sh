@@ -20,7 +20,7 @@ sudo chmod 644 install-root/etc/{passwd,group}
 sudo chmod 000 install-root/etc/shadow
 
 sudo cp configs/etc/nsswitch.conf install-root/etc
-sudo mkdir -p install-root/mnt/sda1
+sudo mkdir -p install-root/mnt/install
 sudo mkdir -p install-root/mnt/sr0
 sudo mkdir -p install-root/proc
 sudo mkdir -p install-root/packages/
@@ -39,7 +39,7 @@ sudo cp mtab install-root/etc/mtab
 sudo mkdir -p install-root/usr/bin
 # sudo cp install-root/bin/bash install-root/usr/bin/bash
 sudo cp bootstrap.sh install-root/bootstrap.sh
-sudo cp install-sda1.sh install-root/root/install-sda1.sh
+sudo cp install-sda.sh install-root/root/install-sda.sh
 sudo cp rungetty.sh install-root/
 sudo mkdir -p install-root/etc/pam.d
 sudo cp configs/etc/pam.d/login install-root/etc/pam.d/
