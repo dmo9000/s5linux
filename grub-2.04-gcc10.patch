@@ -1,0 +1,42 @@
+diff -urN grub-2.04.dist/grub-core/disk/mdraid1x_linux.c grub-2.04/grub-core/disk/mdraid1x_linux.c
+--- grub-2.04.dist/grub-core/disk/mdraid1x_linux.c	2018-11-25 04:13:02.000000000 +1100
++++ grub-2.04/grub-core/disk/mdraid1x_linux.c	2020-12-25 05:19:43.654486302 +1100
+@@ -178,7 +178,7 @@
+ 	return NULL;
+ 
+       if (grub_disk_read (disk, sector, 
+-			  (char *) &sb.dev_roles[grub_le_to_cpu32 (sb.dev_number)]
++			  (char *) (sb.dev_roles + grub_le_to_cpu32 (sb.dev_number))
+ 			  - (char *) &sb,
+ 			  sizeof (role), &role))
+ 	return NULL;
+diff -urN grub-2.04.dist/grub-core/fs/zfs/zfs.c grub-2.04/grub-core/fs/zfs/zfs.c
+--- grub-2.04.dist/grub-core/fs/zfs/zfs.c	2019-04-23 18:54:47.000000000 +1000
++++ grub-2.04/grub-core/fs/zfs/zfs.c	2020-12-25 05:21:09.280279461 +1100
+@@ -141,9 +141,12 @@
+ static inline zap_leaf_chunk_t *
+ ZAP_LEAF_CHUNK (zap_leaf_phys_t *l, int bs, int idx)
+ {
+-  return &((zap_leaf_chunk_t *) (l->l_entries 
+-				 + (ZAP_LEAF_HASH_NUMENTRIES(bs) * 2)
+-				 / sizeof (grub_properly_aligned_t)))[idx];
++  grub_properly_aligned_t *l_entries;
++
++  l_entries = (grub_properly_aligned_t *) ALIGN_UP((grub_addr_t)l->l_hash, sizeof (grub_properly_aligned_t));
++  return &((zap_leaf_chunk_t *) (l_entries
++                                 + (ZAP_LEAF_HASH_NUMENTRIES(bs) * 2)
++                                 / sizeof (grub_properly_aligned_t)))[idx];
+ }
+ 
+ static inline struct zap_leaf_entry *
+diff -urN grub-2.04.dist/include/grub/zfs/zap_leaf.h grub-2.04/include/grub/zfs/zap_leaf.h
+--- grub-2.04.dist/include/grub/zfs/zap_leaf.h	2018-11-25 04:13:02.000000000 +1100
++++ grub-2.04/include/grub/zfs/zap_leaf.h	2020-12-25 05:22:07.411817947 +1100
+@@ -70,7 +70,6 @@
+ 	 */
+ 
+ 	grub_uint16_t l_hash[0];
+-        grub_properly_aligned_t l_entries[0];
+ } zap_leaf_phys_t;
+ 
+ typedef union zap_leaf_chunk {

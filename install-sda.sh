@@ -13,10 +13,11 @@ echo "*** Creating /boot and /root partitions ..."
 printf "type=83,size=100M,bootable\ntype=83\n" | /sbin/sfdisk /dev/sda
 
 echo "*** Formatting /boot (/dev/sda1) as ext4 ..."
+/sbin/wipefs --force -a /dev/sda1
 /sbin/mkfs.ext4 /dev/sda1
 
 echo "*** Copying base install image ... "
-
+/sbin/wipefs --force -a /dev/sda2
 /bin/dd if=/root/rootfs.ext4 of=/dev/sda2 bs=100M 1>/dev/null 2>&1
 
 echo "*** Checking filesystem integrity ..."
@@ -29,7 +30,7 @@ echo "*** Mounting new filesystem ..."
 mount /dev/sda2 /mnt/install 1>/dev/null 2>&1
 
 echo "*** Expanding filesystem on /dev/sda2 ..."
-/sbin/resize2fs /dev/sda2 1>/dev/null 2>&1
+/sbin/resize2fs /dev/sda2 1>/dev/null 
 
 echo "*** Doing some minor housekeeping ... "
 
