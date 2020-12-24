@@ -9,7 +9,9 @@ rm -f prototype
 
 echo "i pkginfo" > prototype 
 # check if postinstall exists and if so, add it to prototype
-if [ ! -x "postinstall " ]; then 
+ls -l postinstall
+
+if [ -e postinstall ]; then 
 	echo "+++ postinstall script found; adding to prototype"
 	echo "i postinstall" >> prototype
 	else 

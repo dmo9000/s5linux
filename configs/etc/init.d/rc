@@ -9,14 +9,14 @@ if [ -z '${RUNLEVEL}' ]; then
 
 start_services() {
 	RUNLEVEL=${1}
-	for SERVICE in /etc/rc${RUNLEVEL}.d/S* ; do
+	for SERVICE in `ls -1 /etc/rc${RUNLEVEL}.d/S* 2>/dev/null | sort -n` ; do
 		echo -n "Starting service ${SERVICE} ..."
 		${SERVICE} start 1>/dev/null 2>&1
 		STATUS=$?
 		if [ $STATUS -gt 0 ]; then 
-			echo "[FAILED ($STATUS)]"
+				echo "\x1b[31m[FAILED ($STATUS)]\x1b[0m"
 			else
-				echo "[OK]"
+				echo "\x1b[32m[OK]\x1b[0m"
 			fi
 		done
 
