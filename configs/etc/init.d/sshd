@@ -37,14 +37,14 @@ do_host_keygen()
 {
    if [ ! -s $Rsa1Key ]
    then
-	echo "Generating SSH1 RSA host key... \c"
+	echo -n "Generating SSH1 RSA host key... "
 	if $KeyGen -q -t ed25519 -f $Rsa1Key -C '' -N '' > /dev/null 2>&1
 	then
 	   /bin/chmod 600 $Rsa1Key
 	   /bin/chmod 644 $Rsa1Key.pub
-	   echo "done\n"
+	   echo "done"
 	else
-	   echo "FAILED\n"
+	   echo "FAILED"
 	   exit 1
 	fi
    fi
@@ -73,7 +73,7 @@ do_dsa_keygen()
 {
    if [ ! -s $DsaKey ]
    then
-	echo "Generating SSH2 DSA host key... "
+	echo -n "Generating SSH2 DSA host key... "
 	if $KeyGen -q -t dsa -f $DsaKey -C '' -N '' > /dev/null 2>&1
 	then
 	   /bin/chmod 600 $DsaKey
