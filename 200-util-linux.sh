@@ -5,6 +5,8 @@
 
 # setup
 
+set -e
+
 PKGNAME=util-linux-2.36
 NPROC=`nproc`
 TOPLEVEL=`pwd`
@@ -15,18 +17,22 @@ tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
 # configure/build/install
-
-#CFLAGS=-static LDFLAGS=-static ./configure --prefix=/ --disable-wall --disable-mount --enable-static-programs
-#make LDFLAGS=--static -j ${NPROC}
+sudo rm -rf ${PKGDIR}
 ./configure --prefix=/usr  --disable-selinux
 make -j ${NPROC}
 sudo make install DESTDIR=${PKGDIR}
+cd ${TOPLEVEL}
+sudo mkdir -p ${PKGDIR}/etc/pam.d
+sudo cp configs/etc/pam.d/login ${PKGDIR}/etc/pam.d/login
+sudo cp configs/etc/pam.d/su ${PKGDIR}/etc/pam.d/su
+
+sudo chmod 777 ${PKGDIR}
 
 # package
 
 cd ${PKGDIR}
 
-cat <<__PKGINFO__ > pkginfo
+sudo cat <<__PKGINFO__ > pkginfo
 PKG=S5LXutillinux
 NAME=${PKGNAME}
 DESC=Linux utilities
@@ -38,4 +44,4 @@ BASEDIR=/
 __PKGINFO__
 
 ../../mkproto.sh
-
+../../mkpkg.sh

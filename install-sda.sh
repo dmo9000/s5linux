@@ -30,27 +30,51 @@ echo "*** Mounting new filesystem ..."
 mount /dev/sda2 /mnt/install 1>/dev/null 2>&1
 
 echo "*** Expanding filesystem on /dev/sda2 ..."
-/sbin/resize2fs /dev/sda2 1>/dev/null 
+/sbin/resize2fs /dev/sda2 
 
 echo "*** Doing some minor housekeeping ... "
 
-echo "/dev/sda1 /boot ext4 defaults 0 0" >> /mnt/install/etc/fstab
-echo "/dev/sda2 / ext4 defaults 0 0" >> /mnt/install/etc/fstab
+rm -f /mnt/install/etc/fstab
+echo "/dev/sda1 /mnt/install/boot ext4 defaults 0 0" >> /mnt/install/etc/fstab
+echo "/dev/sda2 /mnt/install ext4 defaults 0 0" >> /mnt/install/etc/fstab
 
 rm -rf /mnt/install/boot/bzImage
 rm -rf /mnt/install/rr_moved 
 rm -rf /mnt/install/mnt/install
 rm -rf /mnt/install/root/install-sda.sh
 sync
-echo "*** Unmounting /dev/sda2 ..."
-umount /mnt/install 1>/dev/null 2>&1
 
 echo "*** Installing kernel (bzImage) to /boot ..."
-mount /dev/sda1 /mnt/install 1>/dev/null 2>&1
-cp -v /boot/bzImage /mnt/install/bzImage
+mount /dev/sda1 /mnt/install/boot 1>/dev/null 2>&1
+cp -v /boot/bzImage /mnt/install/boot/bzImage
 sync
-umount /mnt/install 1>/dev/null 2>&1
+
+mkdir -p /mnt/install/boot/grub
+cat << __GRUB_CFG__ > /mnt/install/boot/grub/grub.cfg
+menuentry "HeadRat Linux" {
+        set root=(hd0,1)
+        linux   /bzImage root=/dev/sda2 rw
+}
+__GRUB_CFG__
+
+mount --rbind /dev /mnt/install/dev
+mount --rbind /proc /mnt/install/proc
+mount --rbind /sys /mnt/install/sys
+mount --rbind /run /mnt/install/run
+chroot /mnt/install /usr/sbin/grub-install /dev/sda
+
+
+rm -f /mnt/install/etc/fstab
+echo "/dev/sda1 /boot ext4 defaults 0 0" >> /mnt/install/etc/fstab
+echo "/dev/sda2 / ext4 defaults 0 0" >> /mnt/install/etc/fstab
+
+
+echo "*** Unmounting /dev/sda1 ..."
+umount /mnt/install/boot 1>/dev/null 2>&1
 echo "*** done."
+
+echo "*** Unmounting /dev/sda2 ..."
+umount /mnt/install 1>/dev/null 2>&1
 
 echo "*** Hit ENTER to reboot the system"
 read ENTER

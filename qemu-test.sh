@@ -18,7 +18,7 @@ if [ ! -r qemu-disks/sda.img ]; then
 	fi
 #qemu-system-x86_64 -cdrom images/bootable.iso -m 512 -boot d
 #qemu-system-x86_64 qemu-disks/sda.img -cdrom images/bootable.iso -m 512 -boot d
-qemu-system-x86_64 -drive file=qemu-disks/sda.img,format=raw -cdrom images/bootable.iso -m 512 -boot d
+qemu-system-x86_64 -drive file=qemu-disks/sda.img,format=raw -cdrom images/bootable.iso -m 512 -boot ${1} 
 
 
 

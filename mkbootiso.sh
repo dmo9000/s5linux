@@ -8,6 +8,8 @@ cp /usr/share/syslinux/libutil.c32 images/ISO-ROOT/isolinux/
 cp /usr/share/syslinux/ldlinux.c32 images/ISO-ROOT/isolinux/ 
 cp /usr/share/syslinux/libcom32.c32 images/ISO-ROOT/isolinux/
 cp /usr/share/syslinux/vesamenu.c32 images/ISO-ROOT/isolinux/
+cp /usr/share/syslinux/chain.c32 images/ISO-ROOT/isolinux/
+
 cp graphics/syslinux.png images/ISO-ROOT/isolinux/syslinux.png
 cp graphics/sun12x22.psfu images/ISO-ROOT/isolinux/sun12x22.psfu
 
@@ -51,6 +53,15 @@ LABEL HeadRatLinuxViaInit
     TEXT HELP
         Boot HeadRat Linux via SysVInit (/dev/sda2) 
     ENDTEXT
+
+LABEL HeadRatLinuxInstalledSystem
+    MENU LABEL ^HeadRat Linux Installed System (/dev/sda2) 
+    COM32 /isolinux/chain.c32
+    APPEND hd0
+    TEXT HELP
+        Boot HeadRat Linux InstalledSystem (/dev/sda2) 
+    ENDTEXT
+
 
 EOF
 

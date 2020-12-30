@@ -23,6 +23,8 @@ sudo cp configs/etc/nsswitch.conf install-root/etc
 sudo mkdir -p install-root/mnt/install
 sudo mkdir -p install-root/mnt/sr0
 sudo mkdir -p install-root/proc
+sudo mkdir -p install-root/sys
+sudo mkdir -p install-root/run
 sudo mkdir -p install-root/packages/
 sudo mkdir -p install-root/var/spool/pkg
 sudo mkdir -p install-root/tmp
@@ -55,7 +57,7 @@ sudo cp configs/etc/init.d/rcS install-root/etc/init.d/rcS
 sudo mkdir -p install-root/run
 sudo cp network.sh install-root/root/network.sh
 sudo cp configs/etc/resolv.conf install-root/etc/resolv.conf
-sudo cp configs/etc/fstab install-root/etc/fstab
+#sudo cp configs/etc/fstab install-root/etc/fstab
 sudo mkdir -p install-root/boot
 sudo cp -p kernel/bzImage install-root/boot/bzImage
 
