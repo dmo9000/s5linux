@@ -1,4 +1,6 @@
 #!/bin/sh
+set -e
+
 TOPLEVEL=`pwd`
 NPROC=`nproc`
 cd src 

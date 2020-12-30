@@ -28,13 +28,13 @@ echo "*** Copying base install image ... "
 echo "  *** Checking filesystem integrity ..."
 
 /sbin/e2fsck -f /dev/sda2 1>/dev/null 2>&1
-/sbin/resize2fs /dev/sda2 1>/dev/null 
+/sbin/resize2fs -f /dev/sda2 1>/dev/null 
 
 echo "  *** Expanding filesystem on /dev/sda2 ..."
 echo "    *** Mounting new filesystem ..."
 mount /dev/sda2 /mnt/install 1>/dev/null 2>&1
 echo "    *** Resizing new filesystem ..."
-/sbin/resize2fs /dev/sda2 
+/sbin/resize2fs -f /dev/sda2 
 
 echo "*** Doing some minor housekeeping ... "
 
@@ -57,10 +57,10 @@ menuentry "HeadRat Linux" {
 }
 __GRUB_CFG__
 
-mount --rbind /dev /mnt/install/dev
-mount --rbind /proc /mnt/install/proc
-mount --rbind /sys /mnt/install/sys
-mount --rbind /run /mnt/install/run
+#mount --rbind /dev /mnt/install/dev
+#mount --rbind /proc /mnt/install/proc
+#mount --rbind /sys /mnt/install/sys
+#mount --rbind /run /mnt/install/run
 chroot /mnt/install /usr/sbin/grub-install /dev/sda 1>/dev/null 2>&1
 
 
