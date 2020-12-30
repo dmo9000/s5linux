@@ -33,7 +33,7 @@ LABEL HeadRatLinuxLive
     MENU LABEL ^HeadRat Linux Live
     MENU DEFAULT
     KERNEL /images/bzImage
-    APPEND root=/dev/sr0 ro init=/sbin/init fbcon=font:SUN8x16 
+    APPEND root=/dev/sr0 ro init=/sbin/init fbcon=font:SUN8x16 nomodeset quiet splash 
     TEXT HELP
        	Boot HeadRat Linux live image 
     ENDTEXT
@@ -41,7 +41,7 @@ LABEL HeadRatLinuxLive
 LABEL HeadRatLinuxInstaller
     MENU LABEL ^HeadRat Linux Install to /dev/sda2 
     KERNEL /images/bzImage
-    APPEND root=/dev/sr0 ro init=/root/install-sda.sh fbcon=font:SUN8x16 
+    APPEND root=/dev/sr0 ro init=/root/install-sda.sh fbcon=font:SUN8x16 nomodeset quiet splash
     TEXT HELP
 	Install HeadRat Linux to (/dev/sda2) 
     ENDTEXT
@@ -49,7 +49,7 @@ LABEL HeadRatLinuxInstaller
 LABEL HeadRatLinuxViaInit
     MENU LABEL ^HeadRat Linux via SysVInit (/dev/sda2) 
     KERNEL /images/bzImage
-    APPEND root=/dev/sda2 rw init=/sbin/init fbcon=font:SUN8x16 
+    APPEND root=/dev/sda2 rw init=/sbin/init fbcon=font:SUN8x16 nomodeset quiet splash
     TEXT HELP
         Boot HeadRat Linux via SysVInit (/dev/sda2) 
     ENDTEXT

@@ -3,6 +3,10 @@ TOPLEVEL=`pwd`
 NPROC=`nproc`
 cd src 
 tar -zxvf linux-5.10.1.tar.gz
+convert ${TOPLEVEL}/graphics/syslinux.png src/linux-5.10.1/drivers/video/logo/headrat-linux.ppm
+ppmquant 224 src/linux-5.10.1/drivers/video/logo/headrat-linux.ppm > src/linux-5.10.1/drivers/video/logo/headrat-linux-224.ppm
+pnmnoraw src/linux-5.10.1/drivers/video/logo/headrat-linux-224.ppm > src/linux-5.10.1/drivers/video/logo/headrat-linux-224-ascii.ppm 
+mv src/linux-5.10.1/drivers/video/logo/headrat-linux-224-ascii.ppm src/linux-5.10.1/drivers/video/logo/logo_linux_clut224.ppm
 cd linux-5.10.1
 cp ../../kernel.config .config
 #make defconfig

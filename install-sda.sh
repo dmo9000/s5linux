@@ -4,6 +4,10 @@
 #echo "*** Read to install to /dev/sda2 - hit ENTER to start"
 #read ENTER
 
+/usr/bin/clear
+
+cat /etc/issue
+
 echo "*** Wiping partition table on /dev/sda ..."
 /sbin/wipefs --force -a /dev/sda 1>/dev/null 2>&1
 
@@ -19,7 +23,7 @@ echo "  *** Formatting /boot (/dev/sda1) as ext4 ..."
 echo "*** Copying base install image ... "
 /sbin/wipefs --force -a /dev/sda2 1>/dev/null 2>&1
 #/bin/dd if=/root/rootfs.ext4 of=/dev/sda2 bs=100M 1>/dev/null 2>&1 1>/dev/null 2>&1
-/usr/bin/pv /root/rootfs./ext4 > /dev/sda2 
+/usr/bin/pv /root/rootfs.ext4 > /dev/sda2 
 
 echo "  *** Checking filesystem integrity ..."
 
@@ -48,7 +52,7 @@ mkdir -p /mnt/install/boot/grub
 cat << __GRUB_CFG__ > /mnt/install/boot/grub/grub.cfg
 menuentry "HeadRat Linux" {
         set root=(hd0,1)
-        linux   /bzImage root=/dev/sda2 rw
+        linux   /bzImage root=/dev/sda2 rw nomodeset quiet splash
 }
 __GRUB_CFG__
 
@@ -65,12 +69,13 @@ echo "/dev/sda2 / ext4 defaults 0 0" >> /mnt/install/etc/fstab
 echo "/dev/sr0 /mnt/sr0 iso9660 defaults 0 0" >> /mnt/install/etc/fstab
 
 
-echo "*** Unmounting /dev/sda1 ..."
+echo -n "*** Unmounting /dev/sda1 ... "
 umount /mnt/install/boot 1>/dev/null 2>&1
-echo "*** done."
+echo "done."
 
-echo "*** Unmounting /dev/sda2 ..."
+echo -n "*** Unmounting /dev/sda2 ... "
 umount /mnt/install 1>/dev/null 2>&1
+echo "done."
 
 echo "*** Hit ENTER to reboot the system"
 read ENTER
