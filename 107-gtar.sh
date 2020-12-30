@@ -20,7 +20,7 @@ sudo rm -rf ${PKGDIR}
 tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
-./configure --prefix=/usr 
+./configure --prefix=/usr --without-selinux   
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 
