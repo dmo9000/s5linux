@@ -28,6 +28,7 @@ echo "*** Copying base install image ... "
 echo "  *** Checking filesystem integrity ..."
 
 /sbin/e2fsck -f /dev/sda2 1>/dev/null 2>&1
+/sbin/resize2fs /dev/sda2 1>/dev/null 2>&1
 
 echo "  *** Expanding filesystem on /dev/sda2 ..."
 echo "    *** Mounting new filesystem ..."
