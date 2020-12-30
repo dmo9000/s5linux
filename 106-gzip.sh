@@ -2,35 +2,40 @@
 #
 
 # setup
+#
+set -e
+#
 
-PKGNAME=ncurses-6.2
+PKGID=S5LXgzip
+PKG=gzip
+VERSION=1.10
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
+
 cd src
-rm -rf ./${PKGNAME}
+sudo rm -rf ./${PKGNAME}
+sudo rm -rf ${PKGDIR}
 tar -zxvf ${PKGNAME}.tar.gz
+cd ${PKGNAME} 
 
-# configure/build/install
-
-cd ../build/
-../src/${PKGNAME}/configure --prefix=/usr --with-termlib --with-shared
-make -j ${NPROC}
+./configure --prefix=/usr 
+make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
-cd ${TOPLEVEL}
 
 # package
 
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXncurses
+PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=GNU ncurses
+DESC=GNU gzip
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=IA64,x86_64
-CATEGORY=libraries
+CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
