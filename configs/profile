@@ -1,5 +1,6 @@
 shopt -s expand_aliases
 export BASH_ENV=~/.bashrc
 alias ls='ls --color=always'
+alias vi=vim
 stty erase ^?
 export PATH=$PATH:/usr/5bin

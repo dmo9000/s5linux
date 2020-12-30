@@ -11,7 +11,7 @@ sudo touch install-root/var/sadm/install/contents
 # FIXME: do something better here
 #        especially the sshd user setup should be moved to the S5LXopenssh postinstall script
 
-sudo cp configs/bashrc install-root/etc/profile
+sudo cp configs/profile install-root/etc/profile
 sudo egrep "^root|^dan|^sshd" /etc/passwd | tee configs/etc/passwd
 sudo egrep "^root|^dan|^tty|^wheel|^sshd" /etc/group | tee configs/etc/group
 sudo egrep "^root|^dan|^sshd" /etc/shadow | sudo tee configs/etc/shadow

@@ -1,24 +1,24 @@
 #!/bin/bash
 /bin/dmesg -n 1
 
-echo "*** Read to install to /dev/sda2 - hit ENTER to start"
-read ENTER
+#echo "*** Read to install to /dev/sda2 - hit ENTER to start"
+#read ENTER
 
 echo "** Wiping partition table on /dev/sda ..."
-/sbin/wipefs --force -a /dev/sda
+/sbin/wipefs --force -a /dev/sda 1>/dev/null 2>&1
 
 echo "*** Creating /boot and /root partitions ..."
 
 #echo ';' | /sbin/sfdisk /dev/sda 1>/dev/null 2>&1 
-printf "type=83,size=100M,bootable\ntype=83\n" | /sbin/sfdisk /dev/sda
+printf "type=83,size=100M,bootable\ntype=83\n" | /sbin/sfdisk /dev/sda 1>/dev/null 2>&1
 
 echo "*** Formatting /boot (/dev/sda1) as ext4 ..."
-/sbin/wipefs --force -a /dev/sda1
-/sbin/mkfs.ext4 /dev/sda1
+/sbin/wipefs --force -a /dev/sda1 1>/dev/null 2>&1
+/sbin/mkfs.ext4 /dev/sda1 1>/dev/null 2>&1
 
 echo "*** Copying base install image ... "
-/sbin/wipefs --force -a /dev/sda2
-/bin/dd if=/root/rootfs.ext4 of=/dev/sda2 bs=100M 1>/dev/null 2>&1
+/sbin/wipefs --force -a /dev/sda2 1>/dev/null 2>&1
+/bin/dd if=/root/rootfs.ext4 of=/dev/sda2 bs=100M 1>/dev/null 2>&1 1>/dev/null 2>&1
 
 echo "*** Checking filesystem integrity ..."
 
@@ -30,7 +30,7 @@ echo "*** Mounting new filesystem ..."
 mount /dev/sda2 /mnt/install 1>/dev/null 2>&1
 
 echo "*** Expanding filesystem on /dev/sda2 ..."
-/sbin/resize2fs /dev/sda2 
+/sbin/resize2fs /dev/sda2 1>/dev/null 2>&1
 
 echo "*** Doing some minor housekeeping ... "
 
@@ -46,7 +46,7 @@ sync
 
 echo "*** Installing kernel (bzImage) to /boot ..."
 mount /dev/sda1 /mnt/install/boot 1>/dev/null 2>&1
-cp -v /boot/bzImage /mnt/install/boot/bzImage
+cp -v /boot/bzImage /mnt/install/boot/bzImage 1>/dev/null 2>&1
 sync
 
 mkdir -p /mnt/install/boot/grub
@@ -61,12 +61,13 @@ mount --rbind /dev /mnt/install/dev
 mount --rbind /proc /mnt/install/proc
 mount --rbind /sys /mnt/install/sys
 mount --rbind /run /mnt/install/run
-chroot /mnt/install /usr/sbin/grub-install /dev/sda
+chroot /mnt/install /usr/sbin/grub-install /dev/sda 1>/dev/null 2>&1
 
 
 rm -f /mnt/install/etc/fstab
 echo "/dev/sda1 /boot ext4 defaults 0 0" >> /mnt/install/etc/fstab
 echo "/dev/sda2 / ext4 defaults 0 0" >> /mnt/install/etc/fstab
+echo "/dev/sr0 /mnt/sr0 iso9660 defaults 0 0" >> /mnt/install/etc/fstab
 
 
 echo "*** Unmounting /dev/sda1 ..."
