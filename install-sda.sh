@@ -23,7 +23,8 @@ echo "  *** Formatting /boot (/dev/sda1) as ext4 ..."
 echo "*** Copying base install image ... "
 /sbin/wipefs --force -a /dev/sda2 1>/dev/null 2>&1
 #/bin/dd if=/root/rootfs.ext4 of=/dev/sda2 bs=100M 1>/dev/null 2>&1 1>/dev/null 2>&1
-/usr/bin/pv /root/rootfs.ext4 > /dev/sda2 
+#/usr/bin/pv /root/rootfs.ext4 > /dev/sda2 
+zcat /root/rootfs.ext4.gz | /bin/dd of=/dev/sda2 bs=100M 1>/dev/null 2>&1 1>/dev/null 2>&1
 
 echo "  *** Checking filesystem integrity ..."
 
@@ -57,10 +58,10 @@ menuentry "HeadRat Linux" {
 }
 __GRUB_CFG__
 
-#mount --rbind /dev /mnt/install/dev
-#mount --rbind /proc /mnt/install/proc
-#mount --rbind /sys /mnt/install/sys
-#mount --rbind /run /mnt/install/run
+mount --rbind /dev /mnt/install/dev
+mount --rbind /proc /mnt/install/proc
+mount --rbind /sys /mnt/install/sys
+mount --rbind /run /mnt/install/run
 chroot /mnt/install /usr/sbin/grub-install /dev/sda 1>/dev/null 2>&1
 
 

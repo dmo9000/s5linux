@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 mkdir -p install-root/bin

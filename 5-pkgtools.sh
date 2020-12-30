@@ -1,4 +1,6 @@
 #!/bin/sh
+set -e
+set -x
 TOPLEVEL=`pwd`
 NPROC=`nproc`
 TOPLEVEL=`echo $TOPLEVEL | sed 's,\/,\\\/,g'`

@@ -1,3 +1,7 @@
+#!/bin/sh
+
+set -e
+
 # in the initial phase, we checkout the heirloom sources, apply many patches, 
 # and capture the modified sources to tarballs both for the purposes of creating Redhat RPMS 
 # for the bootstrapping Fedora system, and for later packaging in SVR4 format
@@ -12,8 +16,9 @@
 
 ./2-shell.sh
 ./3-devtools.sh
-./4-utils.sh || exit 1
+./4-utils.sh 
 ./5-pkgtools.sh
+./8-gzip.sh
 
 # copy initial system configs and packages 
 
