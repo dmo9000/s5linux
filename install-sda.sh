@@ -31,11 +31,11 @@ echo "  *** Checking filesystem integrity ..."
 /sbin/e2fsck -f /dev/sda2 1>/dev/null 2>&1
 /sbin/resize2fs -f /dev/sda2 1>/dev/null 
 
-echo "  *** Expanding filesystem on /dev/sda2 ..."
+#echo "  *** Expanding filesystem on /dev/sda2 ..."
 echo "    *** Mounting new filesystem ..."
 mount /dev/sda2 /mnt/install 1>/dev/null 2>&1
-echo "    *** Resizing new filesystem ..."
-/sbin/resize2fs -f /dev/sda2 
+#echo "    *** Resizing new filesystem ..."
+#/sbin/resize2fs -f /dev/sda2 
 
 echo "*** Doing some minor housekeeping ... "
 

@@ -8,4 +8,6 @@ S5LXopenssl
 S5LXbindutils
 S5LXcacerts
 S5LXcurl
-
+S5LXnettle
+S5LXwget
+S5LXopenssh

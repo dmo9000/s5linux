@@ -6,9 +6,9 @@
 set -e
 #
 
-PKGID=S5LXgsed
-PKG=sed
-VERSION=4.8
+PKGID=S5LXnettle
+PKG=nettle
+VERSION=3.6
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
@@ -20,7 +20,7 @@ sudo rm -rf ${PKGDIR}
 tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
-./configure --prefix=/usr --without-selinux
+./configure --prefix=/usr 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 
@@ -31,7 +31,7 @@ cd ${PKGDIR}
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=GNU sed 
+DESC=GNU nettle 
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=IA64,x86_64
