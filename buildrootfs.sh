@@ -22,4 +22,7 @@ mkdir -p images/rootfs.mounted
 sudo mount -o loop images/rootfs.ext4 images/rootfs.mounted
 sudo cp -pax install-root/* images/rootfs.mounted/
 sudo umount images/rootfs.mounted
+
+echo "+++ Compressing root filesystem image ..."
+
 gzip -f -9 -k images/rootfs.ext4

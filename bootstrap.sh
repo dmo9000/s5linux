@@ -8,13 +8,13 @@ status2message()
 {
 	case ${1} in 
 		0)
-		echo "[OK]"	
+		printf "\x1b[92m[OK]\x1b[0m"	
 		;;		
 		2)
-		echo "[WARNING]"
+		printf "\x1b[93m[WARNING]\x1b[0m"
 		;;
 		*)
-		echo "[FATAL ERROR]"
+		printf "\x1b[91m[ERROR=${1}]\x1b[0m"
 		exit 1
 		;;
 	esac
