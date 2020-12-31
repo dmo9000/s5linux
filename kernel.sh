@@ -18,6 +18,8 @@ cp .config .config.current
 
 time make -j ${NPROC} bzImage
 time make -j 4 modules
+time make -j 4 headers_install ARCH=x86_64 INSTALL_HDR_PATH=../../build/kernel-headers/usr
 
 cd ${TOPLEVEL}
 cp src/linux-5.10.1/arch/x86_64/boot/bzImage kernel/bzImage
+
