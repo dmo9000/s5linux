@@ -6,30 +6,22 @@
 set -e
 #
 
-PKGID=S5LXgmake
-PKG=make
-VERSION=4.2.93
+PKGID=S5LXkernel-modules
+PKG=kernel-modules
+VERSION=5.10.1
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
-PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
-cd src
-rm -rf ./${PKGNAME}
-tar -zxvf ${PKGNAME}.tar.gz
-cd ${PKGNAME} 
+PKGDIR=${TOPLEVEL}/build/${PKG}
 
-MAKE=/usr/ccs/bin/make ./configure --prefix=/usr 
-make  -j ${NPROC}
-make install DESTDIR=${PKGDIR}
+cd pkgbuild/kernel-modules 
 
 # package
-
-cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=GNU make
+DESC=Linux Kernel modules ${VERSION}
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64

@@ -31,7 +31,7 @@ NAME=${PKGNAME}
 DESC=iproute2 network configuration utilities
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
-ARCH=IA64,x86_64
+ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__

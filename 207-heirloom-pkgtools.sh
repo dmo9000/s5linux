@@ -29,7 +29,7 @@ NAME=${PKGNAME}
 DESC=heirloom-pkgtools
 VENDOR=HeadRat Linux
 VERSION=000000
-ARCH=IA64,x86_64
+ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__

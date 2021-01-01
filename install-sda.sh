@@ -45,9 +45,12 @@ rm -rf /mnt/install/mnt/install
 rm -rf /mnt/install/root/install-sda.sh
 sync
 
-echo "*** Installing kernel (bzImage) to /boot ..."
+echo "*** Installing S5LXkernel package ..."
 mount /dev/sda1 /mnt/install/boot 1>/dev/null 2>&1
-cp -v /boot/bzImage /mnt/install/boot/bzImage 1>/dev/null 2>&1
+#cp -v /boot/bzImage /mnt/install/boot/bzImage 1>/dev/null 2>&1
+zcat /packages/S5LXkernel.pkg.gz > /mnt/install/boot/S5LXkernel.pkg
+(echo 1 && yes) | chroot /mnt/install /usr/5bin/pkgadd -d /boot/S5LXkernel.pkg
+rm -f /mnt/install/boot/S5LXkernel.pkg
 sync
 
 mkdir -p /mnt/install/boot/grub

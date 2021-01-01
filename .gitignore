@@ -2,6 +2,7 @@
 /heirloom-project/
 /heirloom-project.orig/
 /install-root/
+/pkgbuild/kernel
 /pkgbuild/*-*
 /spool/S5LX*
 /src/*.gz
@@ -18,4 +19,3 @@
 /configs/etc/passwd
 /configs/etc/group
 /configs/etc/shadow
-
