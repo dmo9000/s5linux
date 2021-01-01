@@ -69,6 +69,10 @@ rm -f /mnt/install/etc/fstab
 echo "/dev/sda1 /boot ext4 defaults 0 0" >> /mnt/install/etc/fstab
 echo "/dev/sda2 / ext4 defaults 0 0" >> /mnt/install/etc/fstab
 echo "/dev/sr0 /mnt/sr0 iso9660 defaults 0 0" >> /mnt/install/etc/fstab
+echo "proc           /proc        proc   defaults        0     0" >> /mnt/install/etc/fstab
+echo "sysfs          /sys         sysfs  defaults        0     0" >> /mnt/install/etc/fstab
+echo "devpts         /dev/pts     devpts gid=4,mode=620  0     0" >> /mnt/install/etc/fstab
+echo "tmpfs          /dev/shm     tmpfs  defaults        0     0" >> /mnt/install/etc/fstab
 
 
 echo -n "*** Unmounting /dev/sda1 ... "

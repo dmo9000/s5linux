@@ -18,7 +18,18 @@ if [ ! -r qemu-disks/sda.img ]; then
 	fi
 #qemu-system-x86_64 -cdrom images/bootable.iso -m 512 -boot d
 #qemu-system-x86_64 qemu-disks/sda.img -cdrom images/bootable.iso -m 512 -boot d
-qemu-system-x86_64 -drive file=qemu-disks/sda.img,format=raw -cdrom images/bootable.iso -m 512 -boot ${1} 
+
+
+sudo brctl addbr br0
+sudo brctl addif br0 enp0s3 
+sudo tunctl -t tap0 -u `whoami`
+sudo brctl addif br0 tap0
+sudo ifconfig tap0 up
+sudo ifconfig br0 up
+sudo brctl show
+sudo dhclient -v br0
+
+sudo qemu-system-x86_64 -drive file=qemu-disks/sda.img,format=raw -cdrom images/bootable.iso -m 512 -boot ${1} -netdev tap,id=mynet0,ifname=tap0,script=no,downscript=no -device e1000,netdev=mynet0 
 
 
 

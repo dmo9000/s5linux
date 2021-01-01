@@ -28,7 +28,9 @@ sudo mkdir -p install-root/run
 sudo mkdir -p install-root/packages/
 sudo mkdir -p install-root/var/spool/pkg
 sudo mkdir -p install-root/tmp
+sudo chmod 1777 install-root/tmp
 sudo mkdir -p install-root/var/tmp
+sudo chmod 1777 install-root/var/tmp
 sudo touch install-root/etc/mtab
 sudo mkdir -p install-root/dev
 sudo rm -f install-root/dev/null

@@ -9,3 +9,8 @@ S5LXgcc
 S5LXflex
 S5LXkernel-headers
 S5LXm4
+S5LXbison
+S5LXgawk
+S5LXgrep
+S5LXbc
+S5LXperl
