@@ -5,17 +5,17 @@
 #
 set -e
 #
-# xkeyboard-config-2.24 
-PKGID=S5LXxkeyboard-config
-PKG=xkeyboard-config
-VERSION=2.24
+# libX11-1.6.12.tar.gz 
+PKGID=S5LXlibX11
+PKG=libX11
+VERSION=1.6.12
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
 cd src
 rm -rf ./${PKGNAME}
-tar -jxvf ${PKGNAME}.tar.bz2
+tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
 # configure/build/install
@@ -32,7 +32,7 @@ cd ${PKGDIR}
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=xkeyboard-config
+DESC=libX11
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64
