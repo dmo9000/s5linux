@@ -5,22 +5,24 @@
 #
 set -e
 #
-PKGID=S5LXopenssl
-PKG=openssl
-VERSION=1.1.1i
+# libXau-1.0.9
+
+PKGID=S5LXlibXau
+PKG=libXau
+VERSION=1.0.9
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
+
 cd src
-rm -rf ./${PKGNAME}
-rm -rf ${PKGDIR}
-mkdir -p ${PKGDIR}
+sudo rm -rf ./${PKGNAME}
+sudo rm -rf ${PKGDIR}
 tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
-# configure/build/install
-./Configure linux-x86_64 --prefix=/usr
+# FIXME: need libpcre packaged
+./configure --prefix=/usr 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 
@@ -31,7 +33,7 @@ cd ${PKGDIR}
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=openssl
+DESC=libXau 
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64

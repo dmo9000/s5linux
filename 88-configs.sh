@@ -4,6 +4,11 @@ set -e
 sudo mkdir -p install-root/root
 sudo mkdir -p install-root/var/sadm/install
 sudo touch install-root/var/sadm/install/contents
+sudo mkdir -p install-root/libx32
+sudo mkdir -p install-root/usr/libx32
+
+
+
 # sudo cp configs/bashrc install-root/root/.bashrc
 # sudo cp configs/bashrc install-root/root/.profile
 # sudo cp configs/bashrc install-root/root/.bash_profile

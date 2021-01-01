@@ -5,24 +5,24 @@
 #
 set -e
 #
-PKGID=S5LXopenssl
-PKG=openssl
-VERSION=1.1.1i
+# harfbuzz-2.4.103
+PKGID=S5LXharfbuzz
+PKG=harfbuzz
+VERSION=2.6.7
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
 cd src
 rm -rf ./${PKGNAME}
-rm -rf ${PKGDIR}
-mkdir -p ${PKGDIR}
-tar -zxvf ${PKGNAME}.tar.gz
+xzcat ${PKGNAME}.tar.xz > ${PKGNAME}.tar
+tar -xvf ${PKGNAME}.tar
 cd ${PKGNAME} 
 
 # configure/build/install
-./Configure linux-x86_64 --prefix=/usr
-make  -j ${NPROC}
-make install DESTDIR=${PKGDIR}
+./configure --prefix=/usr
+make -j ${NPROC}
+make DESTDIR=${PKGDIR} install
 
 # package
 
@@ -30,14 +30,20 @@ cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
-NAME=${PKGNAME}
-DESC=openssl
+NAME=${PKGNAME} utilities
+DESC=harfbuzz
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
+
+cat <<__POSTINSTALL__ > postinstall
+#!/bin/sh
+/sbin/ldconfig
+__POSTINSTALL__
+
 
 ../../mkproto.sh
 ../../mkpkg.sh

@@ -5,22 +5,21 @@
 #
 set -e
 #
-PKGID=S5LXopenssl
-PKG=openssl
-VERSION=1.1.1i
+# libXfont2-2.0.4.tar.bz2 
+PKGID=S5LXlibXfont2
+PKG=libXfont2
+VERSION=2.0.4
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
 cd src
 rm -rf ./${PKGNAME}
-rm -rf ${PKGDIR}
-mkdir -p ${PKGDIR}
-tar -zxvf ${PKGNAME}.tar.gz
+tar -jxvf ${PKGNAME}.tar.bz2
 cd ${PKGNAME} 
 
 # configure/build/install
-./Configure linux-x86_64 --prefix=/usr
+./configure --prefix=/usr 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 
@@ -28,16 +27,23 @@ make install DESTDIR=${PKGDIR}
 
 cd ${PKGDIR}
 
+
+
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=openssl
+DESC=Xfont2
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
+
+cat <<__POSTINSTALL__ > postinstall
+#!/bin/sh
+/sbin/ldconfig
+__POSTINSTALL__
 
 ../../mkproto.sh
 ../../mkpkg.sh
