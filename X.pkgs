@@ -1,4 +1,6 @@
 S5LXlibpciaccess
+S5LXnettle
+S5LXbrotli
 S5LXlibdrm
 S5LXpixman
 S5LXlibXfont2
@@ -6,5 +8,8 @@ S5LXlibXau
 S5LXlibfontenc
 S5LXfreetype
 S5LXglib2
+S5LXlibpng16
+S5LXharfbuzz
 S5LXxorg-server
-
+S5LXxkbcomp
+S5LXxkeyboard-config

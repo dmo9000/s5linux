@@ -3,6 +3,7 @@ S5LXgzip
 S5LXbzip2
 S5LXgtar
 S5LXgsed
+S5LXpcre
 S5LXpv
 S5LXgrub2
 S5LXelfutils
@@ -28,4 +29,3 @@ S5LXvim
 S5LXprocps-ng
 S5LXpsmisc
 S5LXkmod
-S5LXkernel-modules

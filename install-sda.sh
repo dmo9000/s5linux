@@ -47,17 +47,24 @@ sync
 
 echo "*** Installing S5LXkernel package ..."
 mount /dev/sda1 /mnt/install/boot 1>/dev/null 2>&1
-#cp -v /boot/bzImage /mnt/install/boot/bzImage 1>/dev/null 2>&1
 zcat /packages/S5LXkernel.pkg.gz > /mnt/install/boot/S5LXkernel.pkg
 (echo 1 && yes) | chroot /mnt/install /usr/5bin/pkgadd -d /boot/S5LXkernel.pkg
 rm -f /mnt/install/boot/S5LXkernel.pkg
 sync
 
+echo "*** Installing S5LXkernel-modules package ..."
+mount /dev/sda1 /mnt/install/boot 1>/dev/null 2>&1
+zcat /packages/S5LXkernel-modules.pkg.gz > /mnt/install/boot/S5LXkernel-modules.pkg
+(echo 1 && yes) | chroot /mnt/install /usr/5bin/pkgadd -d /boot/S5LXkernel-modules.pkg
+rm -f /mnt/install/boot/S5LXkernel-modules.pkg
+sync
+
+
 mkdir -p /mnt/install/boot/grub
 cat << __GRUB_CFG__ > /mnt/install/boot/grub/grub.cfg
 menuentry "HeadRat Linux" {
         set root=(hd0,1)
-        linux   /bzImage root=/dev/sda2 rw nomodeset quiet splash
+        linux   /bzImage root=/dev/sda2 rw quiet splash
 }
 __GRUB_CFG__
 
