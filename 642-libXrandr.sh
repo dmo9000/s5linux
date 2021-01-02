@@ -5,10 +5,10 @@
 #
 set -e
 #
-# xinput
-PKGID=S5LXxinput
-PKG=xinput
-VERSION=1.6.3
+# libXrandr
+PKGID=S5LXlibXrandr
+PKG=libXrandr
+VERSION=1.5.2
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
@@ -30,7 +30,7 @@ cd ${PKGDIR}
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME} utilities
-DESC=xinput
+DESC=libXrandr
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64
@@ -40,6 +40,7 @@ __PKGINFO__
 
 cat <<__POSTINSTALL__ > postinstall
 #!/bin/sh
+/sbin/ldconfig
 __POSTINSTALL__
 
 

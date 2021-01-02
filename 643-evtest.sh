@@ -5,10 +5,10 @@
 #
 set -e
 #
-# xinput
-PKGID=S5LXxinput
-PKG=xinput
-VERSION=1.6.3
+# evtest-1.34 
+PKGID=S5LXevtest
+PKG=evtest
+VERSION=1.34
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
@@ -18,11 +18,12 @@ rm -rf ./${PKGNAME}
 tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
-rm -rf ${PKGDIR}
 # configure/build/install
-./configure --prefix=/usr 
-make  -j ${NPROC}
-make install DESTDIR=${PKGDIR}
+./autogen.sh
+./configure --prefix=/usr
+make -j ${NPROC}
+make DESTDIR=${PKGDIR} install
+
 # package
 
 cd ${PKGDIR}
@@ -30,7 +31,7 @@ cd ${PKGDIR}
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME} utilities
-DESC=xinput
+DESC=evtest
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64
@@ -40,6 +41,7 @@ __PKGINFO__
 
 cat <<__POSTINSTALL__ > postinstall
 #!/bin/sh
+/sbin/ldconfig
 __POSTINSTALL__
 
 

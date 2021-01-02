@@ -29,7 +29,7 @@ if [ ! -r qemu-disks/sda.img ]; then
 #sudo brctl show
 #sudo dhclient -v br0
 
-sudo qemu-system-x86_64 -m 4G -drive file=qemu-disks/sda.img,format=raw -cdrom images/bootable.iso -m 512 -boot ${1} #-netdev tap,id=mynet0,ifname=tap0,script=no,downscript=no -device e1000,netdev=mynet0 
+sudo qemu-system-x86_64 -m 4G -usb -device usb-kbd -device usb-mouse -drive file=qemu-disks/sda.img,format=raw -cdrom images/bootable.iso -m 512 -boot ${1} #-netdev tap,id=mynet0,ifname=tap0,script=no,downscript=no -device e1000,netdev=mynet0 
 
 
 
