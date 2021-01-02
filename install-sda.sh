@@ -24,7 +24,7 @@ echo "*** Copying base install image ... "
 /sbin/wipefs --force -a /dev/sda2 1>/dev/null 2>&1
 #/bin/dd if=/root/rootfs.ext4 of=/dev/sda2 bs=100M 1>/dev/null 2>&1 1>/dev/null 2>&1
 #/usr/bin/pv /root/rootfs.ext4 > /dev/sda2 
-zcat /root/rootfs.ext4.gz | /bin/dd of=/dev/sda2 bs=100M 1>/dev/null 2>&1 1>/dev/null 2>&1
+pv /root/rootfs.ext4.gz | zcat | /bin/dd of=/dev/sda2 bs=100M 1>/dev/null 2>&1 1>/dev/null 2>&1
 
 echo "  *** Checking filesystem integrity ..."
 
