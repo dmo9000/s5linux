@@ -62,9 +62,16 @@ sudo chmod 777 install-root
 # date/timestamp + git short hash
 
 
+GIT_CHANGES=`git status --porcelain=v1 2>/dev/null | wc -l`
+if [ ${GIT_CHANGES} -gt 0 ]; then
+	GIT_SUMMARY="+${GIT_CHANGES} changes"
+	else
+	GIT_SUMMARY="(trunk)"
+	fi
+
 cp configs/etc/issue configs/etc/issue.tmp
 echo "" >> configs/etc/issue.tmp
-echo "Build "`date +"%Y%m%d:%H%M%S"`"#"`git rev-parse --short HEAD` >> configs/etc/issue.tmp
+echo "Build "`date +"%Y%m%d:%H%M%S"`"#"`git rev-parse --short HEAD`"${GIT_SUMMARYY}" >> configs/etc/issue.tmp
 echo "" >> configs/etc/issue.tmp
 sudo mv configs/etc/issue.tmp install-root/etc/issue
 
