@@ -64,7 +64,7 @@ mkdir -p /mnt/install/boot/grub
 cat << __GRUB_CFG__ > /mnt/install/boot/grub/grub.cfg
 menuentry "HeadRat Linux" {
         set root=(hd0,1)
-        linux   /bzImage root=/dev/sda2 rw quiet splash
+        linux   /bzImage root=/dev/sda2 rw quiet splash fbcon=font:SUN8x16
 }
 __GRUB_CFG__
 

@@ -56,7 +56,18 @@ sudo egrep "^root|^dan" /etc/shadow | sudo tee install-root/etc/shadow
 sudo chmod 000 install-root/etc/shadow
 ls -l install-root/etc/shadow
 sudo cp configs/etc/ld.so.conf install-root/etc/ld.so.conf
-sudo cp configs/etc/issue install-root/etc/issue
+
+sudo chmod 777 install-root
+
+# date/timestamp + git short hash
+
+
+cp configs/etc/issue configs/etc/issue.tmp
+echo "" >> configs/etc/issue.tmp
+echo "Build "`date +"%Y%m%d:%H%M%S"`"#"`git rev-parse --short HEAD` >> configs/etc/issue.tmp
+echo "" >> configs/etc/issue.tmp
+sudo mv configs/etc/issue.tmp install-root/etc/issue
+
 sudo cp configs/etc/inittab install-root/etc/inittab
 sudo mkdir -p install-root/etc/init.d
 sudo cp configs/etc/init.d/rc install-root/etc/init.d/rc
