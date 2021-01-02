@@ -5,25 +5,26 @@
 #
 set -e
 #
-# xorg-server-1.20.10.tar.bz2
-PKGID=S5LXxorg-server
-PKG=xorg-server
-VERSION=1.20.10
+# dbus-1.0.9
+
+PKGID=S5LXdbus
+PKG=dbus
+VERSION=1.12.20
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
+
 cd src
-rm -rf ./${PKGNAME}
-tar -jxvf ${PKGNAME}.tar.bz2
+sudo rm -rf ./${PKGNAME}
+sudo rm -rf ${PKGDIR}
+tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
-# configure/build/install
-./configure --prefix=/usr --disable-glamor 
+# FIXME: need libpcre packaged
+./configure --prefix=/usr 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
-sudo chmod u+s ${PKGDIR}/usr/bin/X
-sudo chmod u+s ${PKGDIR}/usr/bin/Xorg
 
 # package
 
@@ -32,7 +33,7 @@ cd ${PKGDIR}
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=Xorg server
+DESC=dbus 
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64

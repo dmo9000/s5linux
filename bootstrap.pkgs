@@ -34,3 +34,16 @@ S5LXkmod
 S5LXusbutils
 S5LXpciutils
 S5LXlibusb
+S5LXsystemd
+S5LXlibinput
+S5LXlibevdev
+S5LXmtdev
+S5LXlibcap
+S5LXopenssl
+S5LXp11-kit
+S5LXlibwacom
+S5LXglib2
+S5LXlibgudev
+S5LXlibffi
+S5LXdbus
+S5LXpkg-config

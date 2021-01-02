@@ -5,25 +5,27 @@
 #
 set -e
 #
-# xorg-server-1.20.10.tar.bz2
-PKGID=S5LXxorg-server
-PKG=xorg-server
-VERSION=1.20.10
+# p11-kit-1.0.9
+
+PKGID=S5LXp11-kit
+PKG=p11-kit
+VERSION=0.23.22
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
+
 cd src
-rm -rf ./${PKGNAME}
-tar -jxvf ${PKGNAME}.tar.bz2
+sudo rm -rf ./${PKGNAME}
+sudo rm -rf ${PKGDIR}
+xzcat ${PKGNAME}.tar.xz > ${PKGNAME}.tar
+tar -xvf ${PKGNAME}.tar
 cd ${PKGNAME} 
 
-# configure/build/install
-./configure --prefix=/usr --disable-glamor 
+# FIXME: need libpcre packaged
+./configure --prefix=/usr 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
-sudo chmod u+s ${PKGDIR}/usr/bin/X
-sudo chmod u+s ${PKGDIR}/usr/bin/Xorg
 
 # package
 
@@ -32,7 +34,7 @@ cd ${PKGDIR}
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=Xorg server
+DESC=p11-kit 
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64

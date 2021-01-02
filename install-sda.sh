@@ -43,6 +43,8 @@ rm -rf /mnt/install/boot/bzImage
 rm -rf /mnt/install/rr_moved 
 rm -rf /mnt/install/mnt/install
 rm -rf /mnt/install/root/install-sda.sh
+rm -rf /mnt/install/packages
+chroot /mnt/install ln -sf /mnt/sr0/packages /packages
 sync
 
 echo "*** Installing S5LXkernel package ..."
@@ -64,7 +66,7 @@ mkdir -p /mnt/install/boot/grub
 cat << __GRUB_CFG__ > /mnt/install/boot/grub/grub.cfg
 menuentry "HeadRat Linux" {
         set root=(hd0,1)
-        linux   /bzImage root=/dev/sda2 rw quiet splash fbcon=font:SUN8x16
+        linux   /bzImage root=/dev/sda2 rw quiet splash fbcon=font:SUN8x16 biosdevname=0 net.ifnames=0
 }
 __GRUB_CFG__
 

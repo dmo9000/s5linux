@@ -24,11 +24,13 @@ cd ${PKGNAME}
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 
-# we really, really only want libudev
+# install SysV init script for udev
 
-find ${PKGDIR}/* -type l ! -name "libudev*" -exec rm -f {} \;
-find ${PKGDIR}/* -type f ! -name "libudev*" -exec rm -f {} \;
-find ${PKGDIR}/* -type d -empty -delete
+mkdir -p ${PKGDIR}/etc/init.d
+mkdir -p ${PKGDIR}/etc/rc5.d
+cp ${TOPLEVEL}/configs/etc/init.d/udevd ${PKGDIR}/etc/init.d/udevd
+cd ${PKGDIR}/etc/rc5.d 
+ln -sf ../init.d/udevd ./S01udevd
 
 # package
 

@@ -13,6 +13,14 @@ cp /usr/share/syslinux/chain.c32 images/ISO-ROOT/isolinux/
 cp graphics/syslinux.png images/ISO-ROOT/isolinux/syslinux.png
 cp graphics/sun12x22.psfu images/ISO-ROOT/isolinux/sun12x22.psfu
 
+mkdir -p images/ISO-ROOT/etc
+rm -f images/ISO-ROOT/etc/fstab
+echo "/dev/sr0 / iso9660 defaults 0 0" >> images/ISO-ROOT/etc/fstab
+echo "proc           /proc        proc   defaults        0     0" >> images/ISO-ROOT/etc/fstab
+echo "sysfs          /sys         sysfs  defaults        0     0" >> images/ISO-ROOT/etc/fstab 
+echo "devpts         /dev/pts     devpts gid=4,mode=620  0     0" >> images/ISO-ROOT/etc/fstab 
+echo "tmpfs          /dev/shm     tmpfs  defaults        0     0" >> images/ISO-ROOT/etc/fstab 
+echo "tmpfs          /run     tmpfs  defaults        0     0" >> images/ISO-ROOT/etc/fstab 
 
 # copy kernel
 
@@ -33,7 +41,7 @@ LABEL HeadRatLinuxLive
     MENU LABEL ^HeadRat Linux Live
     MENU DEFAULT
     KERNEL /images/bzImage
-    APPEND root=/dev/sr0 ro init=/sbin/init fbcon=font:SUN8x16 quiet splash 
+    APPEND root=/dev/sr0 ro init=/sbin/init fbcon=font:SUN8x16 quiet splash biosdevname=0 net.ifnames=0 
     TEXT HELP
        	Boot HeadRat Linux live image 
     ENDTEXT
@@ -41,7 +49,7 @@ LABEL HeadRatLinuxLive
 LABEL HeadRatLinuxInstaller
     MENU LABEL ^HeadRat Linux Install to /dev/sda2 
     KERNEL /images/bzImage
-    APPEND root=/dev/sr0 ro init=/root/install-sda.sh fbcon=font:SUN8x16 quiet splash
+    APPEND root=/dev/sr0 ro init=/root/install-sda.sh fbcon=font:SUN8x16 quiet splash biosdevname=0 net.ifnames=0
     TEXT HELP
 	Install HeadRat Linux to (/dev/sda2) 
     ENDTEXT
@@ -49,7 +57,7 @@ LABEL HeadRatLinuxInstaller
 LABEL HeadRatLinuxViaInit
     MENU LABEL ^HeadRat Linux via SysVInit (/dev/sda2) 
     KERNEL /images/bzImage
-    APPEND root=/dev/sda2 rw init=/sbin/init fbcon=font:SUN8x16 quiet splash
+    APPEND root=/dev/sda2 rw init=/sbin/init fbcon=font:SUN8x16 quiet splash biosdevname=0 net.ifnames=0
     TEXT HELP
         Boot HeadRat Linux via SysVInit (/dev/sda2) 
     ENDTEXT
