@@ -19,3 +19,4 @@
 /configs/etc/passwd
 /configs/etc/group
 /configs/etc/shadow
+/issue.tmp
