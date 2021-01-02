@@ -32,3 +32,12 @@ S5LXxterm
 S5LXlibICE
 S5LXlibXaw
 S5LXlibXft
+S5LXlibXext
+S5LXlibXinerama
+S5LXlibXmu
+S5LXlibXpm
+S5LXlibXrender
+S5LXlibXt
+S5LXfontconfig
+S5LXlibSM
+S5LXexpat
