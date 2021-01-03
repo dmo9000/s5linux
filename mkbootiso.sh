@@ -94,4 +94,5 @@ sudo genisoimage -rational-rock -volid "HeadRat Linux" -cache-inodes \
 	-output images/bootable.iso images/ISO-ROOT/
 
 cat images/ISO-ROOT/isolinux/isolinux.cfg
-find . -name "bzImage" -exec md5sum {} \;
+sudo find kernel -name "bzImage" -exec md5sum {} \;
+sudo find images -name "bzImage" -exec md5sum {} \;

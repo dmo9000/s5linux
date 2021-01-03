@@ -5,7 +5,7 @@ for PKG in `ls -1 ./spool/*.pkg` ; do
 		echo "Compressing package ${FILENAME} to ${ZFILENAME} ..."
 		#gzip -f -9 -k "spool/${FILENAME}"
 		pigz -f -9 -k "spool/${FILENAME}"
-		touch "spool/${FILENAME}"
+		touch "spool/${FILENAME}.gz"
 		fi
 	sudo cp "spool/${ZFILENAME}" install-root/packages/"${ZFILENAME}"
 	done

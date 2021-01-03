@@ -12,6 +12,7 @@ S5LXelfutils
 S5LXzlib
 S5LXxz
 S5LXsysvinit
+S5LXstart-stop-daemon
 S5LXlibxcrypt
 S5LXlibtirpc
 S5LXpam
@@ -47,3 +48,4 @@ S5LXlibgudev
 S5LXlibffi
 S5LXdbus
 S5LXpkg-config
+S5LXsudo

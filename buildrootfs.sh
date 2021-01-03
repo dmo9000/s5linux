@@ -2,8 +2,8 @@
 
 # get the size of the root filesystem image, and increase it by 50%
 
-ROOTSIZE=`du -s install-root | awk '{ print $1 }'`
-PADDEDSIZE=`echo "$ROOTSIZE * 1.5" | bc | sed -e "s/\..*//g"`
+ROOTSIZE=`sudo du -s install-root | awk '{ print $1 }'`
+PADDEDSIZE=`echo "$ROOTSIZE * 1.1" | bc | sed -e "s/\..*//g"`
 
 echo "root size   = ${ROOTSIZE}"
 echo "padded size = ${PADDEDSIZE}"

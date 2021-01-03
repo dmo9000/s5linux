@@ -17,8 +17,8 @@ sudo mkdir -p install-root/usr/libx32
 #        especially the sshd user setup should be moved to the S5LXopenssh postinstall script
 
 sudo cp configs/profile install-root/etc/profile
-sudo egrep "^root|^dan|^sshd" /etc/passwd | tee configs/etc/passwd
-sudo egrep "^root|^dan|^tty|^wheel|^sshd|^audio|^cdrom|^dialout|^disk|^input|^kmem|^kvm|^lp|^render|^tape|^video" /etc/group | tee configs/etc/group
+sudo egrep "^root|^dan|^sshd|^dbus" /etc/passwd | tee configs/etc/passwd
+sudo egrep "^root|^dan|^tty|^wheel|^sshd|^audio|^cdrom|^dialout|^disk|^input|^kmem|^kvm|^lp|^render|^tape|^video|^dbus" /etc/group | tee configs/etc/group
 sudo egrep "^root|^dan|^sshd" /etc/shadow | sudo tee configs/etc/shadow
 sudo cp -p configs/etc/{passwd,group,shadow} install-root/etc
 sudo chmod 644 install-root/etc/{passwd,group}
@@ -38,6 +38,7 @@ sudo mkdir -p install-root/var/tmp
 sudo chmod 1777 install-root/var/tmp
 sudo touch install-root/etc/mtab
 sudo mkdir -p install-root/dev
+sudo mkdir -p install-root/dev/shm
 sudo rm -f install-root/dev/null
 sudo mknod install-root/dev/null c 1 3
 sudo chmod 666 install-root/dev/null
