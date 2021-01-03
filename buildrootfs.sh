@@ -25,4 +25,6 @@ sudo umount images/rootfs.mounted
 
 echo "+++ Compressing root filesystem image ..."
 
-gzip -f -9 -k images/rootfs.ext4
+#gzip -f -9 -k images/rootfs.ext4
+time pigz -f -9 -k images/rootfs.ext4
+

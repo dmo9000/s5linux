@@ -58,6 +58,17 @@ S5LXxcb-util
 S5LXgamin
 S5LXlibwnck
 S5LXlibXres
+S5LXlibglvnd
+S5LXiceauth
+S5LXfont-util
+S5LXencodings
+S5LXfont-alias
+S5LXfont-adobe-utopia-type1
+S5LXfont-bh-ttf
+S5LXfont-bh-type1
+S5LXfont-ibm-type1
+S5LXfont-misc-ethiopic
+S5LXfont-xfree86-type1
 S5LXgtk3+
 S5LXlibxfce4util
 S5LXxfconf

@@ -4,6 +4,7 @@
 #
 
 # setup
+set -e
 
 PKGNAME=sysvinit-2.98
 NPROC=`nproc`
@@ -16,9 +17,11 @@ cd ${PKGNAME}
 
 # configure/build/install
 
-./configure --prefix=/usr 
 make  -j ${NPROC}
 make install ROOT=${PKGDIR}
+
+mkdir -p ${PKGDIR}/lib/lsb/
+cp ${TOPLEVEL}/configs/lib/lsb/init-functions ${PKGDIR}/lib/lsb/init-functions
 
 # package
 
@@ -29,11 +32,12 @@ PKG=S5LXsysvinit
 NAME=${PKGNAME}
 DESC=SysV Init
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=2.98
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
 ../../mkproto.sh
+../../mkpkg.sh
 
