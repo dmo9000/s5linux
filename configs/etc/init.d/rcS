@@ -9,5 +9,11 @@ mount devpts /dev/pts -t devpts
 /usr/5bin/hostname headrat
 mount -a
 
+# Delete ICE locks 
+rm -rf /tmp/.ICE-unix
+mkdir -p /tmp/.ICE-unix
+chown root:root /tmp/.ICE-unix/
+chmod 1777 /tmp/.ICE-unix
+
 exit 0
 

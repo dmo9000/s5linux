@@ -6,6 +6,7 @@
 /pkgbuild/*-*
 /spool/S5LX*
 /src/*.gz
+/src/*.zip
 /src/*-*
 /images/rootfs.ext4
 /images/rootfs.ext4.gz

@@ -15,8 +15,6 @@ TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
 cd src
 rm -rf ./${PKGNAME}
-rm -rf ${TOPLEVEL}/src/${PKGNAME}
-rm -rf ${PKGNAME}
 tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
@@ -32,10 +30,13 @@ rm -rf ${PKGDIR}
 #ln -sf /usr/bin/aclocal ./aclocal-1.15
 #ln -sf /usr/bin/automake ./automake-1.15
 #PATH=$PATH:`pwd`
-make  World 
-make  -j ${NPROC}
+echo "#define UsrLibDir /usr/lib64" > config/cf/host.def
+make  World.dev 
+#make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 cp programs/dtlogin/config/{Xsession,Xsetup,Xstartup,Xreset,Xfailsafe} ${PKGDIR}/usr/dt/bin/
+mkdir ${PKGDIR}/usr/dt/palettes
+cp programs/palettes/Default.dp ${PKGDIR}/usr/dt/palettes/Default.dp
 # package
 
 cd ${PKGDIR}
