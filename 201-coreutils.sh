@@ -20,11 +20,11 @@ mkdir -p ${PKGDIR}
 
 # FIXME should probably use hard links like Redhat does, but I'm too lazy to figure it out right now
 
-./configure --prefix=/ 
+./configure --prefix=/ --disable-xattr 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 
-./configure --prefix=/usr 
+./configure --prefix=/usr --disable-xattr
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 

@@ -9061,8 +9061,8 @@ softcm          6110/tcp                # HP SoftBench CM
 softcm          6110/udp                # HP SoftBench CM
 spc             6111/tcp                # HP SoftBench Sub-Process Control
 spc             6111/udp                # HP SoftBench Sub-Process Control
-dtspcd          6112/tcp                # Desk-Top Sub-Process Control Daemon
-dtspcd          6112/udp                # Desk-Top Sub-Process Control Daemon
+dtspc           6112/tcp                # Desk-Top Sub-Process Control Daemon
+dtspc           6112/udp                # Desk-Top Sub-Process Control Daemon
 dayliteserver   6113/tcp                # Daylite Server
 wrspice         6114/tcp                # WRspice IPC Service
 xic             6115/tcp                # Xic IPC Service
