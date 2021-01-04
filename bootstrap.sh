@@ -1,8 +1,5 @@
 #!/usr/5bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/5bin
-PKGPATH=`dirname ${1}`
-PKGLIST=`basename ${1}`
-PKGNAMES=`/usr/5bin/cat ${PKGPATH}/${PKGLIST}`
 
 status2message()
 {
@@ -21,27 +18,33 @@ status2message()
 
 }
 
-for PKG in ${PKGNAMES} ; do 
-	#echo "-> ${PKG}"
-	if [ ! -r "${PKGPATH}/${PKG}.pkg" ]; then
-		if [ -r "${PKGPATH}/${PKG}.pkg.gz" ]; then
-			PKGSIZE=`/usr/5bin/ls -sh ${PKGPATH}/${PKG}.pkg.gz  | /usr/5bin/awk '{ print $1; }'`
-			printf "[C] Installing ${PKGPATH}/${PKG}.pkg.gz (${PKGSIZE}) ... "
-			gzip -d -c -k "${PKGPATH}/${PKG}.pkg.gz" > /var/spool/pkg/${PKG}.pkg
-			( echo 1 && yes) | pkgadd -d /var/spool/pkg/${PKG}.pkg  1>/dev/null 2>&1
+for ${CUR_PKGLIST} in ${@}; do
+        PKGPATH=`dirname ${CUR_PKGLIST}`
+        PKGLIST=`basename ${CUR_PKGLIST}`
+        PKGNAMES=`/usr/5bin/cat ${PKGPATH}/${PKGLIST}`
+
+	for PKG in ${PKGNAMES} ; do 
+		#echo "-> ${PKG}"
+		if [ ! -r "${PKGPATH}/${PKG}.pkg" ]; then
+			if [ -r "${PKGPATH}/${PKG}.pkg.gz" ]; then
+				PKGSIZE=`/usr/5bin/ls -sh ${PKGPATH}/${PKG}.pkg.gz  | /usr/5bin/awk '{ print $1; }'`
+				printf "[C] Installing ${PKGPATH}/${PKG}.pkg.gz (${PKGSIZE}) ... "
+				gzip -d -c -k "${PKGPATH}/${PKG}.pkg.gz" > /var/spool/pkg/${PKG}.pkg
+				( echo 1 && yes) | pkgadd -d /var/spool/pkg/${PKG}.pkg  1>/dev/null 2>&1
+				status2message $?
+				/sbin/ldconfig
+				rm -f /var/spool/pkg/${PKG}.pkg
+				else 
+				echo "[?] No package found for ${PKG} ; skipping"
+				fi	
+			else
+			PKGSIZE=`/usr/5bin/ls -sh ${PKGPATH}/${PKG}.pkg  | /usr/5bin/awk '{ print $1; }'`
+			printf "[U] Installing package ${PKGPATH}/${PKG}.pkg (${PKGSIZE}) ... "
+			( echo 1 && yes) | pkgadd -d ${PKGPATH}/${PKG}.pkg  1>/dev/null 2>&1
 			status2message $?
 			/sbin/ldconfig
-			rm -f /var/spool/pkg/${PKG}.pkg
-			else 
-			echo "[?] No package found for ${PKG} ; skipping"
-			fi	
-		else
-		PKGSIZE=`/usr/5bin/ls -sh ${PKGPATH}/${PKG}.pkg  | /usr/5bin/awk '{ print $1; }'`
-		printf "[U] Installing package ${PKGPATH}/${PKG}.pkg (${PKGSIZE}) ... "
-		( echo 1 && yes) | pkgadd -d ${PKGPATH}/${PKG}.pkg  1>/dev/null 2>&1
-		status2message $?
-		/sbin/ldconfig
-		fi
+			fi
+		done
 	done
 
 /sbin/ldconfig
