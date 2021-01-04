@@ -24,14 +24,16 @@ cd ${PKGNAME}
 ./configure --prefix=/usr
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
+mkdir -p ${PKGDIR}/etc
+cp ${TOPLEVEL}/configs/etc/syslog.conf ${PKGDIR}/etc/syslog.conf
 
-#mkdir -p ${PKGDIR}/etc/{init.d,rc0.d,rc5.d}
-#cp ${TOPLEVEL}/lfs-bootscripts/blfs-bootscripts-20201002/blfs/init.d/sysklogd \
-#	${PKGDIR}/etc/init.d/sysklogd
-#chmod 755 ${PKGDIR}/etc/init.d/sysklogd
+mkdir -p ${PKGDIR}/etc/{init.d,rc0.d,rc5.d}
+cp ${TOPLEVEL}/configs/etc/init.d/sysklogd \
+	${PKGDIR}/etc/init.d/sysklogd
+chmod 755 ${PKGDIR}/etc/init.d/sysklogd
 
-#cd ${PKGDIR}/etc/rc0.d/ && sudo ln -sf ../init.d/sysklogd ./K85sysklogd
-#cd ${PKGDIR}/etc/rc5.d/ && sudo ln -sf ../init.d/sysklogd ./S15sysklogd
+cd ${PKGDIR}/etc/rc0.d/ && sudo ln -sf ../init.d/sysklogd ./K99sysklogd
+cd ${PKGDIR}/etc/rc5.d/ && sudo ln -sf ../init.d/sysklogd ./S02sysklogd
 
 # package
 
