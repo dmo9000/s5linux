@@ -5,18 +5,18 @@
 #
 set -e
 #
-# gdk-pixbuf
-PKGID=S5LXgdk-pixbuf
-PKG=gdk-pixbuf
-VERSION=2.42.2
+# shared-mime-info
+PKGID=S5LXshared-mime-info
+PKG=shared-mime-info
+VERSION=2.1
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
 cd src
 rm -rf ./${PKGNAME}
-xzcat ${PKGNAME}.tar.xz > ${PKGNAME}.tar
-tar -xvf ${PKGNAME}.tar
+#xzcat ${PKGNAME}.tar.xz > ${PKGNAME}.tar
+tar -xxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
 rm -rf ${PKGDIR}
@@ -36,7 +36,7 @@ cd ${PKGDIR}
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME} utilities
-DESC=gdk-pixbuf
+DESC=shared-mime-info
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64
@@ -47,7 +47,7 @@ __PKGINFO__
 cat <<__POSTINSTALL__ > postinstall
 #!/bin/sh
 /sbin/ldconfig
-/usr/bin/gdk-pixbuf-query-loaders > /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders.cache
+update-mime-database /usr/share/mime 
 __POSTINSTALL__
 
 

@@ -49,3 +49,6 @@ S5LXlibffi
 S5LXdbus
 S5LXpkg-config
 S5LXsudo
+S5LXexpat
+S5LXlibxml2
+S5LXshared-mime-info

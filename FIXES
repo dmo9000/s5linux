@@ -1,0 +1,3 @@
+
+
+for FONTDIR in find `/usr/share/X11/fonts/* -type d` ^Cdo ( set -x ; cd $FONTDIR; mkfontdir ) ; done

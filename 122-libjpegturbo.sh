@@ -1,37 +1,49 @@
 #!/bin/sh
 #
-# mount/wall disabled for now since it wants to chggrp
-#
 
 # setup
+#
+set -e
+#
 
-PKGNAME=vim-8.1
+PKGID=S5LXlibjpeg-turbo
+PKG=libjpeg-turbo
+VERSION=2.0.6
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
+
 cd src
-rm -rf ./${PKGNAME}
+sudo rm -rf ./${PKGNAME}
+sudo rm -rf ${PKGDIR}
 tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
-# configure/build/install
-
-./configure --prefix=/usr --enable-gui=no --without-x --disable-selinux 
+#./configure --prefix=/usr 
+cmake -G"Unix Makefiles"
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
-cd ${PKGDIR}/usr/bin
-ln -sf vim vi
+
 
 # package
 
 cd ${PKGDIR}
 
+# honestly some people need to get a grip ...
+
+mv opt usr
+mv usr/libjpeg-turbo/* usr
+rmdir usr/libjpeg-turbo
+
+
+
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXvim
+PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=vim editor
+DESC=libjpeg-turbo
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/

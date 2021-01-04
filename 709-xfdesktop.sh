@@ -28,6 +28,11 @@ make DESTDIR=${PKGDIR} install
 
 # package
 
+mkdir -p ${PKGDIR}/etc/xdg-test/xfce4/xfconf/xfce-perchannel-xml/
+cp ${TOPLEVEL}/configs/etc/xdg-test/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml \
+       	${PKGDIR}/etc/xdg-test/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+cp ${TOPLEVEL}/graphics/syslinux.png ${PKGDIR}/usr/share/backgrounds/xfce/xfce-stripes.png
+
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo

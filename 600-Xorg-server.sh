@@ -24,6 +24,8 @@ make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 sudo chmod u+s ${PKGDIR}/usr/bin/X
 sudo chmod u+s ${PKGDIR}/usr/bin/Xorg
+mkdir -p ${PKGDIR}/etc/X11
+cp ${TOPLEVEL}/configs/etc/X11/xorg.conf ${PKGDIR}/etc/X11/xorg.conf
 
 # package
 

@@ -1,0 +1,11 @@
+Section "Screen"
+	Identifier "Screen0"
+	Device	   "Card0"
+	Monitor    "Monitor0"
+	DefaultColorDepth 24
+	SubSection "Display"
+		Viewport 0 0
+		Depth 24 
+		Modes "1440x900"
+	EndSubSection
+EndSection

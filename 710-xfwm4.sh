@@ -28,6 +28,8 @@ make DESTDIR=${PKGDIR} install
 
 # package
 
+sed -i "s/Sans Bold 9/Google Sans/g"  ${PKGDIR}/usr/share/xfwm4/defaults
+
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo

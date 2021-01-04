@@ -1,0 +1,14 @@
+mkdir ~/.fonts
+cp GoogleSans-Regular.ttf ~/.fonts
+fc-cache -fv
+fc-list
+Edit: 
+	.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
+	title_font = "Google Sans"
+
+
+Sans Bold 9 is the dfault
+
+COntained in file
+
+pkgbuild/xfwm4-4.14.0/usr/share/xfwm4/defaults
