@@ -37,7 +37,6 @@ make install DESTDIR=${PKGDIR}
 cp programs/dtlogin/config/{Xsession,Xsetup,Xstartup,Xreset,Xfailsafe} ${PKGDIR}/usr/dt/bin/
 mkdir ${PKGDIR}/usr/dt/palettes
 cp programs/palettes/Default.dp ${PKGDIR}/usr/dt/palettes/Default.dp
-# package
 
 cd ${PKGDIR}
 
@@ -52,11 +51,25 @@ CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
-#cat <<__POSTINSTALL__ > postinstall
-#!/bin/sh
-#/sbin/ldconfig
-#__POSTINSTALL__
+../../mkproto.sh
+../../mkpkg.sh
 
+cd ${TOPLEVEL}
+set +e
+./install-cde.sh
+set -e
+cd ${PKGDIR}-configs
+
+cat <<__PKGINFO__ > pkginfo
+PKG=${PKGID}-configs
+NAME=${PKGNAME} configs 
+DESC=cde
+VENDOR=HeadRat Linux
+VERSION=${VERSION}
+ARCH=x86_64
+CATEGORY=utilities
+BASEDIR=/
+__PKGINFO__
 
 ../../mkproto.sh
 ../../mkpkg.sh

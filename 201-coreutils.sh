@@ -18,17 +18,21 @@ cd ${PKGNAME}
 rm -rf ${PKGDIR}
 mkdir -p ${PKGDIR}
 
+# FIXME should probably use hard links like Redhat does, but I'm too lazy to figure it out right now
+
 ./configure --prefix=/ 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 
-mkdir -p  ${PKGDIR}/usr/bin
-cd ${PKGDIR}/usr/bin
-ln -sf ../../bin/tr tr
+./configure --prefix=/usr 
+make  -j ${NPROC}
+make install DESTDIR=${PKGDIR}
 
 # package
 
 cd ${PKGDIR}
+# remove duplicate manpages
+rm -rf ${PKGDIR}/share
 
 cat <<__PKGINFO__ > pkginfo
 PKG=S5LXcoreutils
@@ -60,4 +64,4 @@ BASEDIR=/
 __PKGINFO__
 
 ../../mkproto.sh
-
+../../mkpkg.sh
