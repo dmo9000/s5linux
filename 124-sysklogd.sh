@@ -21,7 +21,7 @@ sudo rm -rf ${PKGDIR}
 tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 ./autogen.sh
-./configure --prefix=/usr
+./configure --prefix=/
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 mkdir -p ${PKGDIR}/etc
