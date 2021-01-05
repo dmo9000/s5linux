@@ -54,3 +54,7 @@ S5LXlibxml2
 S5LXshared-mime-info
 S5LXrpcbind
 S5LXsysklogd
+S5LXgmp
+S5LXmpfr
+S5LXgawk
+S5LXksh

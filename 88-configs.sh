@@ -68,7 +68,9 @@ sudo chmod 777 install-root
 sudo mkdir -p install-root/usr/share/fonts
 sudo cp fonts/GoogleSans-Regular.ttf install-root/usr/share/fonts
 sudo mkdir -p install-root/home/dan
-echo "xfce4-session" | sudo tee install-root/home/dan/.xinitrc
+#echo "# xfce4-session" | sudo tee install-root/home/dan/.xinitrc
+#echo "# xfce4-session" | sudo tee install-root/home/dan/.xinitrc
+
 sudo chown -R dan:dan install-root/home/dan
 sudo mkdir -p install-root/usr/share/backgrounds/xfce
 sudo cp graphics/syslinux.png install-root/usr/share/backgrounds/xfce/headrat-linux.png 

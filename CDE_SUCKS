@@ -1,0 +1,9 @@
+A good indicator if installCDE failed is if /usr/dt/dthelp is missing. 
+
+Several types of documentation apparently do not yet build correctly. 
+
+Ensure it has an awk available when running installCDE in a chroot (required because the script only has no support for DESTDIR) and 
+make install with DESTDIR specified doesn't install everything. 
+
+Apparently gawk5+ has a bug which causes warnings, using AT&T nawk can fix this. I can't be bothered packaging nawk right now. 
+

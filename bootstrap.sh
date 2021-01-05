@@ -18,7 +18,7 @@ status2message()
 
 }
 
-for ${CUR_PKGLIST} in ${@}; do
+for CUR_PKGLIST in ${@}; do
         PKGPATH=`dirname ${CUR_PKGLIST}`
         PKGLIST=`basename ${CUR_PKGLIST}`
         PKGNAMES=`/usr/5bin/cat ${PKGPATH}/${PKGLIST}`
