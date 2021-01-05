@@ -41,7 +41,7 @@ LABEL HeadRatLinuxLive
     MENU LABEL ^HeadRat Linux Live
     MENU DEFAULT
     KERNEL /images/bzImage
-    APPEND root=/dev/sr0 ro init=/sbin/init fbcon=font:SUN8x16 quiet splash biosdevname=0 net.ifnames=0 
+    APPEND root=/dev/sr0 ro init=/sbin/init fbcon=font:SUN8x16 quiet splash biosdevname=0 net.ifnames=0 1
     TEXT HELP
        	Boot HeadRat Linux live image 
     ENDTEXT

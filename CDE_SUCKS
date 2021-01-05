@@ -7,3 +7,26 @@ make install with DESTDIR specified doesn't install everything.
 
 Apparently gawk5+ has a bug which causes warnings, using AT&T nawk can fix this. I can't be bothered packaging nawk right now. 
 
+
+GETTING DOCUMENTATION WORK
+===========================
+
+Use "make World.doc" to attempt to build docs. 
+
+Problem is that xlate_locate doesn't work. 
+
+[dan@localhost xlate_locale]$ DTSVCSRC=../../../lib/DtSvc/ make^C
+[dan@localhost xlate_locale]$ pwd
+/home/dan/src/s5linux/src/cde-2.3.2/programs/dtdocbook/xlate_locale
+[dan@localhost xlate_locale]$ 
+
+eg.
+
+[dan@localhost xlate_locale]$ DTSVCSRC=../../../lib/DtSvc/ make^C
+[dan@localhost xlate_locale]$ pwd
+/home/dan/src/s5linux/src/cde-2.3.2/programs/dtdocbook/xlate_locale
+[dan@localhost xlate_locale]$ 
+
+
+
+

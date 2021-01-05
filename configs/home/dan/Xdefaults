@@ -1,0 +1,24 @@
+Xft.antialias: 1
+Xft.autohint: 1
+Xft.hintstyle: hintslight
+XTerm*faceName: Cascadia Mono
+XTerm*faceSize: 10
+XTerm*background: #000000
+XTerm*foreground: #B2B2B2
+XTerm*color0:  #000000
+XTerm*color1:  #B21818
+XTerm*color2:  #18B218
+XTerm*color3:  #B26818
+XTerm*color4:  #1818B2
+XTerm*color5:  #B218B2
+XTerm*color6:  #18B2B2
+XTerm*color7:  #B2B2B2
+XTerm*color8:  #686868
+XTerm*color9:  #FF5454
+XTerm*color10: #54FF54
+XTerm*color11: #FFFF54
+XTerm*color12: #5454FF
+XTerm*color13: #FF54FF
+XTerm*color14: #54FFFF
+XTerm*color15: #FFFFFF
+XTerm*boldColors: true

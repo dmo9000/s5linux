@@ -1,4 +1,10 @@
 #!/bin/sh
+
+if [ ! -d "./install-root" ]; then
+        echo "install-root/ is missing. Please fix this first." 
+        exit 1
+        fi
+
 sudo rm -rf pkgbuild/cde-2.3.2 
 mkdir -p pkgbuild/cde-2.3.2
 sudo cp -rfp install-root/* pkgbuild/cde-2.3.2
