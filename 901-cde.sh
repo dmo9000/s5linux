@@ -58,7 +58,9 @@ sudo cp ${TOPLEVEL}/configs/etc/dt/appconfig/types/C/dt.dt \
 sudo rm -f ${PKGDIR}//usr/dt/share/backdrops/*
 sudo cp configs/usr/dt/share/backdrops/* ${PKGDIR}/usr/dt/share/backdrops/
 sudo find ${PKGDIR}/usr/dt/app-defaults -type f | xargs sudo sed -i "s/SkyLight/Background/g"
-
+sudo find ${PKGDIR} -name "fonts.alias" -delete
+sudo find ${PKGDIR} -name "sys.font" -delete
+sudo find ${PKGDIR} -name "sys.resources" -delete
 
 cd ${PKGDIR}
 cat <<__PKGINFO__ > pkginfo

@@ -28,7 +28,7 @@ for CUR_PKGLIST in ${@}; do
 		if [ ! -r "${PKGPATH}/${PKG}.pkg" ]; then
 			if [ -r "${PKGPATH}/${PKG}.pkg.gz" ]; then
 				PKGSIZE=`/usr/5bin/ls -sh ${PKGPATH}/${PKG}.pkg.gz  | /usr/5bin/awk '{ print $1; }'`
-				printf "[C] Installing ${PKGPATH}/${PKG}.pkg.gz (${PKGSIZE}) ... "
+				printf "%-70s" "[C] Installing ${PKGPATH}/${PKG}.pkg.gz (${PKGSIZE}) ... "
 				gzip -d -c -k "${PKGPATH}/${PKG}.pkg.gz" > /var/spool/pkg/${PKG}.pkg
 				( echo 1 && yes) | pkgadd -d /var/spool/pkg/${PKG}.pkg  1>/dev/null 2>&1
 				status2message $?
