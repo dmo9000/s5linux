@@ -42,6 +42,7 @@ S5LXlibevdev
 S5LXmtdev
 S5LXlibcap
 S5LXopenssl
+S5LXgnutls
 S5LXp11-kit
 S5LXlibwacom
 S5LXglib2
@@ -59,3 +60,4 @@ S5LXgmp
 S5LXmpfr
 S5LXgawk
 S5LXksh
+S5LXreadline

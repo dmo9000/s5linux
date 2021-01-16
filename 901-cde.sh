@@ -61,12 +61,17 @@ sudo find ${PKGDIR}/usr/dt/app-defaults -type f | xargs sudo sed -i "s/SkyLight/
 sudo find ${PKGDIR} -name "fonts.alias" -delete
 sudo find ${PKGDIR} -name "sys.font" -delete
 sudo find ${PKGDIR} -name "sys.resources" -delete
+mkdir -p ${PKGDIR}/usr/dt/config/C/
+sudo cp -p ${TOPLEVEL}/configs/usr/dt/config/C/Xresources ${PKGDIR}/usr/dt/config/C/Xresources
+
+sudo mkdir -p ${PKGDIR}/usr/dt/share/backgrops/
+sudo cp graphics/dtlogin-logo-256.pm ${PKGDIR}/usr/dt/share/backdrops/dtlogin-logo-256.pm
 
 cd ${PKGDIR}
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=CDE
+DESC=Common Desktop Environment
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64
@@ -78,6 +83,8 @@ cat <<__POSTINSTALL__ > postinstall
 #!/bin/sh
 echo "/usr/dt/lib" >> /etc/ld.so.conf
 /sbin/ldconfig
+sed -i "s/^.*dtlogin.*$//g" /etc/inittab
+echo "5:5:respawn:/usr/dt/bin/dtlogin" >> /etc/inittab
 __POSTINSTALL__
 
 ../../mkproto.sh

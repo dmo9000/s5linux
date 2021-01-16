@@ -8,5 +8,6 @@ if [ ! -r pkginfo ]; then
 PKGNAME=`grep "PKG=" pkginfo | sed -e "s/^.*=//g"`
 rm -rf ../../spool/${PKGNAME}
 pkgmk -o -r `pwd` -d ../../spool
+cat pkginfo
 cd ../../spool
 ../mkstream.sh ${PKGNAME}
