@@ -37,7 +37,9 @@ make -j ${NPROC} clean
 make -j ${NPROC} includes
 make -j ${NPROC} depend
 make -j ${NPROC} all
-
+make Makefiles.doc
+cd doc && make
+cd ${TOPLEVEL}/src/${PKGNAME}
 make install DESTDIR=${PKGDIR}
 cp programs/dtlogin/config/{Xsession,Xsetup,Xstartup,Xreset,Xfailsafe} ${PKGDIR}/usr/dt/bin/
 mkdir ${PKGDIR}/usr/dt/palettes
@@ -64,7 +66,7 @@ sudo find ${PKGDIR} -name "sys.resources" -delete
 mkdir -p ${PKGDIR}/usr/dt/config/C/
 sudo cp -p ${TOPLEVEL}/configs/usr/dt/config/C/Xresources ${PKGDIR}/usr/dt/config/C/Xresources
 
-sudo mkdir -p ${PKGDIR}/usr/dt/share/backgrops/
+sudo mkdir -p ${PKGDIR}/usr/dt/share/backdrops/
 sudo cp graphics/dtlogin-logo-256.pm ${PKGDIR}/usr/dt/share/backdrops/dtlogin-logo-256.pm
 
 cd ${PKGDIR}

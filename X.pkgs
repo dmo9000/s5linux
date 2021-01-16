@@ -1,6 +1,5 @@
 S5LXlibpciaccess
 S5LXnettle
-S5LXbrotli
 S5LXlibdrm
 S5LXpixman
 S5LXlibXfont2
@@ -57,7 +56,6 @@ S5LXstartup-notification
 S5LXlibthai
 S5LXlibdatrie
 S5LXxcb-util
-S5LXgamin
 S5LXlibwnck
 S5LXlibXres
 S5LXlibglvnd

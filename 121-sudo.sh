@@ -31,6 +31,10 @@ sudo cp configs/etc/pam.d/sudo-i ${PKGDIR}/etc/pam.d/sudo-i
 
 cd ${PKGDIR}
 
+# allow members of group 'wheel' to sudo without a password
+
+sudo sed -i "s/^# \(%wheel.*NOPASSWD.*\)$/\1/" ${PKGDIR}/etc/sudoers
+
 sudo cat <<__PKGINFO__ | sudo tee pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME} utilities

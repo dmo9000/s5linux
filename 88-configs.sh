@@ -55,6 +55,7 @@ sudo cp install-sda.sh install-root/root/install-sda.sh
 # rungetty script no longer needed - deprecated
 #sudo cp rungetty.sh install-root/
 sudo mkdir -p install-root/etc/pam.d
+sudo cp configs/etc/pam.d/other install-root/etc/pam.d/other
 sudo cp configs/etc/pam.d/login install-root/etc/pam.d/
 sudo egrep "^root|^dan" /etc/shadow | sudo tee install-root/etc/shadow
 sudo chmod 000 install-root/etc/shadow
@@ -97,7 +98,7 @@ sudo mkdir -p install-root/etc/init.d
 sudo cp configs/etc/init.d/rc install-root/etc/init.d/rc
 sudo cp configs/etc/init.d/rcS install-root/etc/init.d/rcS
 sudo mkdir -p install-root/run
-sudo cp network.sh install-root/root/network.sh
+#sudo cp network.sh install-root/root/network.sh
 sudo cp configs/etc/resolv.conf install-root/etc/resolv.conf
 #sudo cp configs/etc/fstab install-root/etc/fstab
 sudo mkdir -p install-root/boot

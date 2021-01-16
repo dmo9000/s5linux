@@ -28,7 +28,11 @@ make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 
 mkdir -p ${PKGDIR}/etc/init.d
+mkdir -p ${PKGDIR}/etc/rc5.d
 cp ${TOPLEVEL}/lfs-bootscripts/blfs-bootscripts-20201002/blfs/init.d/networkmanager ${PKGDIR}/etc/init.d/networkmanager
+chmod 755 ${PKGDIR}/etc/init.d/networkmanager
+cd ${PKGDIR}/etc/rc5.d
+ln -sf ../init.d/networkmanager ./S20networkmanager
 
 # package
 
