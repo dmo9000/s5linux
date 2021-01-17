@@ -67,7 +67,11 @@ package_install()
 
 	case ${STATUS} in 
 		22)
-		echo "package not found."
+		echo ""
+		echo "Package not found (HTTP 404):"
+	       	echo ""
+		echo "	$BASEURL/${PACKAGE}.pkg.gz"
+	       	echo ""
 		exit 1
 		;;
 		0)
@@ -104,12 +108,12 @@ package_install()
 	VERSION=`grep "^VERSION=.*$" ${SPOOL}/_autopkg/${PACKAGE}/pkginfo | sed -e "s/^.*=//"`
 	PSTAMP=`grep "^PSTAMP=.*$" ${SPOOL}/_autopkg/${PACKAGE}/pkginfo | sed -e "s/^.*=//"`
 
-	# echo ""
-	# echo " VERSION: ${VERSION}"
-	# echo " PSTAMP:  ${PSTAMP}"
-	# echo ""
+	echo ""
+	echo " VERSION: ${VERSION}"
+	echo " PSTAMP:  ${PSTAMP}"
+	echo ""
 
-	if [ "${PKG_INSTALLED}" -eq 0 ]; then
+	if [ "${PKG_INSTALLED}" -eq 0 ] && [ "$INST_VERSION" != "000000" ]; then
 		# overwriting installed package
 		verlte "${VERSION}" "${INST_VERSION}" 
 		VERSION_STATUS=$?

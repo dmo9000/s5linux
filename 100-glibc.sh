@@ -3,7 +3,10 @@
 
 # setup
 
-PKGNAME=glibc-2.32
+PKGID=S5LXglibc
+PKG=glibc
+VERSION=2.32
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -25,15 +28,27 @@ cd ${TOPLEVEL}
 
 cd ${PKGDIR}
 
+PSTAMP=`date +"%Y%m%d%H%M%S"`
+
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXglibc
+PKG=${PKGID}
 NAME=${PKGNAME}
 DESC=GNU libc
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=libraries
 BASEDIR=/
+PSTAMP=${PSTAMP}
 __PKGINFO__
 
+cat <<__POSTINSTALL__ > postinstall
+#!/bin/sh
+/sbin/ldconfig
+cd /var/db
+/usr/ccs/bin/make -f Makefile
+__POSTINSTALL__
+
+
 ../../mkproto.sh
+../../mkpkg.sh
