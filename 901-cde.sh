@@ -73,6 +73,10 @@ sudo cp graphics/dtlogin-logo-256.pm ${PKGDIR}/usr/dt/share/backdrops/dtlogin-lo
 
 sudo cp ${PKGDIR}/usr/dt/share/palettes/Grass.dp ${PKGDIR}/usr/dt/share/palettes/Default.dp
 
+# update icons
+
+sudo find ${PKGDIR} -name "mail.pm" -print -exec convert /usr/share/icons/Adwaita/48x48/legacy/mail-send-receive.png {} \;
+
 PSTAMP=`date +"%Y%m%d%H%M%S"`
 
 cd ${PKGDIR}
