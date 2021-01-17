@@ -75,7 +75,29 @@ sudo cp ${PKGDIR}/usr/dt/share/palettes/Grass.dp ${PKGDIR}/usr/dt/share/palettes
 
 # update icons
 
-sudo find ${PKGDIR} -name "mail.pm" -print -exec convert /usr/share/icons/Adwaita/48x48/legacy/mail-send-receive.png {} \;
+sudo cp ${TOPLEVEL}/cde-icons/*.pm /usr/dt/appconfig/icons/C/
+
+# sudo find ${PKGDIR} -name "DtMail.l.pm" -print -exec convert -layers Optimize /usr/share/icons/Adwaita/48x48/legacy/mail-send-receive.png {} \;
+# sudo find ${PKGDIR} -name "Dtterm.l.pm" -print -exec convert -layers Optimize /usr/share/icons/Adwaita/48x48/legacy/utilities-terminal.png {} \;
+# sudo find ${PKGDIR} -name "Fppenpd.l.pm" -print -exec convert -layers Optimize /usr/share/icons/Adwaita/48x48/legacy/accessories-text-editor.png {} \;
+# sudo find ${PKGDIR} -name "Fpprnt.l.pm" -print -exec convert -layers Optimize /usr/share/icons/Adwaita/48x48/legacy/printer-printing.png {} \;
+# sudo find ${PKGDIR} -name "Fphome.l.pm" -print -exec convert -layers Optimize /usr/share/icons/Adwaita/48x48/legacy/system-file-manager.png {} \;
+#sudo find ${PKGDIR} -name "Dtinfo.l.pm" -print -exec convert -layers Optimize /usr/share/icons/Adwaita/48x48/legacy/system-help.png {} \;
+#sudo find ${PKGDIR} -name "Fptrsh.l.pm" -print -exec convert -layers Optimize /usr/share/icons/Adwaita/48x48/places/user-trash.png {} \;
+#sudo find ${PKGDIR} -name "Fpapps.l.pm" -print -exec convert -layers Optimize /usr/share/icons/Adwaita/48x48/legacy/applications-other.png {} \;
+#sudo find ${PKGDIR} -name "Fpstyle.l.pm" -print -exec convert -layers Optimize /usr/share/icons/Adwaita/48x48/legacy/preferences-desktop-theme.png {} \;
+
+sudo cp /dev/null ${PKGDIR}/usr/dt/appconfig/types/C/autoStart.dt
+
+#sudo convert /usr/share/icons/Adwaita/48x48/legacy/mail-send-receive.png /usr/dt/appconfig/icons/C/DtMail.l.pm
+#sudo convert /usr/share/icons/Adwaita/48x48/legacy/utilities-terminal.png /usr/dt/appconfig/icons/C/Dtterm.l.pm
+#sudo convert /usr/share/icons/Adwaita/48x48/legacy/accessories-text-editor.png /usr/dt/appconfig/icons/C/Fppenpd.l.pm
+#sudo convert /usr/share/icons/Adwaita/48x48/legacy/printer-printing.png /usr/dt/appconfig/icons/C/Fpprnt.l.pm
+#sudo convert /usr/share/icons/Adwaita/48x48/legacy/system-file-manager.png /usr/dt/appconfig/icons/C/Fphome.l.pm
+#sudo convert /usr/share/icons/Adwaita/48x48/legacy/system-help.png /usr/dt/appconfig/icons/C/Dtinfo.l.pm
+#sudo convert /usr/share/icons/Adwaita/48x48/places/user-trash.png /usr/dt/appconfig/icons/C/Fptrsh.l.pm
+#sudo convert /usr/share/icons/Adwaita/48x48/legacy/applications-other.png /usr/dt/appconfig/icons/C/Fpapps.l.pm
+#sudo convert /usr/share/icons/Adwaita/48x48/legacy/preferences-desktop-theme.png /usr/dt/appconfig/icons/C/Fpstyle.l.pm
 
 PSTAMP=`date +"%Y%m%d%H%M%S"`
 

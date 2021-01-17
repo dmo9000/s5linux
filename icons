@@ -1,0 +1,16 @@
+# see: /usr/dt/appconfig/types/C/dt.dt
+# see: /etc/dt/appconfig/types/C/dt.dt
+# see: /usr/dt/appconfig/types/C/dtwm.fp
+# see: /usr/dt/appconfig/types/C/autostart.fp
+#
+
+sudo convert /usr/share/icons/Adwaita/48x48/legacy/mail-send-receive.png /usr/dt/appconfig/icons/C/DtMail.l.pm
+sudo convert /usr/share/icons/Adwaita/48x48/legacy/utilities-terminal.png /usr/dt/appconfig/icons/C/Dtterm.l.pm
+sudo convert /usr/share/icons/Adwaita/48x48/legacy/accessories-text-editor.png /usr/dt/appconfig/icons/C/Fppenpd.l.pm
+sudo convert /usr/share/icons/Adwaita/48x48/legacy/printer-printing.png /usr/dt/appconfig/icons/C/Fpprnt.l.pm
+sudo convert /usr/share/icons/Adwaita/48x48/legacy/system-file-manager.png /usr/dt/appconfig/icons/C/Fphome.l.pm
+sudo convert /usr/share/icons/Adwaita/48x48/legacy/system-help.png /usr/dt/appconfig/icons/C/Dtinfo.l.pm
+sudo convert /usr/share/icons/Adwaita/48x48/places/user-trash.png /usr/dt/appconfig/icons/C/Fptrsh.l.pm
+sudo convert /usr/share/icons/Adwaita/48x48/legacy/applications-other.png /usr/dt/appconfig/icons/C/Fpapps.l.pm
+sudo convert /usr/share/icons/Adwaita/48x48/legacy/preferences-desktop-theme.png /usr/dt/appconfig/icons/C/Fpstyle.l.pm
+rm -rf ~/.dt*
