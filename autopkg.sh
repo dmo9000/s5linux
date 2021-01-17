@@ -24,12 +24,14 @@ verlt() {
 
 spool_cleanup()
 {
-	echo -n "Cleaning up package ${PACKAGE} ... " 
+	# echo ""
+	# echo -n "Cleaning up package ${PACKAGE} ... " 
 	rm -f ${SPOOL}/autopkg.pkgs
 	rm -rf ${SPOOL}/_autopkg/${PACKAGE}
 	rm -f ${SPOOL}/${PACKAGE}.pkg
 	rm -f ${SPOOL}/${PACKAGE}.pkg.gz
-	echo "okay"	
+	# echo "okay"	
+	echo ""
 }
 
 package_install()
@@ -49,9 +51,9 @@ package_install()
 		echo ""
 		INST_VERSION=`pkginfo -l ${PACKAGE} | grep VERSION | sed -e "s/.*\ //"`
 		INST_PSTAMP=`pkginfo -l ${PACKAGE} | grep PSTAMP | sed -e "s/.*\ //"`
-		echo " VERSION: ${INST_VERSION}"
-		echo " PSTAMP:  ${INST_PSTAMP}"
-		echo ""
+		# echo " VERSION: ${INST_VERSION}"
+		# echo " PSTAMP:  ${INST_PSTAMP}"
+		# echo ""
 	fi
 
 
@@ -86,49 +88,53 @@ package_install()
 		fi
 	echo "okay"
 
-	echo "Reading package metadata ... "
+	echo -n "Reading package metadata ... "
 	mkdir -p ${SPOOL}/_autopkg
 	rm -rf ${SPOOL}/_autopkg/${PACKAGE}
 	(echo 1) | pkgtrans -o -i ${SPOOL}/${PACKAGE}.pkg ${SPOOL}/_autopkg 1>/dev/null 2>&1
 	STATUS=$?
 	if [ $STATUS -gt 0 ] ; then 
-		echo "pkgtrans faile (exit status=$STATUS}"
+		echo "pkgtrans failed (exit status=$STATUS}"
 		exit 1
 		fi
+
+	echo "okay"
+	echo ""
 
 	VERSION=`grep "^VERSION=.*$" ${SPOOL}/_autopkg/${PACKAGE}/pkginfo | sed -e "s/^.*=//"`
 	PSTAMP=`grep "^PSTAMP=.*$" ${SPOOL}/_autopkg/${PACKAGE}/pkginfo | sed -e "s/^.*=//"`
 
-	echo ""
-	echo " VERSION: ${VERSION}"
-	echo " PSTAMP:  ${PSTAMP}"
-	echo ""
+	# echo ""
+	# echo " VERSION: ${VERSION}"
+	# echo " PSTAMP:  ${PSTAMP}"
+	# echo ""
 
 	if [ "${PKG_INSTALLED}" -eq 0 ]; then
 		# overwriting installed package
 		verlte "${VERSION}" "${INST_VERSION}" 
 		VERSION_STATUS=$?
 		if [ $VERSION_STATUS -eq 0 ]; then  
-			echo -n "New package VERSION is newer or same version than installed package: "
-		        echo "($INST_VERSION <= ${VERSION})"
+			echo "New package VERSION is newer or same version than installed package: "
+		        echo "  (installed $INST_VERSION <= new ${VERSION})"
 			verlte "${PSTAMP}" "${INST_PSTAMP}"
 			PSTAMP_STATUS=$?
 			if [ $PSTAMP_STATUS -eq	0 ]; then 
-				echo -n "New package PSTAMP is same or older; not installing "
-				echo "($INST_PSTAMP >= ${PSTAMP})"
+				echo ""
+				echo "New package PSTAMP is same or older; not installing "
+				echo "  (installed $INST_PSTAMP >= new ${PSTAMP})"
 				spool_cleanup "{$PACKAGE}"
 				exit 1
 				else 
-				echo -n "New package PSTAMP is not same, or is newer; installing "
-				echo "(${INST_PSTAMP} < ${PSTAMP})"
+				echo "New package PSTAMP is not same, or is newer; installing "
+				echo "  (installed ${INST_PSTAMP} < new ${PSTAMP})"
 				echo "${PACKAGE}" > ${SPOOL}/autopkg.pkgs
 				/bootstrap.sh ${SPOOL}/autopkg.pkgs
 				spool_cleanup "{$PACKAGE}"
 				fi
 
 	       		else
-		       	echo -n "New package is older than installed package"
-		        echo "($INST_VERSION > ${VERSION})"
+		       	echo "New package is older than installed package: "
+		        echo "  (installed $INST_VERSION > new ${VERSION})"
 			spool_cleanup "{$PACKAGE}"
 			exit 1
 			fi
