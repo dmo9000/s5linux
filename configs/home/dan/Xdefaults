@@ -26,4 +26,9 @@ XTerm*boldColors: true
 *.renderTable.variable.fontName: Google Sans
 *.renderTable.variable.fontSize: 10 
 *.renderTable.variable.fontType: FONT_IS_XFT
-
+*.fontList: -fontforge-ms sans serif-normal-*-*-*-11-*-*-*-*-*-*-*
+Dtwm*FrontPanel*highResFontList: -fontforge-ms sans serif-normal-*-*-*-11-*-*-*-*-*-*-*
+Dtwm*FrontPanel*mediumResFontList: -fontforge-ms sans serif-normal-*-*-*-11-*-*-*-*-*-*-*
+Dtwm*FrontPanel*lowResFontList: -fontforge-ms sans serif-normal-*-*-*-11-*-*-*-*-*-*-*
+Xfontsel*font: -fontforge-ms sans serif-normal-*-*-*-11-*-*-*-*-*-*-*
+xfontsel*font: -fontforge-ms sans serif-normal-*-*-*-11-*-*-*-*-*-*-*
