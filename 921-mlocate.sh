@@ -48,7 +48,6 @@ __PKGINFO__
 cat <<__POSTINSTALL__ > postinstall
 #!/bin/sh
 /sbin/ldconfig
-/usr/bin/updatedb
 __POSTINSTALL__
 
 ../../mkproto.sh

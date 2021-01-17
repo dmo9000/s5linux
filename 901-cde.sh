@@ -82,6 +82,13 @@ sudo cp /dev/null ${PKGDIR}/usr/dt/appconfig/types/C/autoStart.dt
 mkdir -p ${PKGDIR}/usr/dt/config/xfonts/C/
 sudo cp ${TOPLEVEL}/fonts/win95/*.pcf ${PKGDIR}/usr/dt/config/xfonts/C/
 ( cd ${PKGDIR}/usr/dt/config/xfonts/C/ && sudo /usr/bin/mkfontdir )
+sudo mkdir -p ${PKGDIR}/usr/dt/app-defaults/C/
+sudo cp ${TOPLEVEL}/configs/usr/dt/app-defaults/C/Dtwm \
+	${PKGDIR}/usr/dt/app-defaults/C/Dtwm
+
+sudo cp ${TOPLEVEL}/configs/usr/dt/appconfig/types/C/dtwm.fp \
+	${PKGDIR}/usr/dt/appconfig/types/C/dtwm.fp
+
 
 PSTAMP=`date +"%Y%m%d%H%M%S"`
 
