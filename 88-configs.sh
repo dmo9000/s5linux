@@ -18,7 +18,7 @@ sudo mkdir -p install-root/usr/libx32
 
 sudo cp configs/profile install-root/etc/profile
 sudo egrep "^bin|^root|^dan|^sshd|^dbus" /etc/passwd | tee configs/etc/passwd
-sudo egrep "^bin|^root|^dan|^tty|^wheel|^sshd|^audio|^cdrom|^dialout|^disk|^input|^kmem|^kvm|^lp|^render|^tape|^video|^dbus" /etc/group | tee configs/etc/group
+sudo egrep "^bin|^root|^dan|^tty|^wheel|^sshd|^audio|^cdrom|^dialout|^disk|^input|^kmem|^kvm|^lp|^render|^tape|^video|^dbus|^mlocate" /etc/group | tee configs/etc/group
 sudo egrep "^root|^dan|^sshd" /etc/shadow | sudo tee configs/etc/shadow
 sudo cp -p configs/etc/{passwd,group,shadow} install-root/etc
 sudo chmod 644 install-root/etc/{passwd,group}
@@ -50,6 +50,7 @@ sudo mkdir -p install-root/etc
 sudo cp mtab install-root/etc/mtab
 sudo mkdir -p install-root/usr/bin
 # sudo cp install-root/bin/bash install-root/usr/bin/bash
+sudo cp autopkg.sh install-root/autopkg.sh
 sudo cp bootstrap.sh install-root/bootstrap.sh
 sudo cp install-sda.sh install-root/root/install-sda.sh
 # rungetty script no longer needed - deprecated

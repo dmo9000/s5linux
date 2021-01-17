@@ -32,6 +32,8 @@ make install DESTDIR=${PKGDIR}
 
 cd ${PKGDIR}
 
+PSTAMP=`date +"%Y%m%d%H%M%S"`
+
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME} utilities
@@ -41,6 +43,7 @@ VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
+PSTAMP=${PSTAMP}
 __PKGINFO__
 
 #cat <<__POSTINSTALL__ > postinstall

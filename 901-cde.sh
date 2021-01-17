@@ -69,6 +69,12 @@ sudo cp -p ${TOPLEVEL}/configs/usr/dt/config/C/Xresources ${PKGDIR}/usr/dt/confi
 sudo mkdir -p ${PKGDIR}/usr/dt/share/backdrops/
 sudo cp graphics/dtlogin-logo-256.pm ${PKGDIR}/usr/dt/share/backdrops/dtlogin-logo-256.pm
 
+# default CDE theme
+
+sudo cp ${PKGDIR}/usr/dt/share/palettes/Grass.dp ${PKGDIR}/usr/dt/share/palettes/Default.dp
+
+PSTAMP=`date +"%Y%m%d%H%M%S"`
+
 cd ${PKGDIR}
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
@@ -79,6 +85,7 @@ VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
+PSTAMP=${PSTAMP}
 __PKGINFO__
 
 cat <<__POSTINSTALL__ > postinstall

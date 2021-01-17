@@ -5,11 +5,11 @@
 #
 set -e
 #
-# NetworkManager-1.0.9
+# mlocate-1.0.9
 
-PKGID=S5LXNetworkManager
-PKG=NetworkManager
-VERSION=1.26.4
+PKGID=S5LXmlocate
+PKG=mlocate
+VERSION=0.26
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
@@ -22,17 +22,11 @@ xzcat ${PKGNAME}.tar.xz > ${PKGNAME}.tar
 tar -xvf ${PKGNAME}.tar
 cd ${PKGNAME} 
 
-# FIXME: need libpcre packaged
-./configure --prefix=/usr --disable-ovs --with-crypto=gnutls --enable-ifcfg-rh --enable-ifupdown --enable-lto --disable-wifi --disable-qt --disable-ppp --enable-modify-system
+./configure --prefix=/usr 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
-
-mkdir -p ${PKGDIR}/etc/init.d
-mkdir -p ${PKGDIR}/etc/rc5.d
-cp ${TOPLEVEL}/lfs-bootscripts/blfs-bootscripts-20201002/blfs/init.d/networkmanager ${PKGDIR}/etc/init.d/networkmanager
-chmod 755 ${PKGDIR}/etc/init.d/networkmanager
-cd ${PKGDIR}/etc/rc5.d
-ln -sf ../init.d/networkmanager ./S20networkmanager
+mkdir ${PKGDIR}/etc
+cp ${TOPLEVEL}/configs/etc/updatedb.conf ${PKGDIR}/etc/updatedb.conf
 
 # package
 
@@ -42,7 +36,7 @@ PSTAMP=`date +"%Y%m%d%H%M%S"`
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=NetworkManager 
+DESC=mlocate 
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64
@@ -54,7 +48,6 @@ __PKGINFO__
 cat <<__POSTINSTALL__ > postinstall
 #!/bin/sh
 /sbin/ldconfig
-/etc/init.d/networkmanager start
 __POSTINSTALL__
 
 ../../mkproto.sh
