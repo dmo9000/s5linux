@@ -1,4 +1,5 @@
 S5LXglibc
+S5LXshadow
 S5LXlibselinux
 S5LXkbd
 S5LXgrep
@@ -66,3 +67,4 @@ S5LXbrotli
 S5LXgamin
 S5LXgroff
 S5LXmlocate
+

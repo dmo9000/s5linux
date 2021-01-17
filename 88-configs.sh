@@ -18,7 +18,7 @@ sudo mkdir -p install-root/usr/libx32
 
 sudo cp configs/profile install-root/etc/profile
 sudo egrep "^bin|^root|^dan|^sshd|^dbus" /etc/passwd | tee configs/etc/passwd
-sudo egrep "^bin|^root|^dan|^tty|^wheel|^sshd|^audio|^cdrom|^dialout|^disk|^input|^kmem|^kvm|^lp|^render|^tape|^video|^dbus|^slocate" /etc/group | \
+sudo egrep "^bin|^root|^dan|^tty|^wheel|^sshd|^audio|^cdrom|^dialout|^disk|^input|^kmem|^kvm|^lp|^render|^tape|^video|^dbus|^mail|^slocate" /etc/group | \
 		sed -e "s/^slocate/mlocate/" | tee configs/etc/group
 sudo egrep "^root|^dan|^sshd" /etc/shadow | sudo tee configs/etc/shadow
 sudo cp -p configs/etc/{passwd,group,shadow} install-root/etc
@@ -35,6 +35,7 @@ sudo mkdir -p install-root/sys
 sudo mkdir -p install-root/run
 sudo mkdir -p install-root/packages/
 sudo mkdir -p install-root/var/spool/pkg
+sudo mkdir -p install-root/var/spool/mail
 sudo mkdir -p install-root/tmp
 sudo chmod 1777 install-root/tmp
 sudo mkdir -p install-root/var/tmp
@@ -57,6 +58,7 @@ sudo cp install-sda.sh install-root/root/install-sda.sh
 # rungetty script no longer needed - deprecated
 #sudo cp rungetty.sh install-root/
 sudo mkdir -p install-root/etc/pam.d
+sudo cp configs/etc/pam.d/system-auth install-root/etc/pam.d/system-auth
 sudo cp configs/etc/pam.d/other install-root/etc/pam.d/other
 sudo cp configs/etc/pam.d/login install-root/etc/pam.d/
 sudo egrep "^root|^dan" /etc/shadow | sudo tee install-root/etc/shadow

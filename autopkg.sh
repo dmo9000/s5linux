@@ -103,7 +103,6 @@ package_install()
 		fi
 
 	echo "okay"
-	echo ""
 
 	VERSION=`grep "^VERSION=.*$" ${SPOOL}/_autopkg/${PACKAGE}/pkginfo | sed -e "s/^.*=//"`
 	PSTAMP=`grep "^PSTAMP=.*$" ${SPOOL}/_autopkg/${PACKAGE}/pkginfo | sed -e "s/^.*=//"`
