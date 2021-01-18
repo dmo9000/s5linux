@@ -14,7 +14,8 @@ if [ ${HAS_PSTAMP} -eq 0 ]; then
 	echo ""
 	echo "*** pkginfo file is missing PSTAMP field"
 	echo ""
-	exit 1
+	PSTAMP=`date +"%Y%m%d%H%M%S"`
+	echo "PSTAMP=${PSTAMP}" >> pkginfo
 	fi
 
 cat pkginfo

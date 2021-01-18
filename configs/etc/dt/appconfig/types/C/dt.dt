@@ -441,7 +441,7 @@ ACTION Dtterm
         ICON            Dtterm
         TYPE            COMMAND
         WINDOW_TYPE     NO_STDIO
-        EXEC_STRING     /usr/bin/xterm -ls
+        EXEC_STRING     /usr/bin/sakura -ls -x "/bin/bash --login" -f "Go Sans 10"
         DESCRIPTION     The Terminal (Xterm) action runs the desktop Terminal \
                         Emulator application.
 }
