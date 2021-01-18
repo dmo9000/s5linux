@@ -17,8 +17,8 @@ sudo mkdir -p install-root/usr/libx32
 #        especially the sshd user setup should be moved to the S5LXopenssh postinstall script
 
 sudo cp configs/profile install-root/etc/profile
-sudo egrep "^bin|^root|^dan|^sshd|^dbus" /etc/passwd | tee configs/etc/passwd
-sudo egrep "^bin|^root|^dan|^tty|^wheel|^sshd|^audio|^cdrom|^dialout|^disk|^input|^kmem|^kvm|^lp|^render|^tape|^video|^dbus|^mail|^slocate" /etc/group | \
+sudo egrep "^bin|^root|^dan|^sshd|^dbus|^nobody" /etc/passwd | tee configs/etc/passwd
+sudo egrep "^bin|^root|^dan|^tty|^wheel|^sshd|^audio|^cdrom|^dialout|^disk|^input|^kmem|^kvm|^lp|^render|^tape|^video|^dbus|^nobody|^mail|^slocate" /etc/group | \
 		sed -e "s/^slocate/mlocate/" | tee configs/etc/group
 sudo egrep "^root|^dan|^sshd" /etc/shadow | sudo tee configs/etc/shadow
 sudo cp -p configs/etc/{passwd,group,shadow} install-root/etc
@@ -66,6 +66,8 @@ sudo chmod 000 install-root/etc/shadow
 ls -l install-root/etc/shadow
 sudo cp configs/etc/ld.so.conf install-root/etc/ld.so.conf
 sudo chmod 777 install-root
+
+( cd install-root/var && sudo ln -sf spool/mail mail )
 
 # HACK: install google fonts
 

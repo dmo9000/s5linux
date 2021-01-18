@@ -1,4 +1,5 @@
 adwaita-icon-theme-3.38.0
+appres-1.0.5
 atk-2.36.0
 at-spi2-atk-2.38.0
 at-spi2-core-2.38.0
@@ -16,6 +17,7 @@ coreutils-8.32
 curl-7.74.0
 dbus-1.12.20
 e2fsprogs-1.45.6
+editres-1.0.7
 elfutils-0.182.tar
 encodings-1.0.5
 evtest-1.34
@@ -213,6 +215,7 @@ xfce4-settings-4.14.0.tar
 xfconf-4.14.1.tar
 xfconf-4.16.0.tar
 xfdesktop-4.14.1.tar
+xfontsel-1.0.6
 xfwm4-4.14.0.tar
 xinit-1.4.1
 xinput-1.6.3
@@ -223,5 +226,6 @@ xorg-server-1.20.10.tar
 xrdb-1.2.0
 xset-1.2.4
 xtrans-1.4.0.tar
+xwininfo-1.1.5
 xz-5.2.5
 zlib-1.2.11

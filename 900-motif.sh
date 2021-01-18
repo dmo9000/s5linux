@@ -50,10 +50,10 @@ CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
-#cat <<__POSTINSTALL__ > postinstall
-#!/bin/sh
-#/sbin/ldconfig
-#__POSTINSTALL__
+cat <<__POSTINSTALL__ > postinstall
+!/bin/sh
+/sbin/ldconfig
+__POSTINSTALL__
 
 
 ../../mkproto.sh

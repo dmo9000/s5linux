@@ -67,4 +67,10 @@ S5LXbrotli
 S5LXgamin
 S5LXgroff
 S5LXmlocate
-
+S5LXlibdb
+S5LXlibnsl
+S5LXlibicu
+S5LXfindutils
+S5LXdiffutils
+S5LXbinutils
+S5LXgcc

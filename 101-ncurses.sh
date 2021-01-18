@@ -14,7 +14,7 @@ tar -zxvf ${PKGNAME}.tar.gz
 # configure/build/install
 
 cd ../build/
-../src/${PKGNAME}/configure --prefix=/usr --with-termlib --with-shared
+../src/${PKGNAME}/configure --prefix=/usr --with-termlib --with-shared --enable-widec
 make -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 cd ${TOPLEVEL}

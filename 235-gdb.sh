@@ -5,46 +5,43 @@
 #
 set -e
 #
-# xf86-input-libinput-0.30.0 
 
-PKGID=S5LXxf86-input-libinput
-PKG=xf86-input-libinput
-VERSION=0.30.0
+PKGID=S5LXgdb
+PKG=gdb
+VERSION=10.1
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
+
 cd src
-rm -rf ./${PKGNAME}
+sudo rm -rf ./${PKGNAME}
+sudo rm -rf ${PKGDIR}
 tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
-
-# configure/build/install
 ./configure --prefix=/usr 
 make  -j ${NPROC}
-yes "" | make  DESTDIR=${PKGDIR} install 
+make install DESTDIR=${PKGDIR}
+
+find ${PKGDIR} -type f -name "updatedb*" -exec rm -f {} \;
+find ${PKGDIR} -type f -name "locate*" -exec rm -f {} \;
 
 # package
 
 cd ${PKGDIR}
-
-
+PSTAMP=`date +"%Y%m%d%H%M%S"`
 
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=xf86-input-libinput
+DESC=GNU gdb
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
+PSTAMP=${PSTAMP}
 __PKGINFO__
-
-cat <<__POSTINSTALL__ > postinstall
-#!/bin/sh
-/sbin/ldconfig
-__POSTINSTALL__
 
 ../../mkproto.sh
 ../../mkpkg.sh

@@ -29,7 +29,7 @@
 #$LastChangedBy: dj $
 #$Date: 2020-08-17 01:20:21 -0500 (Mon, 17 Aug 2020) $
 
-BINFILE=/usr/lib/postfix/master
+BINFILE=/usr/libexec/postfix/master
 PIDFILE=/var/spool/postfix/pid/master.pid
 
 case "$1" in
