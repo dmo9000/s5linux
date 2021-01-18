@@ -2,39 +2,44 @@
 #
 
 # setup
+#
+set -e
+#
 
-PKGNAME=ncurses-6.2
-PKG=ncurses
-VERSION=6.2
+PKGID=S5LXcronie
+PKG=cronie
+VERSION=1.5.5
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
 cd src
-rm -rf ./${PKGNAME}
+sudo rm -rf ./${PKGNAME}
+#xzcat ${PKGNAME}.tar.xz > ${PKGNAME}.tar
 tar -zxvf ${PKGNAME}.tar.gz
+cd ${PKGNAME} 
 
 # configure/build/install
-
-cd ../build/
-../src/${PKGNAME}/configure --prefix=/usr --with-termlib --with-shared --enable-widec
-make -j ${NPROC}
-make install DESTDIR=${PKGDIR}
-cd ${TOPLEVEL}
+./configure --prefix=/usr 
+make -j ${NPROC} 
+make DESTDIR=${PKGDIR} install
 
 # package
 
 cd ${PKGDIR}
 
+PSTAMP=`date +"%Y%m%d%H%M%S"`
+
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXncurses
+PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=GNU ncurses
+DESC=cronie
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64
-CATEGORY=libraries
+CATEGORY=utilities
 BASEDIR=/
+PSTAMP=${PSTAMP}
 __PKGINFO__
 
 ../../mkproto.sh

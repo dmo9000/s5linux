@@ -1,6 +1,14 @@
 #!/bin/sh
 #
 
+die()
+{
+	echo "$8"
+	exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
 # setup
 #
 set -e

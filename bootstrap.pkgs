@@ -1,6 +1,7 @@
 S5LXglibc
 S5LXshadow
 S5LXbash
+S5LXncurses
 S5LXlibselinux
 S5LXkbd
 S5LXgrep
@@ -22,7 +23,6 @@ S5LXlibtirpc
 S5LXpam
 S5LXpamtester
 S5LXe2fsprogs
-S5LXncurses
 S5LXutillinux
 S5LXcoreutils
 S5LXwhich
@@ -75,3 +75,4 @@ S5LXfindutils
 S5LXdiffutils
 S5LXbinutils
 S5LXgcc
+S5LXcronie

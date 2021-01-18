@@ -18,7 +18,7 @@ sudo mkdir -p install-root/usr/libx32
 
 sudo cp configs/profile install-root/etc/profile
 sudo egrep "^bin|^root|^dan|^sshd|^dbus|^nobody" /etc/passwd | tee configs/etc/passwd
-sudo egrep "^bin|^root|^dan|^tty|^wheel|^sshd|^audio|^cdrom|^dialout|^disk|^input|^kmem|^kvm|^lp|^render|^tape|^video|^dbus|^nobody|^mail|^slocate" /etc/group | \
+sudo egrep "^bin|^root|^dan|^tty|^wheel|^sshd|^audio|^cdrom|^dialout|^disk|^input|^kmem|^kvm|^lp|^render|^tape|^video|^dbus|^nobody|^mail|^slocate|^utmp" /etc/group | \
 		sed -e "s/^slocate/mlocate/" | tee configs/etc/group
 sudo egrep "^root|^dan|^sshd" /etc/shadow | sudo tee configs/etc/shadow
 sudo cp -p configs/etc/{passwd,group,shadow} install-root/etc

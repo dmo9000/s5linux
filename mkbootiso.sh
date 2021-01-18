@@ -11,7 +11,7 @@ cp /usr/share/syslinux/vesamenu.c32 images/ISO-ROOT/isolinux/
 cp /usr/share/syslinux/chain.c32 images/ISO-ROOT/isolinux/
 
 cp graphics/syslinux.png images/ISO-ROOT/isolinux/syslinux.png
-cp graphics/sun8x16.psfu images/ISO-ROOT/isolinux/sun8x16.psfu
+#cp graphics/sun8x16.psfu images/ISO-ROOT/isolinux/sun8x16.psfu
 
 mkdir -p images/ISO-ROOT/etc
 rm -f images/ISO-ROOT/etc/fstab
