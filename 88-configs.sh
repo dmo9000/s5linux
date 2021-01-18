@@ -79,6 +79,8 @@ sudo mkdir -p install-root/home/dan
 sudo cp configs/home/dan/Xdefaults install-root/home/dan/.Xdefaults
 sudo cp configs/home/dan/Xdefaults install-root/home/dan/.Xresources
 
+
+
 sudo chown -R dan:dan install-root/home/dan
 sudo mkdir -p install-root/usr/share/backgrounds/xfce
 sudo cp graphics/syslinux.png install-root/usr/share/backgrounds/xfce/headrat-linux.png 

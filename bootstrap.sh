@@ -12,7 +12,6 @@ status2message()
 		;;
 		*)
 		printf "\x1b[91m[ERROR=${1}]\x1b[0m\n"
-		exit 1
 		;;
 	esac
 
@@ -30,8 +29,14 @@ for CUR_PKGLIST in ${@}; do
 				PKGSIZE=`/usr/5bin/ls -sh ${PKGPATH}/${PKG}.pkg.gz  | /usr/5bin/awk '{ print $1; }'`
 				printf "%-75s" "[C] Installing ${PKGPATH}/${PKG}.pkg.gz (${PKGSIZE}) ... "
 				gzip -d -c -k "${PKGPATH}/${PKG}.pkg.gz" > /var/spool/pkg/${PKG}.pkg
-				( echo 1 && yes) | pkgadd -d /var/spool/pkg/${PKG}.pkg  1>/dev/null 2>&1
-				status2message $?
+				( echo 1 && yes) | pkgadd -d /var/spool/pkg/${PKG}.pkg  1>/tmp/${PKG}.install.log 2>&1
+				STATUS=$?
+				status2message ${STATUS}
+				if [ ${STATUS} -gt 0 ]; then 
+					cat /tmp/${PKG}.install.log
+					fi
+				rm -f /tmp/${PKG}.install.log
+
 				/sbin/ldconfig
 				rm -f /var/spool/pkg/${PKG}.pkg
 				else 
@@ -40,8 +45,14 @@ for CUR_PKGLIST in ${@}; do
 			else
 			PKGSIZE=`/usr/5bin/ls -sh ${PKGPATH}/${PKG}.pkg  | /usr/5bin/awk '{ print $1; }'`
 			printf "[U] Installing package ${PKGPATH}/${PKG}.pkg (${PKGSIZE}) ... "
-			( echo 1 && yes) | pkgadd -d ${PKGPATH}/${PKG}.pkg  1>/dev/null 2>&1
-			status2message $?
+			( echo 1 && yes) | pkgadd -d ${PKGPATH}/${PKG}.pkg  1>/tmp/${PKG}.install.log 2>&1
+			STATUS=$?
+			status2message ${STATUS}
+                        if [ ${STATUS} -gt 0 ]; then  
+                        	cat /tmp/${PKG}.install.log
+                                fi
+                        rm -f /tmp/${PKG}.install.log
+			
 			/sbin/ldconfig
 			fi
 		done

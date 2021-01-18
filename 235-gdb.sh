@@ -19,7 +19,7 @@ sudo rm -rf ./${PKGNAME}
 sudo rm -rf ${PKGDIR}
 tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
-./configure --prefix=/usr 
+./configure --prefix=/usr --with-python=no 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 
