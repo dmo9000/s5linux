@@ -7,7 +7,14 @@ PROJECT=${1}
 eval `grep "^BUILDREQUIRES=" ${PROJECT}`
 eval `grep "^PKG=" ${PROJECT} | head -n 1`
 eval `grep "^VERSION=" ${PROJECT} | head -n 1`
+eval `grep "^PKGID=" ${PROJECT} | head -n 1`
 
+if [ -z "${PKGID}" ]; then 
+	echo "*** Packaging script is missing PKGID. Aborting"
+	exit 1
+fi
+
+echo "* Project has PKGID         = ${PKGID}"
 echo "* Project has PKG           = ${PKG}"
 echo "* Project has VERSION       = ${VERSION}"
 echo "* Project has BUILDREQUIRES = ${BUILDREQUIRES}"
@@ -60,7 +67,7 @@ sudo cp mkproto.sh ${CONBUILDS}/${PROJECT}/home/mockbuild/mkproto.sh
 sudo cp mkpkg.sh ${CONBUILDS}/${PROJECT}/home/mockbuild/mkpkg.sh
 sudo cp mkstream.sh ${CONBUILDS}/${PROJECT}/home/mockbuild/mkstream.sh
 sudo mkdir -p ${CONBUILDS}/${PROJECT}/home/mockbuild/{src,pkgbuild,spool}
-sudo cp -prv configs ${CONBUILDS}/${PROJECT}/home/mockbuild/configs
+sudo cp -pr configs ${CONBUILDS}/${PROJECT}/home/mockbuild/configs
 
 # copy sources
 
@@ -74,3 +81,10 @@ sudo chroot ${CONBUILDS}/${PROJECT} chown -R mockbuild:mockbuild /home/mockbuild
 sudo chroot ${CONBUILDS}/${PROJECT} sudo -u mockbuild \
 	/bin/bash -c "cd /home/mockbuild && /home/mockbuild/${PROJECT}"
 
+echo "*** Importing packages back from mockbuild to spool ..."
+
+cp -v ${CONBUILDS}/${PROJECT}/home/mockbuild/spool/${PKGID}.pkg spool/${PKGID}.pkg
+cp -v ${CONBUILDS}/${PROJECT}/home/mockbuild/spool/${PKGID}.pkg.gz spool/${PKGID}.pkg.gz
+
+echo "*** Cleaning up build container"
+sudo rm -rf ./${CONBUILDS}/${PROJECT}

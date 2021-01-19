@@ -17,6 +17,7 @@ die()
 
 
 BUILDREQUIRES="devel.pkgs"
+PKGID=S5LXbash
 PKG=bash
 VERSION=5.1
 PKGNAME=${PKG}-${VERSION}
@@ -42,7 +43,7 @@ cd ${PKGDIR}/bin && ln -sf ../usr/bin/bash ./sh
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXbash
+PKG=${PKGID}
 NAME=${PKGNAME}
 DESC=GNU Bourne Again shell 
 VENDOR=HeadRat Linux

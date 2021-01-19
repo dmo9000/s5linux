@@ -5,13 +5,20 @@ echo "+++ build validator: [$0] [$*]"
 
 bash -n $0 $* || exit 1
 
-# test script contains "set -e"
 
 HAS_SET_E=`grep "^set -e" ${0}`
 if [ -z "${HAS_SET_E}" ]; then 
 	echo "error: ${0} doesn't contain 'set -e' directive"
 	exit 1
 	fi
+
+set -x
+HAS_PKGID=`grep "^PKGID=" ${0}`
+if [ -z "${HAS_PKGID}" ]; then 
+	echo "error: ${0} doesn't contain PKGID directive"
+	exit 1
+	fi
+set +x
 
 HAS_MAKEPKG=`grep "^../../mkpkg.sh" ${0}`
 if [ -z "${HAS_MAKEPKG}" ]; then 

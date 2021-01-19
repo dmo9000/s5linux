@@ -35,6 +35,7 @@ if [ -e preremove ]; then
 
 
 ( pkgproto < file.list) | sed -e "s/dan dan$/root root/g" \
+		| sed -e "s/mockbuild mockbuild$/root root/g" \
 		>> prototype && rm -f file.list
 
 md5sum prototype

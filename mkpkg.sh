@@ -8,8 +8,8 @@ if [ ! -r pkginfo ]; then
 	fi
 
 PKGNAME=`grep "PKG=" pkginfo | sed -e "s/^.*=//g"`
-rm -rf ../../spool/${PKGNAME}
-pkgmk -o -r `pwd` -d ../../spool
+#rm -rf ../../spool/${PKGNAME}
+#pkgmk -o -r `pwd` -d ../../spool
 
 HAS_VERSION=`grep ^VERSION= pkginfo | wc -l`
 if [ ${HAS_VERSION} -eq 0 ]; then 
@@ -27,7 +27,7 @@ if [ ${HAS_VERSION} -eq 0 ]; then
 	fi
 fi
 
-HAS_PSTAMP=`grep ^PSTAMP= pkginfo | wc -l`
+HAS_PSTAMP=`grep "^PSTAMP=" pkginfo | wc -l`
 if [ ${HAS_PSTAMP} -eq 0 ]; then 
 	echo ""
 	echo "*** pkginfo file is missing PSTAMP field, adding automatically now..."
@@ -37,5 +37,8 @@ if [ ${HAS_PSTAMP} -eq 0 ]; then
 	fi
 
 cat pkginfo
+
+rm -rf ../../spool/${PKGNAME}
+pkgmk -o -r `pwd` -d ../../spool
 cd ../../spool
 ../mkstream.sh ${PKGNAME}
