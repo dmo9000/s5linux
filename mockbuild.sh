@@ -2,7 +2,14 @@
 set -e
 
 CONBUILDS="./conbuilds"
+
 PROJECT=${1}
+	if [ ! -x "${PROJECT}" ]; then 
+		echo "Cannot find project script ${PROJECT}"
+		exit 1
+		fi
+
+HAS_BUILDREQUIRES=`grep "^BUILDREQUIRES=" ${PROJECT} | wc -l`
 
 eval `grep "^BUILDREQUIRES=" ${PROJECT}`
 eval `grep "^PKG=" ${PROJECT} | head -n 1`
@@ -13,6 +20,11 @@ if [ -z "${PKGID}" ]; then
 	echo "*** Packaging script is missing PKGID. Aborting"
 	exit 1
 fi
+
+if [ ${HAS_BUILDREQUIRES} -eq 0 ]; then 
+	echo "*** mockbuild requires BUILDREQUIRES field in project"
+	exit 1
+	fi
 
 echo "* Project has PKGID         = ${PKGID}"
 echo "* Project has PKG           = ${PKG}"
@@ -68,6 +80,7 @@ sudo cp mkpkg.sh ${CONBUILDS}/${PROJECT}/home/mockbuild/mkpkg.sh
 sudo cp mkstream.sh ${CONBUILDS}/${PROJECT}/home/mockbuild/mkstream.sh
 sudo mkdir -p ${CONBUILDS}/${PROJECT}/home/mockbuild/{src,pkgbuild,spool}
 sudo cp -pr configs ${CONBUILDS}/${PROJECT}/home/mockbuild/configs
+sudo cp -pr lfs-bootscripts ${CONBUILDS}/${PROJECT}/home/mockbuild/lfs-bootscripts
 
 # copy sources
 
@@ -76,8 +89,11 @@ for SOURCE in `find src -maxdepth 1 -name "${PKGNAME}.*" -type f`; do
        sudo cp -v ${SOURCE} ${CONBUILDS}/${PROJECT}/home/mockbuild/${SOURCE}
 done
 
-sudo chroot ${CONBUILDS}/${PROJECT} chown -R mockbuild:mockbuild /home/mockbuild
+# set timezone in mockbuild container
 
+sudo chroot ${CONBUILDS}/${PROJECT} /bin/bash -c "ln -sf /usr/share/zoneinfo/Australia/Melbourne /etc/localtime"
+
+sudo chroot ${CONBUILDS}/${PROJECT} chown -R mockbuild:mockbuild /home/mockbuild
 sudo chroot ${CONBUILDS}/${PROJECT} sudo -u mockbuild \
 	/bin/bash -c "cd /home/mockbuild && /home/mockbuild/${PROJECT}"
 

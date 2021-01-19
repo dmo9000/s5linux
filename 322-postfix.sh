@@ -6,6 +6,7 @@
 set -e
 #
 
+BUILDREQUIRES="devel.pkgs"
 PKGID=S5LXpostfix
 PKG=postfix
 VERSION=3.5.8
@@ -20,10 +21,16 @@ tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
 # configure/build/install
-#./configure --prefix=/usr 
+
+set -x
+( sudo groupadd -g 89 postfix || exit 0 )
+( sudo groupadd -g 90 postdrop || exit 0 )
+( sudo useradd -u 89 -g 89 postfix || exit 0 )
+set +x
+
+
 AUXLIBS="-ldb -lnsl -lresolv" CFLAGS="-DNO_NIS -DNO_NISPLUS" make makefiles
 AUXLIBS="-ldb -lnsl -lresolv" CFLAGS="-DNO_NIS -DNO_NISPLUS" make 
-#AUXLIBS="-ldb -lnsl -lresolv" CFLAGS="-DNO_NIS -DNO_NISPLUS" make install install_root=${PKGDIR}
 sudo /bin/sh ./postfix-install -non-interactive install_root=../../pkgbuild/postfix-3.5.8/
 
 sudo mkdir -p ${PKGDIR}/etc/init.d
@@ -48,7 +55,7 @@ cd ${PKGDIR}
 
 PSTAMP=`date +"%Y%m%d%H%M%S"`
 
-cat <<__PKGINFO__ > pkginfo
+cat <<__PKGINFO__ | sudo tee pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
 DESC=postfix
@@ -60,13 +67,18 @@ BASEDIR=/
 PSTAMP=${PSTAMP}
 __PKGINFO__
 
-cat <<__POSTINSTALL__ > postinstall
+cat <<__PREINSTALL__ | sudo tee preinstall
 #!/bin/sh
 /usr/sbin/groupadd -g 89 postfix
 /usr/sbin/groupadd -g 90 postdrop
 /usr/sbin/useradd -u 89 -g 89 postfix
 echo "/sbin/nologin" | /usr/bin/chsh -s /sbin/nologin postfix
 /usr/sbin/usermod -a -G mail postfix
+__PREINSTALL__
+
+
+cat <<__POSTINSTALL__ | sudo tee postinstall
+#!/bin/sh
 /usr/bin/find /var/spool/postfix -type d ! -name "pid" -exec chown postfix:root {} \;
 /bin/chgrp postdrop /var/spool/postfix/{maildrop,public}
 rm -f /usr/bin/newaliases
@@ -82,7 +94,18 @@ chown root /var/spool/postfix
 chown postfix /var/lib/postfix
 chmod g+s /usr/sbin/postqueue
 chmod g+s /usr/sbin/postdrop
+/etc/init.d/postfix start
 __POSTINSTALL__
+
+
+cat <<__PREREMOVE__ | sudo tee preremove
+#!/bin/sh
+if [ -x /etc/init.d/postfix ]; then 
+	/etc/init.d/postfix stop 
+	fi
+( /usr/sbin/userdel postfix || exit 0)
+( /usr/sbin/groupdel postdrop || exit 0)
+__PREREMOVE__
 
 
 ../../mkproto.sh
