@@ -23,6 +23,17 @@ cd ${PKGNAME}
 ./configure --prefix=/usr 
 make -j ${NPROC} 
 make DESTDIR=${PKGDIR} install
+sudo mkdir -p ${PKGDIR}/etc/init.d
+sudo mkdir -p ${PKGDIR}/etc/rc0.d
+sudo mkdir -p ${PKGDIR}/etc/rc5.d
+sudo mkdir -p ${PKGDIR}/etc/rc6.d
+
+sudo cp ${TOPLEVEL}/lfs-bootscripts/blfs-bootscripts-20201002/blfs/init.d/crond \
+	${PKGDIR}/etc/init.d/crond
+sudo chmod 755 ${PKGDIR}/etc/init.d/crond
+( cd ${PKGDIR}/etc/rc5.d && sudo ln -sf ../init.d/crond ./S30crond )
+sudo mkdir -p ${PKGDIR}/var/spool/cron
+sudo chmod 700 ${PKGDIR}/var/spool/cron
 
 # package
 

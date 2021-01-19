@@ -16,7 +16,10 @@ sudo mkdir -p install-root/usr/libx32
 # FIXME: do something better here
 #        especially the sshd user setup should be moved to the S5LXopenssh postinstall script
 
-sudo cp configs/profile install-root/etc/profile
+sudo cp configs/etc/profile install-root/etc/profile
+sudo cp configs/etc/shells install-root/etc/shells
+
+
 sudo egrep "^bin|^root|^dan|^sshd|^dbus|^nobody" /etc/passwd | tee configs/etc/passwd
 sudo egrep "^bin|^root|^dan|^tty|^wheel|^sshd|^audio|^cdrom|^dialout|^disk|^input|^kmem|^kvm|^lp|^render|^tape|^video|^dbus|^nobody|^mail|^slocate|^utmp" /etc/group | \
 		sed -e "s/^slocate/mlocate/" | tee configs/etc/group
@@ -78,6 +81,9 @@ sudo cp fonts/ttf/*.ttf install-root/usr/share/fonts
 sudo mkdir -p install-root/home/dan
 sudo cp configs/home/dan/Xdefaults install-root/home/dan/.Xdefaults
 sudo cp configs/home/dan/Xdefaults install-root/home/dan/.Xresources
+sudo mkdir -p install-root/home/dan/.config/sakura
+sudo cp configs/home/dan/sakura.conf install-root/home/dan/.config/sakura/sakura.conf
+
 
 
 

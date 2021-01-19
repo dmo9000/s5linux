@@ -31,6 +31,7 @@ echo "#define UsrLibDir /usr/lib64" > config/cf/host.def
 #make World.dev
 cp ${TOPLEVEL}/CDE.Makefile . 
 make Makefile.boot
+sed -i "s/^\(\s*CFLAGS =.*\)$/\1 -DPAM/g" xmakefile
 make VerifyOS
 make -j ${NPROC} Makefiles
 make -j ${NPROC} clean
@@ -89,6 +90,8 @@ sudo cp ${TOPLEVEL}/configs/usr/dt/app-defaults/C/Dtwm \
 sudo cp ${TOPLEVEL}/configs/usr/dt/appconfig/types/C/dtwm.fp \
 	${PKGDIR}/usr/dt/appconfig/types/C/dtwm.fp
 
+sudo cp ${TOPLEVEL}/configs/usr/dt/config/Xsetup \
+	${PKGDIR}/usr/dt/config/Xsetup
 
 PSTAMP=`date +"%Y%m%d%H%M%S"`
 
