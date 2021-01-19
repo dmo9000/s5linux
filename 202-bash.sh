@@ -5,7 +5,21 @@
 
 # setup
 
-PKGNAME=bash-5.1
+set -e
+
+die()
+{
+        echo "$8"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
+
+BUILDREQUIRES="devel.pkgs"
+PKG=bash
+VERSION=5.1
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -19,6 +33,7 @@ cd ${PKGNAME}
 ./configure --prefix=/usr 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
+mkdir -p ${PKGDIR}/bin
 cd ${PKGDIR}/bin && ln -sf ../usr/bin/bash ./bash
 cd ${PKGDIR}/bin && ln -sf ../usr/bin/bash ./sh
 
@@ -31,11 +46,11 @@ PKG=S5LXbash
 NAME=${PKGNAME}
 DESC=GNU Bourne Again shell 
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
 ../../mkproto.sh
-
+../../mkpkg.sh

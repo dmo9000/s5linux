@@ -1,5 +1,7 @@
 #!/bin/sh
+set -e
 WORKING_DIR=`pwd`
+PATH=$PATH:/usr/ccs/bin:/usr/5bin
 echo "mkproto.sh: working directory is ${WORKING_DIR}"
 ls -l 
 rm -f prototype file.list
@@ -31,7 +33,8 @@ if [ -e preremove ]; then
         echo "+++ No preremove script found; skipping"
         fi
 
-( /usr/ccs/bin/pkgproto < file.list) | sed -e "s/dan dan$/root root/g" \
+
+( pkgproto < file.list) | sed -e "s/dan dan$/root root/g" \
 		>> prototype && rm -f file.list
 
 md5sum prototype

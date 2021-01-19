@@ -1,4 +1,6 @@
 #!/bin/sh
+set -e
+PATH=$PATH:/usr/ccs/bin:/usr/5bin
 
 if [ ! -r pkginfo ]; then 
 	echo "pkginfo file is not readable; exiting"

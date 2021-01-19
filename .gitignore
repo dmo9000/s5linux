@@ -21,3 +21,4 @@
 /configs/etc/group
 /configs/etc/shadow
 /issue.tmp
+/conbuilds/*.sh
