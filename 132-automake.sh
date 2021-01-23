@@ -2,59 +2,47 @@
 #
 # mount/wall disabled for now since it wants to chggrp
 #
-
 # setup
-
 set -e
 
 die()
 {
-        echo "$8"
+        echo "$*"
         exit 1
 
 }
 . ./build-validator.sh || die "can't locate validator"
 
-
 BUILDREQUIRES="devel.pkgs"
-PKGID=S5LXcoreutils
-PKG=coreutils
-VERSION=8.32
+PKGID=S5LXautomake
+PKG=automake
+VERSION=1.16
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
+
+build_require autoreconf
+
 cd src
-rm -rf ./${PKGNAME}
+rm -rf ${PKGDIR}
 tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
 # configure/build/install
-rm -rf ${PKGDIR}
-mkdir -p ${PKGDIR}
 
-# FIXME should probably use hard links like Redhat does, but I'm too lazy to figure it out right now
-
-./configure --prefix=/ --disable-xattr 
-make  -j ${NPROC}
-make install DESTDIR=${PKGDIR}
-
-./configure --prefix=/usr --disable-xattr
-make  -j ${NPROC}
-make install DESTDIR=${PKGDIR}
+./configure --prefix=/usr
+make 
+make DESTDIR=${PKGDIR} install
 
 # package
 
 cd ${PKGDIR}
-# remove duplicate manpages
-rm -rf ${PKGDIR}/share
-
-cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXcoreutils
+PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=GNU coreutils
+DESC=GNU automake
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64

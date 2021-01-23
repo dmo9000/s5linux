@@ -4,8 +4,21 @@
 #
 
 # setup
+set -e
 
-PKGNAME=which-2.21
+die()
+{
+        echo "$*"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
+BUILDREQUIRES="devel.pkgs"
+PKGID=S5LXwhich
+PKG=which
+VERSION=2.21
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -29,11 +42,11 @@ PKG=S5LXwhich
 NAME=${PKGNAME}
 DESC=which command
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
 ../../mkproto.sh
-
+../../mkpkg.sh

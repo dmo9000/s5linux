@@ -4,7 +4,7 @@ WORKING_DIR=`pwd`
 PATH=$PATH:/usr/ccs/bin:/usr/5bin
 echo "mkproto.sh: working directory is ${WORKING_DIR}"
 ls -l 
-rm -f prototype file.list
+sudo rm -f prototype file.list
 
 sudo find .  ! -name "preinstall" \
 	! -name "postinstall" \

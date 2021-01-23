@@ -5,7 +5,16 @@
 #
 set -e
 #
+die()
+{
+        echo "$*"
+        exit 1
 
+}
+. ./build-validator.sh || die "can't locate validator"
+
+
+BUILDREQUIRES="devel.pkgs"
 PKGID=S5LXflex
 PKG=flex
 VERSION=2.6.4
@@ -23,6 +32,8 @@ cd ${PKGNAME}
 ./configure --prefix=/usr 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
+
+cd ${PKGDIR}/usr/bin && ln -sf flex lex
 
 # package
 

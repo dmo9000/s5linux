@@ -4,8 +4,19 @@
 # setup
 #
 set -e
+
+die()
+{
+        echo "$*"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
+
 #
 # cde
+BUILDREQUIRES="network.pkgs devel.pkgs X.pkgs CDE.pkgs"
 PKGID=S5LXcde
 PKG=cde
 VERSION=2.3.2
@@ -29,17 +40,17 @@ sudo rm -rf ${PKGDIR}
 echo "#define UsrLibDir /usr/lib64" > config/cf/host.def
 
 #make World.dev
-cp ${TOPLEVEL}/CDE.Makefile . 
-make Makefile.boot
+#cp ${TOPLEVEL}/CDE.Makefile . 
+make CC=gcc Makefile.boot
 sed -i "s/^\(\s*CFLAGS =.*\)$/\1 -DPAM/g" xmakefile
-make VerifyOS
-make -j ${NPROC} Makefiles
-make -j ${NPROC} clean
-make -j ${NPROC} includes
-make -j ${NPROC} depend
-make -j ${NPROC} all
-make Makefiles.doc
-cd doc && make
+make CC=gcc VerifyOS
+make CC=gcc -j ${NPROC} Makefiles
+make CC=gcc -j ${NPROC} clean
+make CC=gcc -j ${NPROC} includes
+make CC=gcc -j ${NPROC} depend
+make CC=gcc -j ${NPROC} all
+make CC=gcc Makefiles.doc
+cd doc && make CC=gcc
 cd ${TOPLEVEL}/src/${PKGNAME}
 make install DESTDIR=${PKGDIR}
 cp programs/dtlogin/config/{Xsession,Xsetup,Xstartup,Xreset,Xfailsafe} ${PKGDIR}/usr/dt/bin/

@@ -5,7 +5,21 @@
 
 # setup
 
-PKGNAME=mpfr-4.1.0
+die()
+{
+        echo "$*"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+set -e
+
+
+BUILDREQUIRES="devel.pkgs"
+PKGID=S5LXmpfr
+PKG=mpfr
+VERSION=4.1.0
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -16,7 +30,7 @@ cd ${PKGNAME}
 
 # configure/build/install
 
-./configure --prefix=/ 
+./configure --prefix=/usr
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 
@@ -25,15 +39,15 @@ make install DESTDIR=${PKGDIR}
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXmpfr
+PKG=${PKGID}
 NAME=${PKGNAME}
 DESC=mpfr
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
 ../../mkproto.sh
-
+../../mkpkg.sh

@@ -17,8 +17,8 @@ tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
 # configure/build/install
-sed -i "s/^CFLAGS=.*/CFLAGS=-static/g" mk.config
-sed -i "s/^LDFLAGS=.*/LDFLAGS=-static/g" mk.config
+#sed -i "s/^CFLAGS=.*/CFLAGS=-static/g" mk.config
+#sed -i "s/^LDFLAGS=.*/LDFLAGS=-static/g" mk.config
 
 make -j ${NPROC} 
 sudo make ROOT=${PKGDIR} install

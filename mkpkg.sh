@@ -33,12 +33,13 @@ if [ ${HAS_PSTAMP} -eq 0 ]; then
 	echo "*** pkginfo file is missing PSTAMP field, adding automatically now..."
 	echo ""
 	PSTAMP=`date +"%Y%m%d%H%M%S"`
+	sudo chmod 777 pkginfo
 	echo "PSTAMP=${PSTAMP}" >> pkginfo
 	fi
 
 cat pkginfo
 
-rm -rf ../../spool/${PKGNAME}
+sudo rm -rf ../../spool/${PKGNAME}
 pkgmk -o -r `pwd` -d ../../spool
 cd ../../spool
 ../mkstream.sh ${PKGNAME}

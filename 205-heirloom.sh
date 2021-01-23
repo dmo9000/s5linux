@@ -5,7 +5,21 @@
 
 # setup
 
-PKGNAME=heirloom-040306
+set -e
+
+die()
+{
+        echo "$8"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
+BUILDREQUIRES="devel.pkgs"
+PKGID=S5LXheirloom-tools
+PKG=heirloom
+VERSION=040306
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -16,7 +30,7 @@ cd ${PKGNAME}
 
 # configure/build/install
 
-make  
+make CC=gcc LDFLAGS=-ltinfo 
 sudo make ROOT=${PKGDIR} install
 sudo rm -f ${PKGDIR}/var/log/sulog
 
@@ -24,16 +38,16 @@ sudo rm -f ${PKGDIR}/var/log/sulog
 
 cd ${PKGDIR}
 
-cat <<__PKGINFO__ > pkginfo
-PKG=S5LXheirloom-tools
+cat <<__PKGINFO__ | sudo tee pkginfo
+PKG=${PKGID}
 NAME=${PKGNAME}
 DESC=heirloom-tools
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
 ../../mkproto.sh
-
+../../mkpkg.sh

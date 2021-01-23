@@ -4,8 +4,22 @@
 #
 
 # setup
+set -e
 
-PKGNAME=mpc-1.2.1
+die()
+{
+        echo "$*"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
+
+BUILDREQUIRES="devel.pkgs"
+PKGID=S5LXmpc
+PKG=mpc
+VERSION=1.2.1
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -16,7 +30,7 @@ cd ${PKGNAME}
 
 # configure/build/install
 
-./configure --prefix=/ 
+./configure --prefix=/usr 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
 
@@ -25,15 +39,15 @@ make install DESTDIR=${PKGDIR}
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXmpc
+PKG=${PKGID}
 NAME=${PKGNAME}
 DESC=mpc
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
 ../../mkproto.sh
-
+../../mkpkg.sh

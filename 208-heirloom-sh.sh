@@ -4,7 +4,20 @@
 #
 
 # setup
+set -e
+die()
+{
+        echo "$*"
+        exit 1
 
+}
+. ./build-validator.sh || die "can't locate validator"
+
+
+BUILDREQUIRES="devel.pkgs"
+PKGID=S5LXheirloom-sh
+PKG=heirloom-sh
+VERSION=1.0
 PKGNAME=heirloom-sh-000000
 NPROC=`nproc`
 TOPLEVEL=`pwd`
@@ -16,7 +29,7 @@ cd ${PKGNAME}
 
 # configure/build/install
 
-make -j ${NPROC} 
+make -j ${NPROC} CC=gcc 
 sudo make ROOT=${PKGDIR} install
 
 # package
@@ -28,11 +41,11 @@ PKG=S5LXheirloom-sh
 NAME=${PKGNAME}
 DESC=heirloom-sh
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
-sudo ../../mkproto.sh
-
+../../mkproto.sh
+../../mkpkg.sh

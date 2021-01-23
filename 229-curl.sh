@@ -3,9 +3,18 @@
 
 # setup
 #
-set -e
-#
 
+set -e
+die()
+{
+        echo "$*"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
+
+BUILDREQUIRES="devel.pkgs"
 PKGID=S5LXcurl
 PKG=curl
 VERSION=7.74.0

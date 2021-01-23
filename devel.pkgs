@@ -1,4 +1,5 @@
 S5LXgmake
+S5LXgmp
 S5LXgit
 S5LXmpc
 S5LXflex
@@ -8,3 +9,10 @@ S5LXbison
 S5LXbc
 S5LXperl
 S5LXgdb
+S5LXautoconf
+S5LXautomake
+S5LXlibtool
+S5LXdiffutils
+S5LXpatch
+S5LXfile
+S5LXastyle

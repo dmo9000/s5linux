@@ -7,7 +7,20 @@
 
 set -e
 
-PKGNAME=util-linux-2.36
+die()
+{
+        echo "$*"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
+
+BUILDREQUIRES="devel.pkgs"
+PKGID=S5LXutillinux
+PKG=util-linux
+VERSION=2.36
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -33,11 +46,11 @@ sudo chmod 777 ${PKGDIR}
 cd ${PKGDIR}
 
 sudo cat <<__PKGINFO__ > pkginfo
-PKG=S5LXutillinux
+PKG=${PKGID}
 NAME=${PKGNAME}
 DESC=Linux utilities
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/

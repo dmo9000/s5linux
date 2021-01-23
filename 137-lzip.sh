@@ -1,8 +1,7 @@
 #!/bin/sh
 #
-# mount/wall disabled for now since it wants to chggrp
+# mount/wall disabllzip for now since it wants to chggrp
 #
-
 # setup
 set -e
 
@@ -14,25 +13,25 @@ die()
 }
 . ./build-validator.sh || die "can't locate validator"
 
-
 BUILDREQUIRES="devel.pkgs"
-PKGID=S5LXstrace
-PKG=strace
-VERSION=5.10
+PKGID=S5LXlzip
+PKG=lzip
+VERSION=1.22
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
+
 cd src
-rm -rf ./${PKGNAME}
+rm -rf ${PKGDIR}
 tar -zxvf ${PKGNAME}.tar.gz
 cd ${PKGNAME} 
 
 # configure/build/install
 
-./configure --prefix=/usr 
-make  -j ${NPROC}
-make install DESTDIR=${PKGDIR}
+./configure --prefix=/usr
+make 
+make DESTDIR=${PKGDIR} install
 
 # package
 
@@ -41,7 +40,7 @@ cd ${PKGDIR}
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=strace command
+DESC=GNU lzip
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64

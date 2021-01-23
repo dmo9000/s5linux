@@ -9,7 +9,11 @@ die()
 INSTALL_ROOT="${1}"
 [ ! -z "${INSTALL_ROOT}" ] || die "Install root not specified."
 
-for PKG in `ls -1 ./spool/*.pkg` ; do 
+PKGCOUNT=`ls -1 ./spool/*.pkg 2>/dev/null | wc -l`
+GZPKGCOUNT=`ls -1 ./spool/*.pkg.gz 2>/dev/null | wc -l`
+echo "PKGCOUNT="${PKGCOUNT}
+
+for PKG in `ls -1 ./spool/*.pkg 2>/dev/null` ; do 
 	FILENAME=`basename ${PKG}`
 	ZFILENAME=${FILENAME}.gz
 	if [ "spool/${FILENAME}" -nt "spool/${ZFILENAME}" ] || [ ! -r "spool/${ZFILENAME}" ]; then
@@ -18,6 +22,12 @@ for PKG in `ls -1 ./spool/*.pkg` ; do
 		pigz -f -9 -k "spool/${FILENAME}"
 		touch "spool/${FILENAME}.gz"
 		fi
+	done
+
+GZPKGCOUNT=`ls -1 ./spool/*.pkg.gz 2>/dev/null | wc -l`
+echo "GZPKGCOUNT="${GZPKGCOUNT}
+for GZPKG in `ls -1 ./spool/*.pkg.gz` ; do 
+	ZFILENAME=`basename ${GZPKG}`
 	sudo cp "spool/${ZFILENAME}" ${INSTALL_ROOT}/packages/"${ZFILENAME}"
 	done
 

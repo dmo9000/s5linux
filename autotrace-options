@@ -1,1 +1,0 @@
--background-color=FFFFFF -color-count 2 -remove-adjacent-corners -corner-threshold 360 -corner-always-threshold 360 -error-threshold 100 

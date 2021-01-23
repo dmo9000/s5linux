@@ -1,10 +1,20 @@
 #!/bin/sh
 set -e
 #
+die()
+{
+        echo "$*"
+        exit 1
 
-# setup
+}
+. ./build-validator.sh || die "can't locate validator"
 
-PKGNAME=Linux-PAM-1.4.0
+
+BUILDREQUIRES="devel.pkgs"
+PKGID=S5LXpam
+PKG=Linux-PAM
+VERSION=1.4.0
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -36,10 +46,11 @@ PKG=S5LXpam
 NAME=${PKGNAME}
 DESC=Linux PAM
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=libraries
 BASEDIR=/
 __PKGINFO__
 
 ../../mkproto.sh
+../../mkpkg.sh

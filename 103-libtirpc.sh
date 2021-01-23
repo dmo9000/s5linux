@@ -7,7 +7,19 @@
 
 set -e
 
-PKGNAME=libtirpc-1.2.6
+die()
+{
+        echo "$*"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
+BUILDREQUIRES="devel.pkgs"
+PKGID=S5LXlibtirpc
+PKG=libtirpc
+VERSION=1.2.6
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -18,24 +30,25 @@ cd ${PKGNAME}
 
 # configure/build/install
 
-./configure --prefix=/ --disable-gssapi 
+./configure --prefix=/usr --disable-gssapi --sysconfdir=/etc 
 make  -j ${NPROC}
 make install DESTDIR=${PKGDIR}
+
 
 # package
 
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXlibtirpc
+PKG=${PKGID}
 NAME=${PKGNAME}
 DESC=libtirpc
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
 ../../mkproto.sh
-
+../../mkpkg.sh

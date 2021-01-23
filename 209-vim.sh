@@ -4,8 +4,22 @@
 #
 
 # setup
+set -e
 
-PKGNAME=vim-8.1
+die()
+{
+        echo "$*"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
+
+BUILDREQUIRES="devel.pkgs"
+PKGID=S5LXvim
+PKG=vim
+VERSION=8.1
+PKGNAME="${PKG}-${VERSION}"
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -27,11 +41,11 @@ ln -sf vim vi
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXvim
+PKG=${PKGID}
 NAME=${PKGNAME}
 DESC=vim editor
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/

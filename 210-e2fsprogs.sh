@@ -4,8 +4,21 @@
 #
 
 # setup
+set -e
+die()
+{
+        echo "$*"
+        exit 1
 
-PKGNAME=e2fsprogs-1.45.6
+}
+. ./build-validator.sh || die "can't locate validator"
+
+
+BUILDREQUIRES="devel.pkgs"
+PKGID=S5LXe2fsprogs
+PKG=e2fsprogs
+VERSION=1.45.6
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -25,15 +38,16 @@ make install DESTDIR=${PKGDIR}
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXe2fsprogs
+PKG=${PKGID}
 NAME=${PKGNAME}
 DESC=Linux e2fsprogs
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
 ../../mkproto.sh
+../../mkpkg.sh
 

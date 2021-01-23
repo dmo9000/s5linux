@@ -5,7 +5,22 @@
 
 # setup
 
-PKGNAME=pamtester-0.1.2
+set -e
+
+die()
+{
+        echo "$*"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
+
+BUILDREQUIRES="devel.pkgs"
+PKGID=S5LXpamtester
+PKG=pamtester
+VERSION=0.1.2
+PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
@@ -25,15 +40,15 @@ make install DESTDIR=${PKGDIR}
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
-PKG=S5LXpamtester
+PKG=${PKGID}
 NAME=${PKGNAME}
 DESC=PAM test utility
 VENDOR=HeadRat Linux
-VERSION=000000
+VERSION=${VERSION}
 ARCH=x86_64
 CATEGORY=utilities
 BASEDIR=/
 __PKGINFO__
 
 ../../mkproto.sh
-
+../../mkpkg.sh

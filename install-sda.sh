@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 /bin/dmesg -n 1
 
 #echo "*** Read to install to /dev/sda2 - hit ENTER to start"

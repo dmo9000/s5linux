@@ -31,3 +31,14 @@ if [ ! -z "${HAS_NULLVERSION}" ]; then
 	echo "error: ${0} has invalid VERSION (000000) - please fix"
 	exit 1
 	fi
+
+
+build_require()
+{
+	REQUIRE=`which ${1}`
+	if [ -z "${REQUIRE}" ]; then 
+		echo "+++ can't find required build tool ${1}"
+		exit 1
+	fi
+
+}
