@@ -4,7 +4,16 @@
 # setup
 #
 set -e
+die()
+{
+        echo "$*"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
 #
+BUILDREQUIRES="devel.pkgs"
 PKGID=S5LXopenssl
 PKG=openssl
 VERSION=1.1.1i

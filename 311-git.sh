@@ -4,7 +4,16 @@
 # setup
 #
 set -e
+die()
+{
+        echo "$*"
+        exit 1
+
+}
+. ./build-validator.sh || die "can't locate validator"
+
 #
+BUILDREQUIRES="devel.pkgs"
 PKGID=S5LXgit
 PKG=git
 VERSION=2.29.2
