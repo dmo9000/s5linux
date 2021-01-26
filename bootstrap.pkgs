@@ -79,3 +79,17 @@ S5LXgcc
 S5LXcronie
 S5LXed
 S5LXlzip
+S5LXlibidn2
+S5LXlibuv
+S5LXiproute2
+S5LXiputils
+S5LXbindutils
+S5LXcacerts
+S5LXcurl
+S5LXnettle
+S5LXwget
+S5LXopenssh
+S5LXrsync
+S5LXlibndp
+S5LXNetworkManager
+S5LXpostfix

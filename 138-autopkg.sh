@@ -16,7 +16,7 @@ die()
 BUILDREQUIRES="devel.pkgs"
 PKGID=S5LXautopkg
 PKG=s5devel
-VERSION=date +"%Y%m%d%H%M%S"
+VERSION=`date +"%Y%m%d%H%M%S"`
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
@@ -32,7 +32,7 @@ make
 
 # package
 
-mkdir -p ${PKGIDR}/usr/bin
+mkdir -p ${PKGDIR}/usr/bin
 
 cp -p autopkg ${PKGDIR}/usr/bin/autopkg
 
@@ -51,3 +51,6 @@ __PKGINFO__
 
 ../../mkproto.sh
 ../../mkpkg.sh
+
+rm -rf ${PKGDIR}
+rm -rf ${TOPLEVEL}/src/${PKGNAME}

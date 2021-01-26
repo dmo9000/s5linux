@@ -14,4 +14,5 @@ done
 
 # copy package group lists
 
+sudo rm -f ${PKGROOT}/*.pkgs
 sudo cp -v *.pkgs ${PKGROOT}/

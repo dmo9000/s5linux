@@ -16,7 +16,7 @@ die()
 
 #
 # cde
-BUILDREQUIRES="network.pkgs devel.pkgs X.pkgs CDE.pkgs"
+BUILDREQUIRES="devel.pkgs X.pkgs CDE.pkgs"
 PKGID=S5LXcde
 PKG=cde
 VERSION=2.3.2
