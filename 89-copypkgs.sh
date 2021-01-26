@@ -13,8 +13,10 @@ PKGCOUNT=`ls -1 ./spool/*.pkg 2>/dev/null | wc -l`
 GZPKGCOUNT=`ls -1 ./spool/*.pkg.gz 2>/dev/null | wc -l`
 echo "PKGCOUNT="${PKGCOUNT}
 
-for PKG in `ls -1 ./spool/*.pkg 2>/dev/null` ; do 
+#for PKG in `ls -1 ./spool/*.pkg 2>/dev/null` ; do 
+for PKG in `cat bootstrap.pkgs`; do
 	FILENAME=`basename ${PKG}`
+	FILENAME="${FILENAME}.pkg"
 	ZFILENAME=${FILENAME}.gz
 	if [ "spool/${FILENAME}" -nt "spool/${ZFILENAME}" ] || [ ! -r "spool/${ZFILENAME}" ]; then
 		echo "Compressing package ${FILENAME} to ${ZFILENAME} ..."
