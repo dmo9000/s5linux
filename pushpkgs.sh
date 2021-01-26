@@ -11,3 +11,7 @@ for PKG in `ls -1 spool/*.pkg.gz`; do
 		sudo cp -p ${PKGDIR}/${PKGFILE} ${PKGROOT}/${PKGFILE}
 		fi
 done
+
+# copy package group lists
+
+sudo cp -v *.pkgs ${PKGROOT}/

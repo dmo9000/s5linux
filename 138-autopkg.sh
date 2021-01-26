@@ -1,9 +1,10 @@
 #!/bin/sh
 #
-
-# setup
+# mount/wall disabllzip for now since it wants to chggrp
 #
+# setup
 set -e
+
 die()
 {
         echo "$*"
@@ -12,38 +13,35 @@ die()
 }
 . ./build-validator.sh || die "can't locate validator"
 
-#
 BUILDREQUIRES="devel.pkgs"
-PKGID=S5LXgit
-PKG=git
-VERSION=2.29.2
+PKGID=S5LXautopkg
+PKG=s5devel
+VERSION=date +"%Y%m%d%H%M%S"
 PKGNAME=${PKG}-${VERSION}
 NPROC=`nproc`
 TOPLEVEL=`pwd`
 PKGDIR=${TOPLEVEL}/pkgbuild/${PKGNAME}
+
 cd src
-rm -rf ./${PKGNAME}
-xzcat ${PKGNAME}.tar.xz > ${PKGNAME}.tar
-tar -xvf ${PKGNAME}.tar
-cd ${PKGNAME} 
+git clone https://github.com/dmo9000/s5devel ${PKGNAME}
+cd ${PKGNAME}/autopkg 
 
 # configure/build/install
-./configure --prefix=/usr 
-make  -j ${NPROC}
-make install DESTDIR=${PKGDIR}
 
-# tests to check for essential artifacts
-
-[ -r ${PKGDIR}/usr/libexec/git-core/git-remote-https ] || exit 1
+make 
 
 # package
+
+mkdir -p ${PKGIDR}/usr/bin
+
+cp -p autopkg ${PKGDIR}/usr/bin/autopkg
 
 cd ${PKGDIR}
 
 cat <<__PKGINFO__ > pkginfo
 PKG=${PKGID}
 NAME=${PKGNAME}
-DESC=git
+DESC=GNU lzip
 VENDOR=HeadRat Linux
 VERSION=${VERSION}
 ARCH=x86_64
