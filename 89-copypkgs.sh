@@ -28,8 +28,10 @@ for PKG in `cat bootstrap.pkgs`; do
 
 GZPKGCOUNT=`ls -1 ./spool/*.pkg.gz 2>/dev/null | wc -l`
 echo "GZPKGCOUNT="${GZPKGCOUNT}
-for GZPKG in `ls -1 ./spool/*.pkg.gz` ; do 
-	ZFILENAME=`basename ${GZPKG}`
+#for GZPKG in `ls -1 ./spool/*.pkg.gz` ; do 
+for GZPKG in `cat bootstrap.pkgs` ; do 
+	ZFILENAME=`basename ${GZPKG}.pkg.gz`
 	sudo cp "spool/${ZFILENAME}" ${INSTALL_ROOT}/packages/"${ZFILENAME}"
 	done
 
+sudo cp -v spool/S5LXkernel*.pkg.gz ${INSTALL_ROOT}/packages/
